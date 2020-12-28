@@ -6,7 +6,7 @@
 # server "example.com", user: "deploy", roles: %w{app db web}, my_property: :my_value
 # server "example.com", user: "deploy", roles: %w{app web}, other_property: :other_value
 server "160.251.19.11", user: "localadm", roles: %w{app db web}
-set :ssh_options, keys: "/Users/kodebu_kun/.ssh/id_rsa"
+set :ssh_options, keys: "/Users/m-yac/web/vps/ssh-key/id_rsa"
 
 
 # role-based syntax
