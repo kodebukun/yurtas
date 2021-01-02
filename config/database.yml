@@ -33,5 +33,5 @@ production:
   <<: *default
   database: yurtas_production
   username: yurtas
-  password:
+  password: <%= ENV['TEST_DATABASE_PASSWORD'] %>
   host: localhost

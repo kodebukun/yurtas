@@ -79,3 +79,6 @@ group :development, :test do
   gem 'ed25519'
   gem 'bcrypt_pbkdf'
 end
+
+#dotenv追加
+gem 'dotenv-rails'
