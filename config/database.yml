@@ -9,13 +9,13 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
   encoding: unicode
-  port: 5433
 
 development:
   <<: *default
   database: yurtas_development
   username: kodebu_kun
   password: deburaru1041
+  port: 5433
   #host: localhost
 
 # Warning: The database defined as "test" will be erased and
@@ -26,6 +26,7 @@ test:
   database: yurtas_test
   username: kodebu_kun
   password: deburaru1041
+  port: 5433
   host: localhost
 
 production:
