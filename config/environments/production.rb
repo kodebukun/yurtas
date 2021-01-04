@@ -91,4 +91,8 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  # production.0, production.1, production.2 の３世代保持 10Mを超えるとローテーション
+  config.logger = Logger.new('log/production.log', 3, 10 * 1024 * 1024)
+
 end
