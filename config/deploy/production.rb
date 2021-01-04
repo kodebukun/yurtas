@@ -5,7 +5,7 @@
 
 # server "example.com", user: "deploy", roles: %w{app db web}, my_property: :my_value
 # server "example.com", user: "deploy", roles: %w{app web}, other_property: :other_value
-server "160.251.19.11", user: "localadm", roles: %w{app db web}
+server "160.251.19.11", user: "localadm", port: "50872", roles: %w{app db web}
 set :ssh_options, keys: "/mnt/c/Users/m-yac/web/vps/ssh-key/id_rsa"
 
 
