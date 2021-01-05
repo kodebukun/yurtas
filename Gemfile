@@ -82,3 +82,7 @@ end
 
 #dotenv追加
 gem 'dotenv-rails'
+
+#bootstrap
+gem 'bootstrap', '~> 4.1.1'
+gem 'jquery-rails'
