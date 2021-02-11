@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :ensure_correct_user, {only: [:edit, :update]}
-  before_action :require_admin, {only: [:new]}
+  #before_action :require_admin, {only: [:new]}
+  skip_before_action :login_required, {only: :new}
 
   def index
     @users = User.all.order(login_id: :asc)
