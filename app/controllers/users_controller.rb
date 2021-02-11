@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :ensure_correct_user, {only: [:edit, :update]}
   #before_action :require_admin, {only: [:new]}
-  skip_before_action :login_required, {only: :new}
+  skip_before_action :login_required
 
   def index
     @users = User.all.order(login_id: :asc)
@@ -19,6 +19,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    @user.admin = true
     @user.image_name = "default_user.jpg"
     if @user.save
       redirect_to user_url(@user), notice: "ユーザー登録が完了しました"
