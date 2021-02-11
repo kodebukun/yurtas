@@ -1,4 +1,7 @@
 Rails.application.configure do
+  #logレベル（warn以上）、ローテション（10M/1file 5fileまで）
+  config.log_level = :warn
+  config.logger = Logger.new("log/production.log", 5, 10 * 1024 * 1024)
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded on

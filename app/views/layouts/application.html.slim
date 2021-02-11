@@ -1,0 +1,55 @@
+doctype html
+html
+  head
+    title Yurtas
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    meta[name="viewport" content="width=device-width,initial-scale=1"]
+    link[href="https://use.fontawesome.com/releases/v5.12.0/css/all.css" rel="stylesheet"]
+  body[style="min-height:100vh; display:flex; flex-flow:column;"]
+    nav.navbar.navbar-expand-lg.navbar-light.bg-primary[style="min-height:10vh;"]
+      .container
+        - if @current_user
+          = link_to "Yurtas", index_path, class: "navbar-brand font-weight-bold text-white"
+        - else
+          = link_to "Yurtas", root_path, class: "navbar-brand font-weight-bold text-white"
+        button.navbar-toggler.custom-hamburger[type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" style="border-color:white;"]
+          span.navbar-toggler-icon
+        #navbarSupportedContent.collapse.navbar-collapse
+          ul.navbar-nav.ml-auto
+            - if @current_user
+              li.nav-item.active
+                = link_to "Home", index_path, class: "nav-link text-white"
+              li.nav-item
+                = link_to current_user.name, current_user, class: "nav-link text-white"
+              li.nav-item
+                = link_to "Users", users_path, class: "nav-link text-white"
+              /  li.nav-item.dropdown
+                  a#navbarDropdown.nav-link.dropdown-toggle.text-white[href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"]
+                    |  Dropdown
+                    .dropdown-menu[aria-labelledby="navbarDropdown"]
+                      a.dropdown-item[href="/overalls"]
+                        | 全体の掲示板
+                      a.dropdown-item[href="/requests/departments"]
+                        | 各部署の掲示板
+                      a.dropdown-item[href="/requests/works"]
+                        | 各係の掲示板
+                      .dropdown-divider
+                      a.dropdown-item[href="/help"]
+                        | Yurtasの使い方
+              li.nav-item
+                = link_to "Logout", logout_path, method: :delete, class: "nav-link text-white", tabindex: "-1"
+            - else
+              li.nav-item= link_to "Yurtasとは", about_path, class: "nav-link text-white"
+              li.nav-item= link_to "新規登録", signup_text_path, class: "nav-link text-white"
+              li.nav-item= link_to "ログイン方法", "#", class: "nav-link text-white"
+    .container[style="flex:1;"]
+      - if flash.notice.present?
+        .alert.alert-warning.alert-dismissible.fade.show.text-center
+          strong= flash.notice
+          button.close[data-dismiss="alert"] ×
+      = yield
+    footer.footer.bg-dark
+      .footer-copyright.text-center.py-4.text-light © 2021 : Yurtas

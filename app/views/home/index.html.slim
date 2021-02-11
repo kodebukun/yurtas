@@ -1,0 +1,34 @@
+header.jumbotron.my-4.py-5
+  h1.display-4.font-weight-bold.text-primary
+    | A Warm Welcome!
+  p.mt-4.lead.text-secondary
+    | こちらから各種業務メニューにアクセスできます。ご覧になりたい項目のボタンをクリックしてください。
+.row.text-center
+  = render partial: "index_cards", locals: {initial_color: "color:#FE2E64;", initial: "A", card_title: "ttendance", card_detail: "勤務表", card_path: "#"}
+  = render partial: "index_cards", locals: {initial_color: "color:#0040FF;", initial: "M", card_title: "aterial", card_detail: "機器情報", card_path: "#"}
+  = render partial: "index_cards", locals: {initial_color: "color:#04B45F;", initial: "M", card_title: "anual", card_detail: "撮影マニュアル", card_path: "#"}
+  = render partial: "index_cards", locals: {initial_color: "color:#FF8000;", initial: "P", card_title: "rocedure", card_detail: "各種手続き方法", card_path: "#"}
+
+
+/  .col-lg-3.col-md-6.mb-4
+    .card.h-100
+      .card-body
+        h4.card-title
+          span.h2[style="color:#585858;"] "R"
+          | equest
+        p.card-text.text-left
+          | こちらから係りの仕事を確認できます。
+      .card-footer
+        a.btn.btn-outline-secondary[href="#"]
+          | Find Out More!
+/  .col-lg-3.col-md-6.mb-4
+    .card.h-100
+      .card-body
+        h4.card-title
+          span.h2[style="color:#BE81F7;"] "T"
+          | ips
+        p.card-text.text-left
+          | こちらからお役立ち情報を確認できます。
+      .card-footer
+        a.btn.btn-outline-secondary[href="#"]
+          | Find Out More!

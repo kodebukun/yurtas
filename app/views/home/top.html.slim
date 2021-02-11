@@ -1,0 +1,11 @@
+.jumbotron.mt-5
+  h1.display-4.font-weight-bold.text-primary "Yurtas"
+  hr.my-4
+  h4
+    | 山大放部の技師支援サービスです。家からでも職場からでも使えます！
+  button.btn.btn-primary.btn-lg.mt-4[type="button" data-toggle="modal" data-target="#Modal"]
+    |  Sign in
+  - if @error_message
+    .form-error.text-danger.mt-2
+      = @error_message
+= render partial: "home/login_modal"

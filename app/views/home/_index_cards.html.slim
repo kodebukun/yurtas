@@ -1,0 +1,13 @@
+.col-lg-3.col-md-6.mb-4
+  .card.h-100
+    .card-body
+      h4.card-title
+        span.h2[style="#{initial_color}"]
+          = initial
+        = card_title
+      p.card-text.text-left
+        | こちらから
+        = card_detail
+        | を確認できます。
+    .card-footer
+      = link_to "Find Out More!", card_path, class:  "btn btn-outline-secondary"

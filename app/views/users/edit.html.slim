@@ -1,0 +1,22 @@
+.my-4
+  = render partial: "shared/error_message", locals: {content: @user}
+
+  = form_with model: @user, local: true do |f|
+    .form-group
+      = f.label :name, "Name"
+      = f.text_field :name, class: "form-control"
+    .form-group
+      = f.label :email, "Email address"
+      = f.text_field :email, class: "form-control"
+      small#emailHelp.form-text.text-muted
+        | We'll never share your email with anyone else.
+    .form-group
+      = f.label :phone_no, "Phone"
+      = f.text_field :phone_no, class: "form-control"
+    .form-group
+      = f.label :password, "Password"
+      = f.password_field :password, class: "form-control"
+    .form-group
+      = f.label :password_confirmation, "Password（確認）"
+      = f.password_field :password_confirmation, class: "form-control"
+    = f.submit nil, class: "btn btn-primary"

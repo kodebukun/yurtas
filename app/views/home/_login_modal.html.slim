@@ -1,0 +1,19 @@
+#Modal.modal.fade[tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true"]
+  .modal-dialog[role="document"]
+    .modal-content
+      .modal-header
+        h5#ModalLabel.modal-title Sign in
+        button.close[type="button" data-dismiss="modal" aria-label="Close"]
+          span[aria-hidden="true"]  ×
+
+      = form_with scope: :session, url: login_path, local: true do |f|
+        .modal-body
+          .form-group
+            = f.label :login_id, "ID"
+            = f.text_field :login_id, class: "form-control", aria_escribedby: "emailHelp", value: @login_id
+          .form-group
+            = f.label :password, "Password"
+            = f.password_field :password, class: "form-control", value: @password
+        .modal-footer
+          button.btn.btn-secondary[type="button" data-dismiss="modal"] Close
+          button.btn.btn-primary[type="submit"] Sign in
