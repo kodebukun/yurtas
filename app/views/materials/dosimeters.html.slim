@@ -1,0 +1,28 @@
+ul#materialsTab.nav.nav-pills.my-3 role="tablist"
+  li.nav-item
+    a#cr-tab.nav-link.active aria-controls="cr" aria-selected="true" data-toggle="pill" href="#cr" role="tab"  一般撮影
+  li.nav-item
+    a#ct-tab.nav-link aria-controls="ct" aria-selected="false" data-toggle="pill" href="#ct" role="tab"  CT
+  li.nav-item
+    a#mri-tab.nav-link aria-controls="mri" aria-selected="false" data-toggle="pill" href="#mri" role="tab"  MRI
+  li.nav-item
+    a#xa-tab.nav-link aria-controls="xa" aria-selected="false" data-toggle="pill" href="#xa" role="tab"  血管撮影
+  li.nav-item
+    a#ri-tab.nav-link aria-controls="ri" aria-selected="false" data-toggle="pill" href="#ri" role="tab"  核医学 / PET
+  li.nav-item
+    a#rt-tab.nav-link aria-controls="rt" aria-selected="false" data-toggle="pill" href="#rt" role="tab"  治療
+
+
+#materialsTabContent.tab-content
+  #cr.tab-pane.fade.show.active aria-labelledby="cr-tab" role="tabpanel"
+    | cr-dosimeters
+  #ct.tab-pane.fade aria-labelledby="ct-tab" role="tabpanel"
+    | ct-dosimeters
+  #mri.tab-pane.fade aria-labelledby="mri-tab" role="tabpanel"
+    | mri-dosimeters
+  #xa.tab-pane.fade aria-labelledby="xa-tab" role="tabpanel"
+    | xa-dosimeters
+  #ri.tab-pane.fade aria-labelledby="ri-tab" role="tabpanel"
+    | ri-dosimeters
+  #rt.tab-pane.fade aria-labelledby="rt-tab" role="tabpanel"
+    | rt-dosimeters

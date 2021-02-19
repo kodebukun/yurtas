@@ -9,6 +9,9 @@ ja:
           has_many: "%{record}が存在しているので削除できません"
     models:
       user: ユーザー
+      position: 役職
+      department: 部署
+      work: 係り
     attributes:
       user:
         id: ID
@@ -19,6 +22,21 @@ ja:
         email: メールアドレス
         phone_no: 電話番号
         image_name: 画像名称
+        created_at: 登録日時
+        updated_at: 更新日時
+      position:
+        id: ID
+        name: 役職
+        created_at: 登録日時
+        updated_at: 更新日時
+      department:
+        id: ID
+        name: 所属部署
+        created_at: 登録日時
+        updated_at: 更新日時
+      work:
+        id: ID
+        name: 所属係り
         created_at: 登録日時
         updated_at: 更新日時
 

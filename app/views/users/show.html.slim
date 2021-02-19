@@ -1,3 +1,6 @@
+.my-4
+  = render partial: "shared/error_message", locals: {content: @user}
+
 h2.my-4.text-primary= @user.name
 table.table
   tbody
@@ -11,6 +14,24 @@ table.table
       th= User.human_attribute_name(:email)
       td= @user.email
     tr
+      th= Position.human_attribute_name(:name)
+      td
+        - @positions.each do |position|
+          = position.name
+          | 　
+    tr
+      th= Department.human_attribute_name(:name)
+      td
+        - @departments.each do |department|
+          = department.name
+          | 　
+    tr
+      th= Work.human_attribute_name(:name)
+      td
+        - @works.each do |work|
+          = work.name
+          | 　
+    tr
       th= User.human_attribute_name(:created_at)
       td= @user.created_at.strftime("%Y-%m-%d %H:%M")
     tr
@@ -18,7 +39,6 @@ table.table
       td= @user.updated_at.strftime("%Y-%m-%d %H:%M")
 
 - if @user.id == @current_user.id
-  = link_to "編集する", edit_user_path, class: "btn btn-secondary mr-3"
+  = link_to "ユーザー情報編集", edit_user_path, class: "btn btn-secondary mr-3"
 .nav.justify-content-end
-  = link_to "ユーザーリストへ", users_path, class: "nav-link"
-/   所属部署 所属係り
+  = link_to "ユーザーリストへ", users_path, class: "nav-link mt-4"

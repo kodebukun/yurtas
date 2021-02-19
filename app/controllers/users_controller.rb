@@ -8,12 +8,16 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    #@works = @user.works
-    #@positions = @user.positions
+    @works = @user.works.all
+    @positions = @user.positions.all
+    @departments = @user.departments.all
   end
 
   def new
     @user = User.new
+    @departments = Department.all
+    @works = Work.all
+    @positions = Position.all
   end
 
   def create
@@ -28,32 +32,29 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
-    #@works = Work.all
-    #@my_works = @user.works
+    @departments = Department.all
+    @works = Work.all
   end
 
   def update
     @user = User.find(params[:id])
-
-    if @user.update(user_params)
-      redirect_to user_url(@user), notice: "ユーザー情報を更新しました"
+    @departments = Department.all
+    @works = Work.all
+    if user_params[:password].present? || user_params[:password_confirmation].present?
+      if @user.update(user_params)
+        redirect_to user_url(@user), notice: "ユーザー情報とパスワードを更新しました"
+      else
+        render :edit
+      end
     else
-      render :edit
+      if @user.update(params_unless_password)
+        redirect_to user_url(@user), notice: "ユーザー情報を更新しました"
+      else
+        render :edit
+      end
     end
-
-  #  if @user.user_works.exists?
-  #    @my_works = @user.user_works
-  #    @my_works.each do |my_work|
-  #      my_work.destroy
-  #    end
-  #  end
-  #  @works = Work.all
-  #  @works.each do |work|
-  #    if params[:"work#{work.id}"]
-  #      @user.user_works.create(work_id: params[:"work#{work.id}"])
-  #    end
-  #  end
   end
+
 
   private
     #本人か確認
@@ -68,7 +69,11 @@ class UsersController < ApplicationController
     end
     #ストロングパラメーター
     def user_params
-      params.require(:user).permit(:name, :login_id, :password, :phone_no, :email)
+      params.require(:user).permit(:name, :login_id, :phone_no, :email, :password, :password_confirmation, department_ids: [], work_ids: [], position_ids: [])
+    end
+
+    def params_unless_password
+      params.require(:user).permit(:name, :login_id, :phone_no, :email, department_ids: [], work_ids: [])
     end
 
 end

@@ -14,9 +14,28 @@
       = f.label :phone_no, "Phone"
       = f.text_field :phone_no, class: "form-control"
     .form-group
-      = f.label :password, "Password"
-      = f.password_field :password, class: "form-control"
+      = f.label "所属部署"
+      br
+      = f.collection_check_boxes :department_ids, @departments, :id, :name do |t|
+        = t.check_box(class: "mr-1")
+        = t.label(class: "mr-3") {t.text}
     .form-group
-      = f.label :password_confirmation, "Password（確認）"
-      = f.password_field :password_confirmation, class: "form-control"
+      = f.label "所属係り"
+      br
+      = f.collection_check_boxes :work_ids, @works, :id, :name do |t|
+        = t.check_box(class: "mr-1")
+        = t.label(class: "mr-3") {t.text}
+
+    button.btn.btn-secondary.mb-3 type="button" data-toggle="collapse" data-target="#collapse" aria-expanded="false" aria-controls="collapse"
+      | パスワードの変更
+    #collapse.collapse
+      .card.card-body
+        p.text-danger ※パスワードを変更する場合のみ入力して下さい
+        .form-group
+          = f.label :password, "Password"
+          = f.password_field :password, class: "form-control"
+        .form-group
+          = f.label :password_confirmation, "Password（確認）"
+          = f.password_field :password_confirmation, class: "form-control"
+    br
     = f.submit nil, class: "btn btn-primary"

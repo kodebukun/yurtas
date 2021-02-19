@@ -1,0 +1,20 @@
+header.jumbotron.my-4.py-4
+  h1.display-4.font-weight-bold.text-primary Attendance
+  p.mt-4.lead.text-secondary こちらから勤務情報にアクセス出来ます。
+
+.card-deck.my-5
+  .card
+    .card-body.h3.text-center.text-primary 当直表
+    i.far.fa-moon.fa-6x.mx-auto.text-primary.pb-4
+    .card-footer
+      = link_to "Find Out More!", attendances_list_path, class: "btn btn-outline-primary btn-lg btn-block"
+  .card
+    .card-body.h3.text-center.text-success 呼び出しランキング
+    i.fas.fa-list-ol.fa-6x.mx-auto.text-success.pb-4
+    .card-footer
+      = link_to "Find Out More!", attendances_ranking_path, class: "btn btn-outline-success btn-lg btn-block"
+  .card
+    .card-body.h3.text-center.text-danger 週間勤務表
+    i.fas.fa-user-clock.fa-6x.mx-auto.text-danger.pb-4
+    .card-footer
+      = link_to "Find Out More!", attendances_roster_path, class: "btn btn-outline-danger btn-lg btn-block"

@@ -22,4 +22,29 @@
     .form-group
       = f.label :phone_no, "Phone"
       = f.text_field :phone_no, class: "form-control"
+    .form-group
+      = f.label "所属部署"
+      br
+      = f.collection_check_boxes :department_ids, @departments, :id, :name do |t|
+        = t.check_box(class: "mr-1")
+        = t.label(class: "mr-3") {t.text}
+    .form-group
+      = f.label "所属係り"
+      br
+      = f.collection_check_boxes :work_ids, @works, :id, :name do |t|
+        = t.check_box(class: "mr-1")
+        = t.label(class: "mr-3") {t.text}
+    .form-group
+      = f.label "職位"
+      br
+      = f.collection_check_boxes :position_ids, @positions, :id, :name do |t|
+        = t.check_box(class: "mr-1")
+        = t.label(class: "mr-3") {t.text}
+    .form-group
+      | 管理者権限：
+      = f.radio_button :admin, "true", class: "mx-1"
+      | 有り
+      = f.radio_button :admin, "false", class: "mr-1 ml-3"
+      | 無し
+
     = f.submit nil, class: "btn btn-primary"

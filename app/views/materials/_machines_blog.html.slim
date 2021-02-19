@@ -1,0 +1,25 @@
+/Blog Post
+.card.mb-5
+  img.card-img-top src="/machine_images/#{num}.jpg"
+  .card-body
+    h2.card-title.text-primary
+      = name
+    p.card-text
+      | 一般名称：
+      = common
+      br
+      | 製品名　：
+      = name
+      br
+      | メーカー：
+      = company
+      br
+      | 設置場所：
+      = place
+      br
+      | 主な用途：
+      = use
+    = link_to "メーカーHP", "#{url}", class: "btn btn-primary"
+  .card-footer.text-muted
+    | 設置日：
+    = date
