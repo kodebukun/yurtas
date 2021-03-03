@@ -94,3 +94,9 @@ gem 'factory_bot_rails'
 #Slim化
 gem 'slim-rails'
 gem 'html2slim'
+
+#seed-fu追加
+gem 'seed-fu'
+
+#ページネーション
+gem 'kaminari'

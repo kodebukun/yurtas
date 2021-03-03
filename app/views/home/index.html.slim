@@ -1,10 +1,28 @@
-header.jumbotron.my-4.py-5
-  h1.display-4.font-weight-bold.text-primary
-    | A Warm Welcome!
-  p.mt-4.lead.text-secondary
-    | こちらから各種業務メニューにアクセスできます。ご覧になりたい項目のボタンをクリックしてください。
+.row.mt-3
+  .col-md-6.mb-3
+    .card
+      .card-header
+        h4.text-danger News
+      .card-body.py-1
+        ul.list-unstyled
+          - @posts.each do |post|
+            li.mt-2= link_to "・ #{post.title}", post
+        = link_to "もっとみる", posts_path, class: "d-flex justify-content-end"
+  .col-md-6.mb-3
+    .card
+      .card-header
+        h4.text-info 朝ミーティング
+      .card-body.py-1
+        ul.list-unstyled
+          - @mornings.each do |morning|
+            li.mt-2= link_to "・ #{morning.title}", morning
+        = link_to "もっとみる", mornings_path, class: "d-flex justify-content-end"
+
 .row.text-center
   = render partial: "index_cards", locals: {initial_color: "color:#FE2E64;", initial: "A", card_title: "ttendance", card_detail: "勤務表", card_path: attendances_index_path}
+  = render partial: "index_cards", locals: {initial_color: "color:#58D3F7;", initial: "掲", card_title: "示板", card_detail: "掲示板", card_path: posts_top_path}
+  = render partial: "index_cards", locals: {initial_color: "color:#088A29;", initial: "朝", card_title: "ミーティング", card_detail: "朝ミーティング", card_path: mornings_path}
+
   = render partial: "index_cards", locals: {initial_color: "color:#0040FF;", initial: "M", card_title: "aterial", card_detail: "機器情報", card_path: materials_index_path}
   = render partial: "index_cards", locals: {initial_color: "color:#04B45F;", initial: "M", card_title: "anual", card_detail: "撮影マニュアル", card_path: manuals_index_path}
   = render partial: "index_cards", locals: {initial_color: "color:#FF8000;", initial: "P", card_title: "rocedure", card_detail: "各種手続き方法", card_path: procedures_index_path}

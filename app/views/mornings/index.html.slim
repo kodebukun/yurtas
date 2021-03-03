@@ -1,0 +1,16 @@
+.my-4
+  h2.text-primary 朝ミーティング
+  /--btn posts
+  .d-flex.justify-content-end
+    = link_to "新規投稿", new_morning_path, class: "btn btn-primary mr-3"
+    = link_to "印刷用ページ", mornings_print_path, class: "btn btn-secondary mr-3 d-none d-md-inline"
+  /--posts--
+  div
+    ul.list-group.list-group-flush
+      - @mornings.each do |morning|
+        li.list-group-item
+          h6.mb-3= link_to morning.user.name, morning.user, class: "text-secondary"
+          h5= link_to simple_format(morning.title), morning
+    .mt-4
+      = paginate @mornings
+      = page_entries_info @mornings

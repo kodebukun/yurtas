@@ -1,0 +1,5 @@
+.my-4
+  = render partial: "shared/error_message", locals: {content: @comment}
+  = render partial: "form", locals: {title: "コメント編集", post_id: @comment.post_id}
+  .nav.justify-content-end
+    = link_to "投稿詳細へ戻る", post_path(@comment.post), class:"nav-link"

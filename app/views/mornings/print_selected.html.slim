@@ -1,0 +1,22 @@
+.m-4
+  - @mornings.each do |morning|
+    .row.border.border-dark.mb-2[style="height: 280px; page-break-inside: avoid;"]
+      .col-2.border-right.border-dark.d-flex.flex-column.justify-content-around
+        h3.text-center= morning.created_at.strftime("%Y")
+        h3.text-center= morning.created_at.strftime("%m / %d")
+        h3.text-center= @week[morning.created_at.wday]
+      .col-10
+        .row.border-bottom.border-dark
+          .col-2.border-right.border-dark.text-center.py-2 休み
+          .col-10.py-2= morning.absentee
+        .py-2= morning.content
+  .nav.justify-content-end
+    = link_to "朝ミーティング一覧へ", mornings_path, class:"nav-link"
+
+
+/
+    ul.list-group.list-group-flush
+      - @mornings.each do |morning|
+        li.list-group-item
+            h6.mb-3= link_to morning.user.name, morning.user, class: "text-secondary"
+            h5= link_to simple_format(morning.title), morning

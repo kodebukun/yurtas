@@ -1,0 +1,14 @@
+.my-4.d-flex.flex-column.align-items-center
+  div
+    h2.text-primary 日付を選択して下さい。
+    = form_with url: print_selected_path, local: true do |f|
+      .form-group
+        = f.label :start, "開始日", class: 'control-label'
+        = f.date_field :start, class: 'form-control'
+      .form-group
+        = f.label :end, "終了日", class: 'control-label'
+        = f.date_field :end, class: 'form-control'
+
+      = f.submit "期間決定", class: "btn btn-primary mt-2"
+.nav.justify-content-end
+  = link_to "朝ミーティング一覧へ", mornings_path, class:"nav-link"

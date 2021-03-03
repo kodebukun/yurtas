@@ -1,0 +1,5 @@
+.my-4
+  = render partial: "shared/error_message", locals: {content: @morning}
+  = render partial: "form", locals: {title: "朝ミーティング新規投稿"}
+  .nav.justify-content-end
+    = link_to "朝ミーティング一覧へ", mornings_path, class:"nav-link"

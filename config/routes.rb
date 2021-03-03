@@ -1,5 +1,16 @@
 Rails.application.routes.draw do
 
+  post 'mornings/print_selected', to: 'mornings#print_selected', as: 'print_selected'
+  get 'mornings/print', to: 'mornings#print', as: 'mornings_print'
+  resources :mornings
+
+  resources :comments, except: [:index, :show]
+
+  resources :likes, only: [:create, :destroy]
+
+  get 'posts/top', to: 'posts#top', as: 'posts_top'
+  resources :posts
+
   get 'attendances/roster', to: 'attendances#roster'
   get 'attendances/ranking', to: 'attendances#ranking'
   get 'attendances/list', to: 'attendances#list'

@@ -12,6 +12,10 @@ ja:
       position: 役職
       department: 部署
       work: 係り
+      post: 投稿
+      comment: コメント
+      like: いいね
+      morning: 朝ミーティング
     attributes:
       user:
         id: ID
@@ -39,6 +43,29 @@ ja:
         name: 所属係り
         created_at: 登録日時
         updated_at: 更新日時
+      post:
+        id: ID
+        title: タイトル
+        content: 内容
+        user_id: 投稿者ID
+        work_id: 係りID
+        department_id: 部署ID
+        meeting: 朝ミーティング
+        created_at: 登録日時
+        updated_at: 更新日時
+      comment:
+        id: ID
+        content: 内容
+        user_id: 投稿者ID
+        post_id: 投稿ID
+        created_at: 登録日時
+        updated_at: 更新日時
+      morning:
+        id: ID
+        title: タイトル
+        content: 内容
+        user_id: 投稿者ID
+        absentee: 欠席者
 
   date:
     abbr_day_names:

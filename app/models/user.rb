@@ -11,6 +11,10 @@ class User < ApplicationRecord
   has_many :positions, through: :user_positions
   has_many :user_departments, dependent: :destroy
   has_many :departments, through: :user_departments
+  has_many :posts, dependent: :destroy
+  has_many :comments, dependent: :destroy
+  has_many :likes, dependent: :destroy
+  has_many :mornings
 
 
 end

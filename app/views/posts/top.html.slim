@@ -1,0 +1,41 @@
+header.jumbotron.mt-5.d-none.d-md-block
+  h1.display-4.font-weight-bold.text-primary Whitch bulletin board ?
+  hr.mt-3.mb-2
+  h4.text-secondary 掲示板をお選び下さい。
+
+.row.text-center.my-3
+  = render partial: "card_top", locals: {initial: "A", color_class: "text-primary", title: "ll", section: "全体", path: posts_path(section: 1)}
+  = render partial: "card_top", locals: {initial: "M", color_class: "text-info", title: "odality", section: "各部署", path: posts_path(section: 2)}
+  = render partial: "card_top", locals: {initial: "W", color_class: "text-danger", title: "ork", section: "各係り", path: posts_path(section: 3)}
+
+/
+    <!-- Page Features -->
+    <div class="row text-center my-3">
+
+
+      <div class="col-lg-4 col-md-6 mb-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <h3 class="card-title"><span class="h1 text-info"">M</span>odality</h3>
+            <p class="card-text text-center h5">各部署の掲示板</p>
+          </div>
+          <div class="card-footer">
+            <a href="/requests/departments" class="btn btn-outline-secondary">Join!</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6 mb-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <h3 class="card-title"><span class="h1 text-danger">W</span>ork</h3>
+            <p class="card-text text-center h5">各係の掲示板</p>
+          </div>
+          <div class="card-footer">
+            <a href="/requests/works" class="btn btn-outline-secondary">Join!</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- /.row -->

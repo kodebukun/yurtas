@@ -1,0 +1,16 @@
+.my-4
+  h2.text-primary 掲示板
+  /--btn posts
+  .d-flex.justify-content-end
+    = link_to "新規投稿", new_post_path, class: "btn btn-primary mr-3"
+  /--posts--
+  div
+    ul.list-group.list-group-flush
+      - @posts.each do |post|
+        li.list-group-item
+          h6.mb-3= link_to post.user.name, post.user, class: "text-secondary"
+          h5= link_to simple_format(post.title), post
+
+    .mt-4
+      = paginate @posts
+      = page_entries_info @posts

@@ -1,0 +1,45 @@
+.my-4
+  / morning user
+  .d-flex.flex-row
+    h4.mt-4= link_to @morning.user.name, @morning.user
+  h4= @morning.title
+  hr
+  / Morning content
+  h5= simple_format(@morning.content)
+  hr
+  /Morning absentee
+  h5= "欠席者：#{@morning.absentee}"
+
+  hr.mb-1
+
+  = @morning.created_at.strftime("%Y-%m-%d %H:%M")
+
+  / morning bottom section
+  .d-flex.justify-content-between.mx-2.mt-3
+    / edit and destroy
+    - if @morning.user_id == @current_user.id
+      div
+        = link_to edit_morning_path, class: "btn px-0 bg-white" do
+          span.fa-stack
+            i.fas.fa-square.fa-stack-2x.text-primary
+            i.fas.fa-pen.fa-stack-1x.fa-inverse
+        = link_to @morning, method: :delete, data: {confirm: "投稿を削除します。よろしいですか？"}, class: "btn px-0 bg-white" do
+          span.fa-stack
+            i.fas.fa-square.fa-stack-2x.text-danger
+            i.far.fa-trash-alt.fa-stack-1x.fa-inverse
+    - else
+      div
+    / likes of morning
+    div
+      - if Like.find_by(user_id: @current_user.id, morning_id: @morning.id)
+        = link_to like_path(morning_id: @morning.id), method: :delete, class: "table-link mr-1", style: "text-decoration: none;" do
+          i.fas.fa-heart.text-danger
+      - else
+        = link_to likes_path(morning_id: @morning.id), method: :post, class: "table-link mr-1", style: "text-decoration: none;" do
+          i.fas.fa-heart.text-secondary
+      = @morning.likes.count
+
+
+  /一覧へのリンク
+  .nav.justify-content-end.mt-3
+    = link_to "朝ミーティング一覧へ", mornings_path, class:"nav-link"

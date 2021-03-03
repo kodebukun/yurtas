@@ -1,0 +1,13 @@
+h2.text-primary.mb-3= title
+= form_with model: @morning, local: true do |f|
+  .form-group
+    = f.label :title, "タイトル"
+    = f.text_field :title, class: "form-control"
+  .form-group
+    = f.label :absentee, "欠席者"
+    = f.text_field :absentee, class: "form-control"
+  .form-group
+    = f.label :content, "内容"
+    = f.text_area :content, class: "form-control", rows: 10
+
+  = f.submit nil, class: "btn btn-primary mt-2"
