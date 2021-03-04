@@ -1,0 +1,5 @@
+.my-4
+  = render partial: "shared/error_message", locals: {content: @post}
+  = render partial: "form", locals: {title: "新規投稿（#{@department.name}）", path: department_posts_path, department_id: @department.id}
+  .nav.justify-content-end
+    = link_to "#{@department.name}の掲示板へ", department_posts_path(department_id: @department.id), class:"nav-link"

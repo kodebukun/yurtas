@@ -1,24 +1,23 @@
-class PostsController < ApplicationController
+class WorkPostsController < ApplicationController
   before_action :ensure_correct_user, {only: [:update, :destroy]}
 
   def top
+    @works = Work.all
   end
 
   def index
-    @posts = Post.where(meeting: true).order(created_at: "DESC").page(params[:page]).per(10)
-  end
-
-  def show
-    @post = Post.find(params[:id])
-    @comments = @post.comments.order(created_at: "DESC")
+    @work = Work.find(params[:work_id])
+    @posts = Post.where(work_id: @work.id).order(created_at: "DESC").page(params[:page]).per(10)
   end
 
   def new
     @post = Post.new
+    @work = Work.find(params[:work_id])
   end
 
   def edit
     @post = Post.find(params[:id])
+    @work = @post.work
   end
 
   def create
@@ -27,6 +26,7 @@ class PostsController < ApplicationController
     if @post.save
       redirect_to post_url(@post), notice: "新規投稿しました。"
     else
+      @work = @post.work
       render :new
     end
   end
@@ -36,6 +36,7 @@ class PostsController < ApplicationController
     if @post.update(post_params)
       redirect_to post_url, notice: "投稿を編集しました。"
     else
+      @work = @post.work
       render :edit
     end
   end
@@ -43,7 +44,7 @@ class PostsController < ApplicationController
   def destroy
     post = Post.find(params[:id])
     post.destroy
-    redirect_to posts_url, notice: "投稿を削除しました。"
+    redirect_to work_posts_url(work_id: post.work_id), notice: "投稿を削除しました。"
   end
 
   private
@@ -52,12 +53,12 @@ class PostsController < ApplicationController
     def ensure_correct_user
       @post = Post.find(params[:id])
       if @post.user_id != @current_user.id
-        redirect_to posts_url, notice: "権限がありません"
+        redirect_to work_posts_url, notice: "権限がありません"
       end
     end
     #ストロングパラメータ
     def post_params
-      params.require(:post).permit(:title, :content, :meeting)
+      params.require(:post).permit(:title, :content, :meeting, :work_id)
     end
 
 end

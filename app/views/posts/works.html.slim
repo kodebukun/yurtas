@@ -1,0 +1,10 @@
+.my-4
+  h4.text-secondary 係りをお選び下さい。
+  .row.text-center.mt-4
+    - @works.each do |work|
+      .col-lg-4.col-md-6.mb-4
+        .card.h-100
+          .card-body
+            h4.card-title.text-primary= work.name
+          .card-footer
+            = link_to "Go!", posts_path(work_id: work.id), class:  "btn btn-outline-primary btn-block"

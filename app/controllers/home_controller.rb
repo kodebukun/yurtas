@@ -9,7 +9,7 @@ class HomeController < ApplicationController
   end
 
   def index
-    @posts = Post.all.order(created_at: "DESC").limit(7)
+    @posts = Post.where(meeting: true).order(created_at: "DESC").limit(7)
     @mornings = Morning.all.order(created_at: "DESC").limit(7)
   end
 

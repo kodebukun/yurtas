@@ -11,15 +11,12 @@
   .d-flex.justify-content-between.mx-2
     / edit and destroy
     - if @post.user_id == @current_user.id
-      div
-        = link_to edit_post_path, class: "btn px-0 bg-white" do
-          span.fa-stack
-            i.fas.fa-square.fa-stack-2x.text-primary
-            i.fas.fa-pen.fa-stack-1x.fa-inverse
-        = link_to @post, method: :delete, data: {confirm: "投稿を削除します。よろしいですか？"}, class: "btn px-0 bg-white" do
-          span.fa-stack
-            i.fas.fa-square.fa-stack-2x.text-danger
-            i.far.fa-trash-alt.fa-stack-1x.fa-inverse
+      - if @post.department
+        = render partial: "btn_edit_destroy", locals: {edit_path: edit_department_post_path, destroy_path: department_post_path}
+      - elsif @post.work
+        = render partial: "btn_edit_destroy", locals: {edit_path: edit_work_post_path, destroy_path: work_post_path}
+      - else
+        = render partial: "btn_edit_destroy", locals: {edit_path: edit_post_path, destroy_path: post_path}
     - else
       div
     / likes of post
@@ -66,4 +63,9 @@
     hr
   /一覧へのリンク
   .nav.justify-content-end.mt-3
-    = link_to "掲示板へ", posts_path, class:"nav-link"
+    - if @post.department
+      = link_to "#{@post.department.name}の掲示板へ", department_posts_path(department_id: @post.department.id), class:"nav-link"
+    -elsif @post.work
+      = link_to "#{@post.work.name}の掲示板へ", work_posts_path(work_id: @post.work.id), class:"nav-link"
+    -else
+      = link_to "掲示板へ", posts_path, class:"nav-link"

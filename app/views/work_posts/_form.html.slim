@@ -1,11 +1,14 @@
 h2.text-primary.mb-3= title
-= form_with model: @post, local: true do |f|
+= form_with model: @post, url: path, local: true do |f|
   .form-group
     = f.label :title, "タイトル"
     = f.text_field :title, class: "form-control"
   .form-group
     = f.label :content, "内容"
     = f.text_area :content, class: "form-control", rows: 10
-    = f.hidden_field :meeting, value: true
+  .form-group
+    = f.label :meeting, "この投稿を全体の掲示板にも表示する"
+    = f.check_box :meeting, {class: "check_box ml-2"}, "true", "false"
+  = f.hidden_field :work_id, value: work_id
 
   = f.submit nil, class: "btn btn-primary mt-2"

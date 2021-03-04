@@ -1,0 +1,10 @@
+.my-4
+  h4.text-secondary 部署をお選び下さい。
+  .row.text-center.mt-4
+    - @departments.each do |department|
+      .col-lg-4.col-md-6.mb-4
+        .card.h-100
+          .card-body
+            h4.card-title.text-primary= department.name
+          .card-footer
+            = link_to "Go!", department_posts_path(department_id: department.id), class:  "btn btn-outline-primary btn-block"

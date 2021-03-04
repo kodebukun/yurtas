@@ -1,9 +1,9 @@
 .my-4
   h2.text-primary
-    = "全体の掲示板"
+    = "#{@work.name}の掲示板"
 
   .d-flex.justify-content-end
-    = link_to "新規投稿", new_post_path, class: "btn btn-primary mr-3"
+    = link_to "新規投稿", new_work_post_path(work_id: @work.id), class: "btn btn-primary mr-3"
   /--posts--
   div
     ul.list-group.list-group-flush
