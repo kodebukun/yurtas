@@ -1,1 +1,24 @@
-h1 attendances List
+.my-4
+  h1.mb-4.text-primary 当直表
+
+  .row
+    .col-md-4.mb-4
+      .card
+        h3.card-header 先月の当直表
+        .card-body
+          h4.card-title.mb-4 3月11日更新
+          = link_to "先月分を表示", "/attendances_pdf/1_list.pdf", target:"_blank", rel:"noopener", class:"btn btn-secondary btn-lg btn-block"
+
+    .col-md-4.mb-4
+      .card
+        h3.card-header 今月の当直表
+        .card-body
+          h4.card-title.mb-4 3月11日更新
+          = link_to "今月分を表示", "/attendances_pdf/1_list.pdf", target:"_blank", rel:"noopener", class:"btn btn-primary btn-lg btn-block"
+
+    .col-md-4.mb-4
+      .card
+        h3.card-header 来月の当直表
+        .card-body
+          h4.card-title.mb-4 3月11日更新
+          = link_to "来月分を表示", "/attendances_pdf/1_list.pdf", target:"_blank", rel:"noopener", class:"btn btn-success btn-lg btn-block"

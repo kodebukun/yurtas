@@ -29,10 +29,14 @@ Rails.application.routes.draw do
     end
   end
 
-  get 'attendances/roster', to: 'attendances#roster'
-  get 'attendances/ranking', to: 'attendances#ranking'
-  get 'attendances/list', to: 'attendances#list'
-  get 'attendances/index', to: 'attendances#index'
+  resource :attendances, except: [:edit, :update, :destroy] do
+    collection do
+      get 'menu'
+      get 'list'
+      get 'ranking'
+      get 'roster'
+    end
+  end
 
   get 'materials/dosimeters', to: 'materials#dosimeters'
   get 'materials/phantoms', to: 'materials#phantoms'

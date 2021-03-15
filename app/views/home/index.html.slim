@@ -19,13 +19,17 @@
         = link_to "もっとみる", mornings_path, class: "d-flex justify-content-end"
 
 .row.text-center
-  = render partial: "index_cards", locals: {initial_color: "color:#FE2E64;", initial: "A", card_title: "ttendance", card_detail: "勤務表", card_path: attendances_index_path}
+
+  = render partial: "index_cards", locals: {initial_color: "color:#FF0000;", initial: "当", card_title: "直表登録", card_detail: "当直表の登録", card_path: new_attendances_path}
+
+  = render partial: "index_cards", locals: {initial_color: "color:#FE2E64;", initial: "当", card_title: "直表", card_detail: "当直表", card_path: "/attendances_pdf/1_list.pdf"}
   = render partial: "index_cards", locals: {initial_color: "color:#58D3F7;", initial: "掲", card_title: "示板", card_detail: "掲示板", card_path: top_posts_path}
   = render partial: "index_cards", locals: {initial_color: "color:#088A29;", initial: "朝", card_title: "ミーティング", card_detail: "朝ミーティング", card_path: mornings_path}
+  = render partial: "index_cards", locals: {initial_color: "color:#8181F7;", initial: "フ", card_title: "ァイル置き場", card_detail: "ファイル置き場", card_path: "https://drive.google.com/drive/folders/1ABT-ZGZzkThg83SvFEC1_vdqARrQJ5TQ?usp=sharing"}
 
-  = render partial: "index_cards", locals: {initial_color: "color:#0040FF;", initial: "M", card_title: "aterial", card_detail: "機器情報", card_path: materials_index_path}
-  = render partial: "index_cards", locals: {initial_color: "color:#04B45F;", initial: "M", card_title: "anual", card_detail: "撮影マニュアル", card_path: manuals_index_path}
-  = render partial: "index_cards", locals: {initial_color: "color:#FF8000;", initial: "P", card_title: "rocedure", card_detail: "各種手続き方法", card_path: procedures_index_path}
+  = render partial: "index_cards", locals: {initial_color: "color:#0040FF;", initial: "機", card_title: "器情報", card_detail: "機器情報", card_path: materials_index_path}
+  = render partial: "index_cards", locals: {initial_color: "color:#04B45F;", initial: "マ", card_title: "ニュアル", card_detail: "撮影マニュアル", card_path: manuals_index_path}
+  = render partial: "index_cards", locals: {initial_color: "color:#FF8000;", initial: "手", card_title: "続き", card_detail: "各種手続き方法", card_path: procedures_index_path}
 
 
 /  .col-lg-3.col-md-6.mb-4

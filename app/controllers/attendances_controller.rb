@@ -1,6 +1,6 @@
 class AttendancesController < ApplicationController
 
-  def index
+  def menu
   end
 
   def list
@@ -10,6 +10,15 @@ class AttendancesController < ApplicationController
   end
 
   def roster
+  end
+
+  def new
+  end
+
+  def create
+    file = params[:file]
+    File.binwrite("public/attendances_pdf/1_list.pdf", file.read)
+    redirect_to index_url, notice: "当直表を登録しました。"
   end
 
 end
