@@ -4,9 +4,9 @@ header.jumbotron.mt-5.d-none.d-md-block
   h4.text-secondary 掲示板をお選び下さい。
 
 .row.text-center.my-3
-  = render partial: "card_top", locals: {initial: "A", color_class: "text-primary", title: "ll", section: "全体", path: posts_path}
-  = render partial: "card_top", locals: {initial: "M", color_class: "text-info", title: "odality", section: "各部署", path: top_department_posts_path}
-  = render partial: "card_top", locals: {initial: "W", color_class: "text-danger", title: "ork", section: "各係り", path: top_work_posts_path}
+  = render partial: "card_top", locals: {initial: "A", color: "color:#007bff;", title: "ll", section: "全体", path: posts_path}
+  = render partial: "card_top", locals: {initial: "M", color: "color:#ffa34d;", title: "odality", section: "各部署", path: top_department_posts_path}
+  = render partial: "card_top", locals: {initial: "W", color: "color:#f67575;", title: "ork", section: "各係り", path: top_work_posts_path}
 
 /
     <!-- Page Features -->

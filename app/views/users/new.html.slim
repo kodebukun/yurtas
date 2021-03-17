@@ -41,6 +41,24 @@
         = t.check_box(class: "mr-1")
         = t.label(class: "mr-3") {t.text}
     .form-group
+      | 当直：
+      = f.radio_button :night_shift, "true", class: "mx-1"
+      | する
+      = f.radio_button :night_shift, "false", class: "mr-1 ml-3"
+      | しない
+    .form-group
+      | 日直：
+      = f.radio_button :day_shift, "true", class: "mx-1"
+      | する
+      = f.radio_button :day_shift, "false", class: "mr-1 ml-3"
+      | しない
+    .form-group
+      | 呼び出し：
+      = f.radio_button :call, "true", class: "mx-1"
+      | 可能
+      = f.radio_button :call, "false", class: "mr-1 ml-3"
+      | 不可
+    .form-group
       | 管理者権限：
       = f.radio_button :admin, "true", class: "mx-1"
       | 有り

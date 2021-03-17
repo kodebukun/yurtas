@@ -16,6 +16,7 @@ ja:
       comment: コメント
       like: いいね
       morning: 朝ミーティング
+      ranking: 呼び出しランキング
     attributes:
       user:
         id: ID
@@ -26,6 +27,9 @@ ja:
         email: メールアドレス
         phone_no: 電話番号
         image_name: 画像名称
+        night_shift: 当直
+        day_shift: 日直
+        call: 呼び出し
         created_at: 登録日時
         updated_at: 更新日時
       position:
@@ -66,6 +70,10 @@ ja:
         content: 内容
         user_id: 投稿者ID
         absentee: 欠席者
+      ranking:
+        id: ID
+        rank: 順位
+        user_id: ユーザーID
 
   date:
     abbr_day_names:

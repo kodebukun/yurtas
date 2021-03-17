@@ -32,6 +32,27 @@ table.table
           = work.name
           | 　
     tr
+      th= User.human_attribute_name(:night_shift)
+      td
+        - if @user.night_shift
+          | する
+        - else
+          | しない
+    tr
+      th= User.human_attribute_name(:day_shift)
+      td
+        - if @user.day_shift
+          | する
+        - else
+          | しない
+    tr
+      th= User.human_attribute_name(:call)
+      td
+        - if @user.call
+          | 可能
+        - else
+          | 不可
+    tr
       th= User.human_attribute_name(:created_at)
       td= @user.created_at.strftime("%Y-%m-%d %H:%M")
     tr

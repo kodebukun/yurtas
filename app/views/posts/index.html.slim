@@ -10,7 +10,7 @@
       - @posts.each do |post|
         li.list-group-item
           h6.mb-3= link_to post.user.name, post.user, class: "text-secondary"
-          h5= link_to simple_format(post.title), post
+          h5= link_to simple_format(post.title), post, class: "text-primary"
 
     .mt-4
       = paginate @posts

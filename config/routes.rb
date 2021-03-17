@@ -34,6 +34,8 @@ Rails.application.routes.draw do
       get 'menu'
       get 'list'
       get 'ranking'
+      put 'ranking_update'
+      patch 'ranking_update'
       get 'roster'
     end
   end

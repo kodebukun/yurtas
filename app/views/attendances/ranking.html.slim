@@ -1,1 +1,30 @@
-h1 attendances Ranking
+.mb-3
+table.table
+  thead.thead-default
+    tr.text-secondary
+      th= Ranking.human_attribute_name(:rank)
+      th= User.human_attribute_name(:name)
+      th= User.human_attribute_name(:phone_no)
+      th.d-none.d-md-table-cell= Department.human_attribute_name(:name)
+      th 順位変更
+  tbody
+    - @users.each do |user|
+      tr
+        td= user.ranking.rank
+        td= link_to user.name, user
+        td= user.phone_no
+        td.d-none.d-md-table-cell
+          - user.departments.each do |department|
+            = "#{department.name}　"
+        td
+          - if user.id == @current_user.id
+            = link_to ranking_update_attendances_path(bottom_user_id: user.id), method: :patch, class:"mr-2 text-primary" do
+              span.fa-stack
+                i.fas.fa-square.fa-stack-2x
+                i.fas.fa-sort-amount-down-alt.fa-stack-1x.fa-inverse
+            a.text-danger [type="button" data-toggle="modal" data-target="#Modal" style="cursor:pointer;"]
+              span.fa-stack
+                i.fas.fa-square.fa-stack-2x
+                i.fas.fa-sign-in-alt.fa-stack-1x.fa-inverse
+
+= render partial: "rank_modal"
