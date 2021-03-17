@@ -67,3 +67,13 @@ Work.seed do |s|
   s.id = 14
   s.name = "業績集"
 end
+
+Work.seed do |s|
+  s.id = 15
+  s.name = "掲示物"
+end
+
+Work.seed do |s|
+  s.id = 16
+  s.name = "倫理委員"
+end
