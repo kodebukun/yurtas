@@ -7,6 +7,13 @@ h2.text-primary.mb-3= title
     = f.label :content, "内容"
     = f.text_area :content, class: "form-control", rows: 10
   .form-group
+    | 投稿方法：
+    = f.radio_button :rule, "false", class: "mx-1"
+    | 通常の投稿
+    = f.radio_button :rule, "true", class: "mr-1 ml-3"
+    | ルールとして投稿
+
+  .form-group
     = f.label :meeting, "この投稿を全体の掲示板にも表示する"
     = f.check_box :meeting, {class: "check_box ml-2"}, "true", "false"
   = f.hidden_field :department_id, value: department_id

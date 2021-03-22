@@ -7,7 +7,8 @@ class DepartmentPostsController < ApplicationController
 
   def index
     @department = Department.find(params[:department_id])
-    @posts = Post.where(department_id: @department.id).order(created_at: "DESC").page(params[:page]).per(10)
+    @posts = Post.where(department_id: @department.id, rule: false).order(created_at: "DESC").page(params[:page]).per(10)
+    @role_posts = Post.where(department_id: @department.id, rule: true).order(created_at: "DESC").page(params[:page]).per(10)
   end
 
   def new
@@ -68,7 +69,7 @@ class DepartmentPostsController < ApplicationController
     end
     #ストロングパラメータ
     def post_params
-      params.require(:post).permit(:title, :content, :meeting, :department_id)
+      params.require(:post).permit(:title, :content, :rule, :meeting, :department_id)
     end
 
 end

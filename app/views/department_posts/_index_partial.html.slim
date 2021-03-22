@@ -1,0 +1,10 @@
+/ posts
+ul.list-group.list-group-flush
+  - posts.each do |post|
+    li.list-group-item
+      h6.mb-3= link_to post.user.name, post.user, class: "text-secondary"
+      h5= link_to simple_format(post.title), post
+
+.mt-4
+  = paginate posts
+  = page_entries_info posts

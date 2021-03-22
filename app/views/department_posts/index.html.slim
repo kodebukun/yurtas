@@ -4,14 +4,16 @@
 
   .d-flex.justify-content-end
     = link_to "新規投稿", new_department_post_path(department_id: @department.id), class: "btn btn-primary mr-3"
-  /--posts--
-  div
-    ul.list-group.list-group-flush
-      - @posts.each do |post|
-        li.list-group-item
-          h6.mb-3= link_to post.user.name, post.user, class: "text-secondary"
-          h5= link_to simple_format(post.title), post
 
-    .mt-4
-      = paginate @posts
-      = page_entries_info @posts
+.my-4
+  ul#postsTab.nav.nav-tabs.my-3 role="tablist"
+    li.nav-item
+      a#post-tab.nav-link.active aria-controls="post" aria-selected="true" data-toggle="tab" href="#post" role="tab"  掲示板
+    li.nav-item
+      a#rule-tab.nav-link aria-controls="rule" aria-selected="false" data-toggle="tab" href="#rule" role="tab"  ルール
+
+  #postsTabContent.tab-content
+    #post.tab-pane.fade.show.active aria-labelledby="post-tab" role="tabpanel"
+      = render partial: "index_partial", locals: {posts: @posts}
+    #rule.tab-pane.fade aria-labelledby="rule-tab" role="tabpanel"
+      = render partial: "index_partial", locals: {posts: @role_posts}
