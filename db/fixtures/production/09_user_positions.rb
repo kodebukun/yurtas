@@ -97,4 +97,5 @@ UserPosition.seed(:id,
 { id: 44, user_id: 32, position_id: 5 },
 { id: 45, user_id: 34, position_id: 5 },
 { id: 46, user_id: 43, position_id: 5 },
+{ id: 47, user_id: 46, position_id: 5 },
 )
