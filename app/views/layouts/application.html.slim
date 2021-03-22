@@ -13,6 +13,16 @@ html
       .container
         - if @current_user
           = link_to "Yurtas", index_path, class: "navbar-brand font-weight-bold text-white"
+          - if unchecked_notifications.any?
+            = link_to notifications_path, class: "navbar-brand text-white" do
+              span.fa-stack style=("font-size: 0.7em;")
+                i.far.fa-bell.fa-stack-2x style=("font-size: 1.5em;")
+                i.fas.fa-circle.fa-stack-1x.n-circle
+              | 通知
+          - else
+            = link_to notifications_path, class: "navbar-brand text-white" do
+              i.far.fa-bell
+              | 通知
         - else
           = link_to "Yurtas", root_path, class: "navbar-brand font-weight-bold text-white"
         button.navbar-toggler.custom-hamburger[type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" style="border-color:white;"]

@@ -1,0 +1,25 @@
+h1.font-weight-bold.text-primary.mt-4.mb-2 通知
+- notifications = @notifications.where.not(visitor_id: @current_user.id)
+- if notifications.exists?
+  ul.list-group
+    = render notifications
+  .d-flex.flex-row-reverse.mt-3
+    button.btn.btn-primary data-target="#DestroyNotificationModal" data-toggle="modal" type="button"
+      | 通知を全て削除
+  .mt-3
+    = paginate notifications
+- else
+  p.mt-4 通知はありません
+/ DestroyModal
+#DestroyNotificationModal.modal.fade aria-hidden="true" aria-labelledby="DestroyNotificationModalLabel" data-backdrop="static" role="dialog" tabindex="-1"
+  .modal-dialog role="document"
+    .modal-content
+      .modal-header
+        h5#DestroyNotificationModal.modal-title 通知の削除
+        button.close aria-label="Close" data-dismiss="modal" type="button"
+          span aria-hidden="true" &times;
+      .modal-body
+        | 通知を全て削除します。よろしいですか？
+      .modal-footer
+        button.btn.btn-secondary data-dismiss="modal" type="button"  No
+        = link_to "Yes", destroy_notifications_path, method: :delete, class: "btn btn-primary"

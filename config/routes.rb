@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  delete 'notifications/destroy', to: 'notifications#destroy', as: 'destroy_notifications'
+  resources :notifications, only: [:index]
+
   resources :mornings do
     collection do
       get 'print'

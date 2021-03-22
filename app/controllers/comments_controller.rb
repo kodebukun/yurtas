@@ -13,10 +13,12 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
     @comment.user_id = @current_user.id
+    @post = @comment.post
     if @comment.save
-      redirect_to post_url(@comment.post), notice: "コメントを投稿しました。"
+      #コメントの通知処理
+      @post.create_notification_comment!(@current_user, @comment.id)
+      redirect_to post_url(@post), notice: "コメントを投稿しました。"
     else
-      @post = @comment.post
       render :new
     end
   end

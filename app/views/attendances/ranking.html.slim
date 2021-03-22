@@ -4,7 +4,7 @@ table.table
     tr.text-secondary
       th= Ranking.human_attribute_name(:rank)
       th= User.human_attribute_name(:name)
-      th= User.human_attribute_name(:phone_no)
+      th.d-none.d-md-table-cell= User.human_attribute_name(:phone_no)
       th.d-none.d-md-table-cell= Department.human_attribute_name(:name)
       th 順位変更
   tbody
@@ -12,7 +12,7 @@ table.table
       tr
         td= user.ranking.rank
         td= link_to user.name, user
-        td= user.phone_no
+        td.d-none.d-md-table-cell= user.phone_no
         td.d-none.d-md-table-cell
           - user.departments.each do |department|
             = "#{department.name}　"

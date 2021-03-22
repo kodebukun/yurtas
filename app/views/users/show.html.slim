@@ -1,7 +1,11 @@
 .my-4
   = render partial: "shared/error_message", locals: {content: @user}
 
-h2.my-4.text-primary= @user.name
+h2.mt-4.text-primary= @user.name
+.d-flex.flex-row.mb-4
+  - @positions.each do |position|
+    h6.text-info.mr-2= position.name
+
 table.table
   tbody
     tr

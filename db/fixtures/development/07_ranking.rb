@@ -1,17 +1,25 @@
-Ranking.seed do |s|
-  s.id = 1
-  s.rank = 1
-  s.user_id = 1
-end
-
-Ranking.seed do |s|
-  s.id = 2
-  s.rank = 2
-  s.user_id = 2
-end
-
-Ranking.seed do |s|
-  s.id = 3
-  s.rank = 3
-  s.user_id = 3
-end
+Ranking.seed(:id,
+{ id: 1, user_id: 22, rank: 1},
+{ id: 2, user_id: 39, rank: 2},
+{ id: 3, user_id: 24, rank: 3},
+{ id: 4, user_id: 26, rank: 4},
+{ id: 5, user_id: 19, rank: 5},
+{ id: 6, user_id: 20, rank: 6},
+{ id: 7, user_id: 31, rank: 7},
+{ id: 8, user_id: 28, rank: 8},
+{ id: 9, user_id: 38, rank: 9},
+{ id: 10, user_id: 30, rank: 10},
+{ id: 11, user_id: 40, rank: 11},
+{ id: 12, user_id: 16, rank: 12},
+{ id: 13, user_id: 45, rank: 13},
+{ id: 14, user_id: 42, rank: 14},
+{ id: 15, user_id: 44, rank: 15},
+{ id: 16, user_id: 13, rank: 16},
+{ id: 17, user_id: 36, rank: 17},
+{ id: 18, user_id: 29, rank: 18},
+{ id: 19, user_id: 27, rank: 19},
+{ id: 20, user_id: 41, rank: 20},
+{ id: 21, user_id: 37, rank: 21},
+{ id: 22, user_id: 21, rank: 22},
+{ id: 23, user_id: 17, rank: 23},
+)

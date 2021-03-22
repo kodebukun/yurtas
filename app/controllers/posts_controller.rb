@@ -25,6 +25,8 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.user_id = @current_user.id
     if @post.save
+      #新規投稿の通知処理
+      @post.save_notification_post!(@current_user)
       redirect_to post_url(@post), notice: "新規投稿しました。"
     else
       render :new

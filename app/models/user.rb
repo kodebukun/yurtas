@@ -5,6 +5,8 @@ class User < ApplicationRecord
 
   has_secure_password
 
+  has_many :active_notifications, class_name: 'Notification', foreign_key: 'visitor_id', dependent: :destroy
+  has_many :passive_notifications, class_name: 'Notification', foreign_key: 'visited_id', dependent: :destroy
   has_many :user_works, dependent: :destroy
   has_many :works, through: :user_works
   has_many :user_positions, dependent: :destroy

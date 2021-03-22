@@ -1,4 +1,5 @@
 class AttendancesController < ApplicationController
+  before_action :check_specific_user, {only: [:new, :create]}
 
   def menu
   end
@@ -57,5 +58,13 @@ class AttendancesController < ApplicationController
     File.binwrite("public/attendances_pdf/1_list.pdf", file.read)
     redirect_to index_url, notice: "当直表を登録しました。"
   end
+
+  private
+
+    def check_specific_user
+      if @current_user.id != 5
+        redirect_to index_url, notice: "権限がありません"
+      end
+    end
 
 end

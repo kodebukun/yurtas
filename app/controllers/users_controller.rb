@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_action :require_admin, {only: [:new, :create]}
 
   def index
-    @users = User.all.order(login_id: :asc)
+    @users = User.all
   end
 
   def show

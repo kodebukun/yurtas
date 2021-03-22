@@ -24,6 +24,12 @@ class WorkPostsController < ApplicationController
     @post = Post.new(post_params)
     @post.user_id = @current_user.id
     if @post.save
+      #通知処理
+      if @post.meeting
+        @post.save_notification_post!(@current_user)
+      else
+        @post.save_notification_work!(@current_user)
+      end
       redirect_to post_url(@post), notice: "新規投稿しました。"
     else
       @work = @post.work
@@ -34,6 +40,10 @@ class WorkPostsController < ApplicationController
   def update
     @post = Post.find(params[:id])
     if @post.update(post_params)
+      #meetingオンの場合、全体に通知処理
+      if @post.meeting
+        @post.save_notification_post!(@current_user)
+      end
       redirect_to post_url, notice: "投稿を編集しました。"
     else
       @work = @post.work
