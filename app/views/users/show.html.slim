@@ -1,69 +1,73 @@
 .my-4
   = render partial: "shared/error_message", locals: {content: @user}
 
-h2.mt-4.text-primary= @user.name
-.d-flex.flex-row.mb-4
-  - @positions.each do |position|
-    h6.text-info.mr-2= position.name
-
-table.table
-  tbody
-    tr
-      th= User.human_attribute_name(:login_id)
-      td= @user.login_id
-    tr
-      th= User.human_attribute_name(:phone_no)
-      td= @user.phone_no
-    tr
-      th= User.human_attribute_name(:email)
-      td= @user.email
-    tr
-      th= Position.human_attribute_name(:name)
-      td
+  .row
+    .col.col-12.col-md-4
+      h3.text-primary= @user.name
+      .d-flex.flex-row
         - @positions.each do |position|
-          = position.name
-          | 　
-    tr
-      th= Department.human_attribute_name(:name)
-      td
-        - @departments.each do |department|
-          = department.name
-          | 　
-    tr
-      th= Work.human_attribute_name(:name)
-      td
-        - @works.each do |work|
-          = work.name
-          | 　
-    tr
-      th= User.human_attribute_name(:night_shift)
-      td
-        - if @user.night_shift
-          | する
-        - else
-          | しない
-    tr
-      th= User.human_attribute_name(:day_shift)
-      td
-        - if @user.day_shift
-          | する
-        - else
-          | しない
-    tr
-      th= User.human_attribute_name(:call)
-      td
-        - if @user.call
-          | 可能
-        - else
-          | 不可
-    tr
-      th= User.human_attribute_name(:created_at)
-      td= @user.created_at.strftime("%Y-%m-%d %H:%M")
-    tr
-      th= User.human_attribute_name(:updated_at)
-      td= @user.updated_at.strftime("%Y-%m-%d %H:%M")
+          h6.text-info.mr-2= position.name
+    .col.col-12.col-md-8
+      .alert.alert-info.text-center= @user.comment
 
-- if @user.id == @current_user.id
-  = link_to "ユーザー情報編集", edit_user_path, class: "btn btn-secondary mr-3"
-.nav.justify-content-end
-  = link_to "ユーザーリストへ", users_path, class: "nav-link mt-4"
+  table.table.mt-3
+    tbody
+      tr
+        th= User.human_attribute_name(:login_id)
+        td= @user.login_id
+      tr
+        th= User.human_attribute_name(:phone_no)
+        td= @user.phone_no
+      tr
+        th= User.human_attribute_name(:email)
+        td= @user.email
+      tr
+        th= Position.human_attribute_name(:name)
+        td
+          - @positions.each do |position|
+            = position.name
+            | 　
+      tr
+        th= Department.human_attribute_name(:name)
+        td
+          - @departments.each do |department|
+            = department.name
+            | 　
+      tr
+        th= Work.human_attribute_name(:name)
+        td
+          - @works.each do |work|
+            = work.name
+            | 　
+      tr
+        th= User.human_attribute_name(:night_shift)
+        td
+          - if @user.night_shift
+            | する
+          - else
+            | しない
+      tr
+        th= User.human_attribute_name(:day_shift)
+        td
+          - if @user.day_shift
+            | する
+          - else
+            | しない
+      tr
+        th= User.human_attribute_name(:call)
+        td
+          - if @user.call
+            | 可能
+          - else
+            | 不可
+      tr
+        th= User.human_attribute_name(:created_at)
+        td= @user.created_at.strftime("%Y-%m-%d %H:%M")
+      tr
+        th= User.human_attribute_name(:updated_at)
+        td= @user.updated_at.strftime("%Y-%m-%d %H:%M")
+
+  - if @user.id == @current_user.id
+    = link_to "ユーザー情報編集", edit_user_path, class: "btn btn-secondary mr-3"
+  .nav.justify-content-end
+    = link_to "ユーザーリストへ", users_path, class: "nav-link mt-4"

@@ -14,7 +14,7 @@
       = f.label :phone_no, "Phone"
       = f.text_field :phone_no, class: "form-control"
     .form-group
-      = f.label "所属部署"
+      = f.label "経験部署"
       br
       = f.collection_check_boxes :department_ids, @departments, :id, :name do |t|
         = t.check_box(class: "mr-1")
@@ -43,6 +43,9 @@
       | 可能
       = f.radio_button :call, "false", class: "mr-1 ml-3"
       | 不可
+    .form-group
+      = f.label :comment, "ひと言コメント"
+      = f.text_field :comment, class: "form-control"
     button.btn.btn-secondary.mb-3 type="button" data-toggle="collapse" data-target="#collapse" aria-expanded="false" aria-controls="collapse"
       | パスワードの変更
     #collapse.collapse

@@ -32,7 +32,7 @@ class AttendancesController < ApplicationController
           change_ranking.save!
         end
         ranking.update!(rank: params[:rank].to_i)
-        redirect_to ranking_attendances_url, notice: "順位を更新した"
+        redirect_to ranking_attendances_url, notice: "順位を更新しました"
       elsif ranking.rank < params[:rank].to_i
         change_rankings = Ranking.where(rank: ranking.rank+1 .. params[:rank].to_i)
         change_rankings.each do |change_ranking|
@@ -40,9 +40,9 @@ class AttendancesController < ApplicationController
           change_ranking.save!
         end
         ranking.update!(rank: params[:rank].to_i)
-        redirect_to ranking_attendances_url, notice: "順位を更新"
+        redirect_to ranking_attendances_url, notice: "順位を更新しました"
       else
-        redirect_to ranking_attendances_url, notice: "順位をそのままで更新した"
+        redirect_to ranking_attendances_url, notice: "順位に変更はありません"
       end
     end
   end

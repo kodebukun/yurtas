@@ -69,11 +69,11 @@ class UsersController < ApplicationController
     end
     #ストロングパラメーター
     def user_params
-      params.require(:user).permit(:name, :login_id, :phone_no, :email, :password, :password_confirmation, :night_shift, :day_shift, :call, department_ids: [], work_ids: [], position_ids: [])
+      params.require(:user).permit(:name, :login_id, :phone_no, :email, :comment, :password, :password_confirmation, :night_shift, :day_shift, :call, department_ids: [], work_ids: [], position_ids: [])
     end
 
     def params_unless_password
-      params.require(:user).permit(:name, :login_id, :phone_no, :email, :night_shift, :day_shift, :call, department_ids: [], work_ids: [])
+      params.require(:user).permit(:name, :login_id, :phone_no, :email, :comment, :night_shift, :day_shift, :call, department_ids: [], work_ids: [])
     end
 
 end

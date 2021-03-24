@@ -5,8 +5,7 @@ table.table
       th= User.human_attribute_name(:name)
       th= User.human_attribute_name(:phone_no)
       th.d-none.d-md-table-cell= User.human_attribute_name(:email)
-      th.d-none.d-md-table-cell= User.human_attribute_name(:created_at)
-      th.d-none.d-md-table-cell= User.human_attribute_name(:updated_at)
+      th.d-none.d-lg-table-cell.text-info= User.human_attribute_name(:comment)
       th
   tbody
     - @users.each do |user|
@@ -14,8 +13,7 @@ table.table
         td= link_to user.name, user
         td= user.phone_no
         td.d-none.d-md-table-cell= user.email
-        td.d-none.d-md-table-cell= user.created_at.strftime("%Y-%m-%d %H:%M")
-        td.d-none.d-md-table-cell= user.updated_at.strftime("%Y-%m-%d %H:%M")
+        td.d-none.d-lg-table-cell.text-info= user.comment
         td
           - if user.id == @current_user.id
             = link_to edit_user_path(user), class:"mr-3", style: "color: #fe635f;" do
