@@ -2,7 +2,7 @@ class User < ApplicationRecord
   validates :name, presence: true, length: {maximum: 30}
   validates :login_id, presence: true, uniqueness: true
   validates :password, confirmation: true
-  validates :comment, length: {maximum: 20}
+  validates :comment, length: {maximum: 30}
 
   has_secure_password
 

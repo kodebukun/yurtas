@@ -1,20 +1,20 @@
 .mb-3
 table.table
   thead.thead-default
-    tr.text-secondary
-      th= User.human_attribute_name(:name)
-      th= User.human_attribute_name(:phone_no)
-      th.d-none.d-md-table-cell= User.human_attribute_name(:email)
-      th.d-none.d-lg-table-cell.text-info= User.human_attribute_name(:comment)
-      th
+    tr.text-secondary.row
+      th.col.col-5.col-md-2= User.human_attribute_name(:name)
+      th.col.col-5.col-md-3.col-lg-2= User.human_attribute_name(:phone_no)
+      th.d-none.d-md-table-cell.col.col-md-5.col-lg-4= User.human_attribute_name(:email)
+      th.d-none.d-lg-table-cell.text-info.col.col-lg-3= User.human_attribute_name(:comment)
+      th.col.col-1
   tbody
     - @users.each do |user|
-      tr
-        td= link_to user.name, user
-        td= user.phone_no
-        td.d-none.d-md-table-cell= user.email
-        td.d-none.d-lg-table-cell.text-info= user.comment
-        td
+      tr.row
+        td.col.col-5.col-md-2= link_to user.name, user
+        td.col.col-5.col-md-3.col-lg-2= user.phone_no
+        td.d-none.d-md-table-cell.col.col-md-5.col-lg-4= user.email
+        td.d-none.d-lg-table-cell.text-info.col.col-lg-3= user.comment
+        td.col.col-1.pl-0
           - if user.id == @current_user.id
             = link_to edit_user_path(user), class:"mr-3", style: "color: #fe635f;" do
               span.fa-stack

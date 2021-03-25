@@ -31,10 +31,6 @@ module NotificationsHelper
         new_post = link_to "新規投稿", post_path(notification.post)
         work = notification.post.work
         visitor + " さんが#{work.name}の投稿に " + new_post + " しました。"
-
-
     end
-
   end
-
 end

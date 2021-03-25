@@ -55,7 +55,6 @@ class UsersController < ApplicationController
     end
   end
 
-
   private
     #本人か確認
     def ensure_correct_user

@@ -7,35 +7,3 @@ header.jumbotron.mt-5.d-none.d-md-block
   = render partial: "card_top", locals: {initial: "A", color: "color:#007bff;", title: "ll", section: "全体", path: posts_path}
   = render partial: "card_top", locals: {initial: "M", color: "color:#ffa34d;", title: "odality", section: "各部署", path: top_department_posts_path}
   = render partial: "card_top", locals: {initial: "W", color: "color:#f67575;", title: "ork", section: "各係り", path: top_work_posts_path}
-
-/
-    <!-- Page Features -->
-    <div class="row text-center my-3">
-
-
-      <div class="col-lg-4 col-md-6 mb-4">
-        <div class="card h-100">
-          <div class="card-body">
-            <h3 class="card-title"><span class="h1 text-info"">M</span>odality</h3>
-            <p class="card-text text-center h5">各部署の掲示板</p>
-          </div>
-          <div class="card-footer">
-            <a href="/requests/departments" class="btn btn-outline-secondary">Join!</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-4 col-md-6 mb-4">
-        <div class="card h-100">
-          <div class="card-body">
-            <h3 class="card-title"><span class="h1 text-danger">W</span>ork</h3>
-            <p class="card-text text-center h5">各係の掲示板</p>
-          </div>
-          <div class="card-footer">
-            <a href="/requests/works" class="btn btn-outline-secondary">Join!</a>
-          </div>
-        </div>
-      </div>
-
-    </div>
-    <!-- /.row -->
