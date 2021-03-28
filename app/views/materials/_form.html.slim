@@ -1,0 +1,36 @@
+h2.text-primary.mb-3= title
+= form_with model: @material, local: true do |f|
+  .form-group
+    | 種類（※必須）：
+    = f.radio_button :material_type, "machine", class: "mx-1"
+    | 装置
+    = f.radio_button :material_type, "phantom", class: "mr-1 ml-3"
+    | ファントム
+    = f.radio_button :material_type, "dosimeter", class: "mr-1 ml-3"
+    | 線量計
+  .form-group
+    = f.label :department_id, "機器所属部署（※必須）："
+    = f.collection_select(:department_id, departments, :id, :name, prompt: "機器所属部署を選択して下さい。", class: "form-control")
+  .form-group
+    = f.label :name, "機器名（※必須）"
+    = f.text_field :name, class: "form-control"
+  .form-group
+    = f.label :manufacturer_id, "メーカー（※必須）："
+    = f.collection_select(:manufacturer_id, manufacturers, :id, :name, prompt: "メーカーを選択して下さい。", class: "form-control")
+  .form-group
+    = f.label :place, "設置場所"
+    = f.text_field :place, class: "form-control"
+  .form-group
+    = f.label :use, "用途"
+    = f.text_field :use, class: "form-control"
+  .form-group
+    = f.label :image, "画像（※必須、画像ファイル限定、1MB以内）"
+    = f.file_field :image, class: "form-control"
+  .form-group
+    = f.label :install_date, "設置日："
+    = f.date_select :install_date, {start_year: 2000}
+  .form-group
+    = f.label :update_date, "更新予定日："
+    = f.date_select :update_date, {end_year: 2040}
+
+  = f.submit nil, class: "btn btn-primary mt-2"

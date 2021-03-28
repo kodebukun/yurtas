@@ -17,6 +17,8 @@ ja:
       like: いいね
       morning: 朝ミーティング
       ranking: 呼び出しランキング
+      material: 機器
+      manufacturer: メーカー
     attributes:
       user:
         id: ID
@@ -75,6 +77,22 @@ ja:
         id: ID
         rank: 順位
         user_id: ユーザーID
+      material:
+        id: 機器ID
+        name: 機器名
+        manufacturer_id: メーカーID
+        manufacturer: メーカー
+        place: 設置場所
+        use: 用途
+        install_date: 設置日
+        update_date: 更新予定日
+        material_type: 機器種別
+        department_id: 機器所属部署
+        image: 画像
+      manufacturer:
+        id: メーカーID
+        name: メーカー名
+        url: メーカーURL
 
   date:
     abbr_day_names:

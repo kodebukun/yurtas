@@ -1,0 +1,39 @@
+- materials.each do |material|
+  .col.col-12.col-md-6.col-lg-4.mb-3
+    .card
+      - if material.image.present?
+        img.card-img-top= image_tag material.image
+      .card-body
+        h2.card-title.text-primary
+          = material.name
+        p.card-text
+          | 製品名　：
+          = material.name
+          br
+          | メーカー：
+          = material.manufacturer.name
+          br
+          | 設置場所：
+          = material.place
+          br
+          | 主な用途：
+          = material.use
+        .d-flex.justify-content-around
+          = link_to "メーカーHP", material.manufacturer.url, class: "btn btn-primary mr-5"
+          div
+            = link_to edit_material_path(material), class: "btn px-0 bg-white" do
+              span.fa-stack
+                i.fas.fa-square.fa-stack-2x.text-primary
+                i.fas.fa-pen.fa-stack-1x.fa-inverse
+            - if @current_user.admin?
+              = link_to material, method: :delete, data: {confirm: "機器を削除します。よろしいですか？"}, class: "btn px-0 bg-white" do
+                span.fa-stack
+                  i.fas.fa-square.fa-stack-2x.text-danger
+                  i.far.fa-trash-alt.fa-stack-1x.fa-inverse
+
+      .card-footer.text-muted
+        | 設置日：
+        = material.install_date
+        br
+        | 更新予定日：
+        = material.update_date

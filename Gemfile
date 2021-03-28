@@ -100,3 +100,9 @@ gem 'seed-fu'
 
 #ページネーション
 gem 'kaminari'
+
+#オートリンク
+gem 'rinku'
+
+#active-stogareのvalidation
+gem 'activestorage-validator'

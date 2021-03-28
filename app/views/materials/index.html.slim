@@ -1,20 +1,24 @@
-header.jumbotron.my-4.py-4
+header.jumbotron.my-4.py-4.d-none.d-md-block
   h1.display-4.font-weight-bold.text-primary Material
   p.mt-4.lead.text-secondary こちらから撮影装置・ファントム・線量計の情報にアクセス出来ます。
+  .d-flex.flex-row-reverse= link_to "新しい機器の登録", new_material_path, class: "btn btn-info"
 
-.card-deck.my-5
-  .card
-    .card-body.h3.text-center.text-primary 装置
-    i.fas.fa-laptop.fa-6x.mx-auto.text-primary.pb-4
-    .card-footer
-      = link_to "Find Out More!", materials_machines_path, class: "btn btn-outline-primary btn-lg btn-block"
-  .card
-    .card-body.h3.text-center.text-success ファントム
-    i.fas.fa-brain.fa-6x.mx-auto.text-success.pb-4
-    .card-footer
-      = link_to "Find Out More!", materials_phantoms_path, class: "btn btn-outline-success btn-lg btn-block"
-  .card
-    .card-body.h3.text-center.text-danger 線量計
-    i.fas.fa-radiation.fa-6x.mx-auto.text-danger.pb-4
-    .card-footer
-      = link_to "Find Out More!", materials_dosimeters_path, class: "btn btn-outline-danger btn-lg btn-block"
+.card-deck.my-5.row
+  .col.col-12.col-md-6.col-lg-4.mb-3
+    .card
+      .card-body.h3.text-center.text-primary 装置
+      i.fas.fa-laptop.fa-6x.mx-auto.text-primary.pb-4
+      .card-footer
+        = link_to "Find Out More!", machines_materials_path, class: "btn btn-outline-primary btn-lg btn-block"
+  .col.col-12.col-md-6.col-lg-4.mb-3
+    .card
+      .card-body.h3.text-center.text-success ファントム
+      i.fas.fa-brain.fa-6x.mx-auto.text-success.pb-4
+      .card-footer
+        = link_to "Find Out More!", phantoms_materials_path, class: "btn btn-outline-success btn-lg btn-block"
+  .col.col-12.col-md-6.col-lg-4.mb-3
+    .card
+      .card-body.h3.text-center.text-danger 線量計
+      i.fas.fa-radiation.fa-6x.mx-auto.text-danger.pb-4
+      .card-footer
+        = link_to "Find Out More!", dosimeters_materials_path, class: "btn btn-outline-danger btn-lg btn-block"

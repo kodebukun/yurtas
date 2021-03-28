@@ -43,10 +43,13 @@ Rails.application.routes.draw do
     end
   end
 
-  get 'materials/dosimeters', to: 'materials#dosimeters'
-  get 'materials/phantoms', to: 'materials#phantoms'
-  get 'materials/machines', to: 'materials#machines'
-  get 'materials/index', to: 'materials#index'
+  resources :materials do
+    collection do
+      get 'dosimeters'
+      get 'machines'
+      get 'phantoms'
+    end
+  end
 
   get 'manuals/index', to: 'manuals#index'
 

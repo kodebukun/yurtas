@@ -1,0 +1,5 @@
+.my-4
+  = render partial: "shared/error_message", locals: {content: @material}
+  = render partial: "form", locals: {title: "機器の新規登録", manufacturers: @manufacturers, departments: @departments}
+  .nav.justify-content-end
+    = link_to "機器一覧へ", materials_path, class:"nav-link"
