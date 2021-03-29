@@ -2,7 +2,7 @@
   .col.col-12.col-md-6.col-lg-4.mb-3
     .card
       - if material.image.present?
-        img.card-img-top= image_tag material.image
+        img.card-img-top= image_tag material.image, class: "w-100 h-100"
       .card-body
         h2.card-title.text-primary
           = material.name
