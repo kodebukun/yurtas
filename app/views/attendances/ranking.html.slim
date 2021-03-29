@@ -8,7 +8,6 @@ table.table
       th.d-none.d-lg-table-cell= Department.human_attribute_name(:name)
       th 順位変更
   tbody
-  /
     - @users.each do |user|
       tr
         td= user.ranking.rank
@@ -18,6 +17,7 @@ table.table
           - user.departments.each do |department|
             = "#{department.name}　"
         td
+        /
           - if user.id == @current_user.id
             = link_to ranking_update_attendances_path(bottom_user_id: user.id), method: :patch, class:"mr-2 text-primary" do
               span.fa-stack
