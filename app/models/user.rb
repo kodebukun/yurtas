@@ -20,10 +20,4 @@ class User < ApplicationRecord
   has_many :mornings
   has_one :ranking
 
-  #本番環境で関連が上手くいかなかったので応急処置
-  def return_rank
-    return self.ranking.rank
-  end
-
-
 end
