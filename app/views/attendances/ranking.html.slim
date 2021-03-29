@@ -10,11 +10,11 @@ table.table
   tbody
     - @users.each do |user|
       tr
-        td= user.ranking.rank
+        td user.ranking.rank
         td= link_to user.name, user
         td.d-none.d-lg-table-cell= user.phone_no
         td.d-none.d-lg-table-cell
-        /  - user.departments.each do |department|
+          - user.departments.each do |department|
             = "#{department.name}　"
         td
           - if user.id == @current_user.id
