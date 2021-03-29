@@ -10,14 +10,13 @@ table.table
   tbody
     - @users.each do |user|
       tr
-        td= user.ranking.rank
+        td user.ranking.rank
         td= link_to user.name, user
         td.d-none.d-lg-table-cell= user.phone_no
         td.d-none.d-lg-table-cell
           - user.departments.each do |department|
             = "#{department.name}　"
         td
-        /
           - if user.id == @current_user.id
             = link_to ranking_update_attendances_path(bottom_user_id: user.id), method: :patch, class:"mr-2 text-primary" do
               span.fa-stack
