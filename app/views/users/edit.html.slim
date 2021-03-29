@@ -37,12 +37,13 @@
       | する
       = f.radio_button :day_shift, "false", class: "mr-1 ml-3"
       | しない
-    .form-group
-      | 呼び出し：
-      = f.radio_button :call, "true", class: "mx-1"
-      | 可能
-      = f.radio_button :call, "false", class: "mr-1 ml-3"
-      | 不可
+    /
+      .form-group
+        | 呼び出し：
+        = f.radio_button :call, "true", class: "mx-1"
+        | 可能
+        = f.radio_button :call, "false", class: "mr-1 ml-3"
+        | 不可
     .form-group
       = f.label :comment, "ひと言コメント（30文字以内）"
       = f.text_field :comment, class: "form-control"
