@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_action :require_admin, {only: [:new, :create]}
 
   def index
-    @users = User.all.where.not(id: 1 .. 3)
+    @users = User.all.where.not(id: 1 .. 3).order(id: "ASC")
   end
 
   def show

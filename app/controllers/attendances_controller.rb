@@ -8,8 +8,7 @@ class AttendancesController < ApplicationController
   end
 
   def ranking
-    @users = User.where(call: true)
-    #.includes(:ranking).order("rankings.rank ASC")
+    @users = User.where(call: true).includes(:ranking).order("rankings.rank ASC")
     @rankings = Ranking.all
   end
 
