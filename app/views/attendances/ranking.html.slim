@@ -8,6 +8,7 @@ table.table
       th.d-none.d-lg-table-cell= Department.human_attribute_name(:name)
       th 順位変更
   tbody
+  /
     - @users.each do |user|
       tr
         td= user.ranking.rank
@@ -27,4 +28,4 @@ table.table
                 i.fas.fa-square.fa-stack-2x
                 i.fas.fa-sign-in-alt.fa-stack-1x.fa-inverse
 
-/ = render partial: "rank_modal"
+= render partial: "rank_modal"
