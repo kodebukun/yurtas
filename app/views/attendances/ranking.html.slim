@@ -17,14 +17,13 @@ table.table
           - user.departments.each do |department|
             = "#{department.name}　"
         td
-          - if user.id == @current_user.id
-            = link_to ranking_update_attendances_path(bottom_user_id: user.id), method: :patch, class:"mr-2 text-primary" do
-              span.fa-stack
-                i.fas.fa-square.fa-stack-2x
-                i.fas.fa-sort-amount-down-alt.fa-stack-1x.fa-inverse
-            = link_to "#!", class: "text-danger", "data-toggle": "modal", "data-target": "#Modal" do
-              span.fa-stack
-                i.fas.fa-square.fa-stack-2x
-                i.fas.fa-sign-in-alt.fa-stack-1x.fa-inverse
+          = link_to ranking_update_attendances_path(bottom_user_id: user.id), method: :patch, class:"mr-2 text-primary" do
+            span.fa-stack
+              i.fas.fa-square.fa-stack-2x
+              i.fas.fa-sort-amount-down-alt.fa-stack-1x.fa-inverse
+          = link_to "#!", class: "text-danger", "data-toggle": "modal", "data-target": "#Modal" do
+            span.fa-stack
+              i.fas.fa-square.fa-stack-2x
+              i.fas.fa-sign-in-alt.fa-stack-1x.fa-inverse
 
 = render partial: "rank_modal"
