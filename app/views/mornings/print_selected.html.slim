@@ -9,6 +9,6 @@
         .row.border-bottom.border-dark
           .col-2.border-right.border-dark.text-center.py-2 休み
           .col-10.py-2= morning.absentee
-        .py-2= morning.content
+        .py-2= simple_format(morning.content)
   .nav.justify-content-end
     = link_to "朝ミーティング一覧へ", mornings_path, class:"nav-link"
