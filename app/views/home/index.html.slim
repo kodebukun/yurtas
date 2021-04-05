@@ -23,7 +23,7 @@
   - if @current_user.id == 5
     = render partial: "index_cards", locals: {initial_color: "color:#FF0000;", initial: "当", card_title: "直表登録", card_detail: "当直表の登録", card_path: new_attendances_path}
 
-  = render partial: "index_cards", locals: {initial_color: "color:#f6416c;", initial: "勤", card_title: "務表", card_detail: "勤務表", card_path: menu_attendances_path}
+  = render partial: "index_cards", locals: {initial_color: "color:#f6416c;", initial: "勤", card_title: "務情報", card_detail: "勤務情報", card_path: menu_attendances_path}
   = render partial: "index_cards", locals: {initial_color: "color:#fed049;", initial: "掲", card_title: "示板", card_detail: "掲示板", card_path: top_posts_path}
   = render partial: "index_cards", locals: {initial_color: "color:#00b8a9;", initial: "朝", card_title: "ミーティング", card_detail: "朝ミーティング", card_path: mornings_path}
   = render partial: "index_cards", locals: {initial_color: "color:#f08a5d;", initial: "フ", card_title: "ァイル置き場", card_detail: "ファイル置き場", card_path: "https://drive.google.com/drive/folders/1ABT-ZGZzkThg83SvFEC1_vdqARrQJ5TQ?usp=sharing"}

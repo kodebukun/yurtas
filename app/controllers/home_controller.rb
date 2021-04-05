@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-  skip_before_action :login_required, {only: [:top, :about, :signup_text]}
+  skip_before_action :login_required, {only: [:top, :about, :signup_text, :login_help]}
   before_action :already_logged_in, {only: :top}
 
   def top
@@ -14,6 +14,13 @@ class HomeController < ApplicationController
   end
 
   def signup_text
+  end
+
+  def login_help
+  end
+
+  def help
+      
   end
 
   private

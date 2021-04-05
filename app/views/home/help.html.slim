@@ -1,0 +1,37 @@
+ul#materialsTab.nav.nav-pills.my-3 role="tablist"
+  li.nav-item
+    a#header-tab.nav-link.active aria-controls="header" aria-selected="true" data-toggle="pill" href="#header" role="tab" ヘッダー
+  li.nav-item
+    a#user-tab.nav-link aria-controls="user" aria-selected="false" data-toggle="pill" href="#user" role="tab" ユーザー
+  li.nav-item
+    a#index-tab.nav-link aria-controls="index" aria-selected="false" data-toggle="pill" href="#index" role="tab" ホーム
+  li.nav-item
+    a#attendance-tab.nav-link aria-controls="attendance" aria-selected="false" data-toggle="pill" href="#attendance" role="tab" 勤務情報
+  li.nav-item
+    a#post-tab.nav-link aria-controls="post" aria-selected="false" data-toggle="pill" href="#post" role="tab" 掲示板
+  li.nav-item
+    a#file-tab.nav-link aria-controls="file" aria-selected="false" data-toggle="pill" href="#file" role="tab" ファイル置き場
+  li.nav-item
+    a#material-tab.nav-link aria-controls="material" aria-selected="false" data-toggle="pill" href="#material" role="tab" 機器情報
+
+#materialsTabContent.tab-content
+  #header.tab-pane.fade.show.active aria-labelledby="header-tab" role="tabpanel"
+    .card-deck= render partial: "help_header"
+
+  #user.tab-pane.fade aria-labelledby="user-tab" role="tabpanel"
+    .card-deck= render partial: "help_user"
+
+  #index.tab-pane.fade aria-labelledby="index-tab" role="tabpanel"
+    .card-deck= render partial: "help_index"
+
+  #attendance.tab-pane.fade aria-labelledby="attendance-tab" role="tabpanel"
+    .card-deck= render partial: "help_attendance"
+
+  #post.tab-pane.fade aria-labelledby="post-tab" role="tabpanel"
+    .card-deck= render partial: "help_post"
+
+  #file.tab-pane.fade aria-labelledby="file-tab" role="tabpanel"
+    .card-deck= render partial: "help_file"
+
+  #material.tab-pane.fade aria-labelledby="material-tab" role="tabpanel"
+    .card-deck= render partial: "help_material"

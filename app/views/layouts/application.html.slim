@@ -40,7 +40,7 @@ html
                 a#navbarDropdown.nav-link.dropdown-toggle.text-white[href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"]
                   |  Dropdown
                 .dropdown-menu[aria-labelledby="navbarDropdown"]
-                  = link_to "勤務表", menu_attendances_path, class: "dropdown-item"
+                  = link_to "勤務情報", menu_attendances_path, class: "dropdown-item"
                   = link_to "掲示板", top_posts_path, class: "dropdown-item"
                   = link_to "朝ミーティング", mornings_path, class: "dropdown-item"
                   = link_to "ファイル置き場", "https://drive.google.com/drive/folders/1ABT-ZGZzkThg83SvFEC1_vdqARrQJ5TQ?usp=sharing", class: "dropdown-item"
@@ -48,13 +48,13 @@ html
                   = link_to "マニュアル", manuals_index_path, class: "dropdown-item"
                   = link_to "手続き方法", procedures_index_path, class: "dropdown-item"
                   .dropdown-divider
-                  = link_to "Yurtasの使い方", "#", class: "dropdown-item"
+                  = link_to "Yurtasの使い方", help_path, class: "dropdown-item"
               li.nav-item
                 = link_to "Logout", logout_path, method: :delete, class: "nav-link text-white", tabindex: "-1"
             - else
               li.nav-item= link_to "Yurtasとは", about_path, class: "nav-link text-white"
               li.nav-item= link_to "新規登録", signup_text_path, class: "nav-link text-white"
-              li.nav-item= link_to "ログイン方法", "#", class: "nav-link text-white"
+              li.nav-item= link_to "ログイン方法", login_help_path, class: "nav-link text-white"
     .container[style="flex:1;"]
       - if flash.notice.present?
         .alert.alert-warning.alert-dismissible.fade.show.text-center

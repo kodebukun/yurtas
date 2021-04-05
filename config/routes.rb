@@ -62,6 +62,8 @@ Rails.application.routes.draw do
   get '/signup/text', to: 'home#signup_text'
   get '/about', to: 'home#about'
   get '/index', to: 'home#index'
+  get '/help', to: 'home#help'
+  get '/login_help', to: 'home#login_help'
 
   resources :users
 
