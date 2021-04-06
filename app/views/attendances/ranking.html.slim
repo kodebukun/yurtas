@@ -21,9 +21,9 @@ table.table
             span.fa-stack
               i.fas.fa-square.fa-stack-2x
               i.fas.fa-sort-amount-down-alt.fa-stack-1x.fa-inverse
-          = link_to "#!", class: "text-danger", "data-toggle": "modal", "data-target": "#Modal" do
+          = link_to "#!", class: "text-danger", "data-toggle": "modal", "data-target": "#Modal#{user.id}" do
             span.fa-stack
               i.fas.fa-square.fa-stack-2x
               i.fas.fa-sign-in-alt.fa-stack-1x.fa-inverse
 
-= render partial: "rank_modal"
+          = render partial: "rank_modal", locals: {user_id: user.id, modal_id: "Modal#{user.id}"}

@@ -1,4 +1,4 @@
-#Modal.modal.fade[tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true"]
+.modal.fade[tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true" id=modal_id]
   .modal-dialog[role="document"]
     .modal-content
       .modal-header
@@ -11,7 +11,7 @@
           .form-group
             = f.label :rank, "移動する順位：#{@rankings.minimum(:rank)}～#{@rankings.maximum(:rank)}位で入力"
             = f.number_field :rank, class: "form-control", min: @rankings.minimum(:rank), max: @rankings.maximum(:rank)
-            = f.hidden_field :user_id, value: @current_user.id
+            = f.hidden_field :user_id, value: user_id
         .modal-footer
           button.btn.btn-secondary[type="button" data-dismiss="modal"] Close
           button.btn.btn-primary[type="submit"] 移動する
