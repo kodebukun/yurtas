@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+
   delete 'notifications/destroy', to: 'notifications#destroy', as: 'destroy_notifications'
   resources :notifications, only: [:index]
 
@@ -51,9 +52,11 @@ Rails.application.routes.draw do
     end
   end
 
-  get 'manuals/index', to: 'manuals#index'
+  get 'files/index'
 
-  get 'procedures/index', to: 'procedures#index'
+  get 'manuals/index'
+
+  get 'procedures/index'
 
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'

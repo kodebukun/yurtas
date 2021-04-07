@@ -13,6 +13,9 @@ ul#materialsTab.nav.nav-pills.my-3 role="tablist"
     a#file-tab.nav-link aria-controls="file" aria-selected="false" data-toggle="pill" href="#file" role="tab" ファイル置き場
   li.nav-item
     a#material-tab.nav-link aria-controls="material" aria-selected="false" data-toggle="pill" href="#material" role="tab" 機器情報
+  li.nav-item
+    a#manual-tab.nav-link aria-controls="manual" aria-selected="false" data-toggle="pill" href="#manual" role="tab" マニュアル
+
 
 #materialsTabContent.tab-content
   #header.tab-pane.fade.show.active aria-labelledby="header-tab" role="tabpanel"
@@ -35,3 +38,6 @@ ul#materialsTab.nav.nav-pills.my-3 role="tablist"
 
   #material.tab-pane.fade aria-labelledby="material-tab" role="tabpanel"
     .card-deck= render partial: "help_material"
+
+  #manual.tab-pane.fade aria-labelledby="manual-tab" role="tabpanel"
+    .card-deck= render partial: "help_manual"
