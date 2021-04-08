@@ -1,9 +1,23 @@
-header.jumbotron.mt-5.d-none.d-md-block
-  h1.display-4.font-weight-bold.text-primary Whitch bulletin board ?
-  hr.mt-3.mb-2
-  h4.text-secondary 掲示板をお選び下さい。
+header.jumbotron.my-4.py-4.d-none.d-md-block
+  h1.display-4.font-weight-bold.text-primary Bulletin board
+  p.mt-4.lead.text-secondary こちらから掲示板にアクセス出来ます。
 
-.row.text-center.my-3
-  = render partial: "card_top", locals: {initial: "A", color: "color:#007bff;", title: "ll", section: "全体", path: posts_path}
-  = render partial: "card_top", locals: {initial: "M", color: "color:#ffa34d;", title: "odality", section: "各部署", path: top_department_posts_path}
-  = render partial: "card_top", locals: {initial: "W", color: "color:#f67575;", title: "ork", section: "各係り", path: top_work_posts_path}
+.card-deck.my-5
+  .col.col-12.col-md-6.col-lg-4.mb-3
+    .card
+      .card-body.h3.text-center.text-primary 全体の掲示板
+      i.fas.fa-hospital-alt.fa-6x.mx-auto.text-primary.pb-4
+      .card-footer.text-center
+        = link_to "Find Out More!", posts_path, class: "btn btn-outline-secondary"
+  .col.col-12.col-md-6.col-lg-4.mb-3
+    .card
+      .card-body.h4.text-center [style="color:#ffa34d;"] 部署の掲示板
+      i.fas.fa-home.fa-6x.mx-auto.pb-4 [style="color:#ffa34d;"]
+      .card-footer.text-center
+        = link_to "Find Out More!", top_department_posts_path, class: "btn btn-outline-secondary"
+  .col.col-12.col-md-6.col-lg-4.mb-3
+    .card
+      .card-body.h3.text-center [style="color:#f67575;"] 係りの掲示板
+      i.fas.fa-users.fa-6x.mx-auto.pb-4 [style="color:#f67575;"]
+      .card-footer.text-center
+        = link_to "Find Out More!", top_work_posts_path, class: "btn btn-outline-secondary"
