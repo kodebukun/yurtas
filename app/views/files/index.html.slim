@@ -1,17 +1,30 @@
 header.jumbotron.my-4.py-4.d-none.d-md-block
   h1.display-4.font-weight-bold.text-primary Files
-  p.mt-4.lead.text-secondary 放射線部のファイル置き場です。
+  p.mt-2.lead.text-secondary
+    | 放射線部のファイル置き場です。
+    br
+    | 技師長フォルダには技師長が皆さんに見て欲しいファイルを配置して下さい。「技師長のみ」編集権限があります。
+    br
+    | オフィシャルには各部署や各係り等から皆さんに見て欲しいファイルを配置して下さい。「ユーザー全員」編集権限があります。
+    br
+    | フリーには自由にファイルを配置して下さい。「ユーザー全員」編集権限があります。
 
 .card-deck.my-5
-  .col.col-12.col-md-6.mb-3
+  .col.col-12.col-md-6.col-lg-4.mb-3
     .card
-      .card-body.h3.text-center.text-primary オフィシャル
-      i.fas.fa-folder-open.fa-6x.mx-auto.text-primary.pb-4
+      .card-body.h3.text-center.text-primary 技師長
+      i.fas.fa-user.fa-6x.mx-auto.text-primary.pb-4
       .card-footer.text-center
         = link_to "Find Out More!", "https://drive.google.com/drive/folders/1ABT-ZGZzkThg83SvFEC1_vdqARrQJ5TQ?usp=sharing", class: "btn btn-outline-secondary"
-  .col.col-12.col-md-6.mb-3
+  .col.col-12.col-md-6.col-lg-4.mb-3
     .card
-      .card-body.h4.text-center [style="color:#ffa34d;"] フリー
-      i.far.fa-folder-open.fa-6x.mx-auto.pb-4 [style="color:#ffa34d;"]
+      .card-body.h3.text-center [style="color:#ffa34d;"] オフィシャル
+      i.fas.fa-hdd.fa-6x.mx-auto.pb-4 [style="color:#ffa34d;"]
       .card-footer.text-center
         = link_to "Find Out More!", "https://drive.google.com/drive/folders/1DZyv21uv_S8EsOKw60PQXgYXbdPC4Ydm?usp=sharing", class: "btn btn-outline-secondary"
+  .col.col-12.col-md-6.col-lg-4.mb-3
+    .card
+      .card-body.h4.text-center [style="color:#f67575;"] フリー
+      i.fas.fa-folder-open.fa-6x.mx-auto.pb-4 [style="color:#f67575;"]
+      .card-footer.text-center
+        = link_to "Find Out More!", "https://drive.google.com/drive/folders/1lJNeHIzDzR_qONm4oNCYSsGZtv9qMGPV?usp=sharing", class: "btn btn-outline-secondary"
