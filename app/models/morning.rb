@@ -3,7 +3,6 @@ class Morning < ApplicationRecord
   validates :content, {presence: true}
   validates :user_id, {presence: true}
 
-  has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :notifications, dependent: :destroy
 
