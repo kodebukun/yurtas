@@ -20,6 +20,7 @@ class MorningsController < ApplicationController
 
   def show
     @morning = Morning.find(params[:id])
+    @comments = @morning.comments.order(created_at: "ASC")
   end
 
   def new

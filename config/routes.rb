@@ -11,7 +11,13 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :comments, except: [:index, :show]
+
+  resources :comments, except: [:index, :show] do
+    collection do
+      get 'new_morning'
+    end
+  end
+  get 'comment/:id/edit_morning', to: 'comments#edit_morning', as: 'edit_morning_comment'
 
   resources :likes, only: [:create, :destroy]
 
