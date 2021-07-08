@@ -3,21 +3,23 @@ header.jumbotron.my-4.py-4.d-none.d-md-block
   p.mt-4.lead.text-secondary こちらから勤務情報にアクセス出来ます。
 
 .card-deck.my-5
-  .col.col-12.col-md-6.col-lg-4.mb-3
+  .col.col-12.col-md-6.mb-3
     .card
       .card-body.h3.text-center.text-primary 当直表
       i.far.fa-moon.fa-6x.mx-auto.text-primary.pb-4
       .card-footer.text-center
         = link_to "Find Out More!", "/attendances_pdf/1_list.pdf", class: "btn btn-outline-secondary"
-  .col.col-12.col-md-6.col-lg-4.mb-3
+  .col.col-12.col-md-6.mb-3
     .card
       .card-body.h4.text-center [style="color:#ffa34d;"] 呼び出しランキング
       i.fas.fa-list-ol.fa-6x.mx-auto.pb-4 [style="color:#ffa34d;"]
       .card-footer.text-center
         = link_to "Find Out More!", ranking_attendances_path, class: "btn btn-outline-secondary"
-  .col.col-12.col-md-6.col-lg-4.mb-3
-    .card
-      .card-body.h3.text-center [style="color:#f67575;"] 週間勤務表
-      i.fas.fa-user-clock.fa-6x.mx-auto.pb-4 [style="color:#f67575;"]
-      .card-footer.text-center
-        = link_to "Find Out More!", roster_attendances_path, class: "btn btn-outline-secondary"
+
+  /
+    .col.col-12.col-md-6.col-lg-4.mb-3
+      .card
+        .card-body.h3.text-center [style="color:#f67575;"] 週間勤務表
+        i.fas.fa-user-clock.fa-6x.mx-auto.pb-4 [style="color:#f67575;"]
+        .card-footer.text-center
+          = link_to "Find Out More!", roster_attendances_path, class: "btn btn-outline-secondary"
