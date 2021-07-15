@@ -218,7 +218,7 @@ User.seed do |s|
   s.image_name = "default_user.jpg"
   s.admin = false
   s.night_shift = true
-  s.day_shift = false
+  s.day_shift = true
   s.call = true
 end
 
@@ -302,7 +302,7 @@ User.seed do |s|
   s.image_name = "default_user.jpg"
   s.admin = false
   s.night_shift = true
-  s.day_shift = false
+  s.day_shift = true
   s.call = true
 end
 
@@ -358,7 +358,7 @@ User.seed do |s|
   s.image_name = "default_user.jpg"
   s.admin = false
   s.night_shift = true
-  s.day_shift = false
+  s.day_shift = true
   s.call = true
 end
 
@@ -568,7 +568,7 @@ User.seed do |s|
   s.image_name = "default_user.jpg"
   s.admin = true
   s.night_shift = true
-  s.day_shift = false
+  s.day_shift = true
   s.call = true
 end
 
