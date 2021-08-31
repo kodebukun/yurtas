@@ -62,7 +62,16 @@ Rails.application.routes.draw do
 
   get 'manuals/index'
 
-  get 'procedures/index'
+  resources :procedures, only: [:index] do
+    collection do
+      get 'holiday_record'
+      get 'holiday_change'
+      get 'holiday_paid'
+      get 'holiday_special'
+      get 'incident'
+      get 'picture_delete'
+    end
+  end
 
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'

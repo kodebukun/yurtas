@@ -1,0 +1,22 @@
+.m-2
+  h2.text-primary.mt-3.mb-3 宿日直変更、出張・休暇届
+  p.mt-2 宿直・日直の変更や出張・休暇を行なうためには「宿日直変更、出張・休暇届」の提出が必要です。
+  = image_tag '/procedure_pct/holiday_change_circle.jpg', class: "rounded w-100"
+  p.mt-2
+    | こちらが宿日直変更、出張・休暇届です。
+    br
+    | 宿日直の変更の場合は
+    span.text-primary.font-weight-bold
+      | 青枠
+    | の部分を記入します。変更項目に丸を付け、変更理由と変更の詳細を記入して下さい。
+    br
+    | 出張や休暇の申請の場合は
+    span.text-danger.font-weight-bold
+      | 赤枠
+    | の部分を記入します。休暇か出張のどちらかに丸を付け、カッコ内に理由を記載し、申請期間を記載して下さい。
+    br
+    | 必要箇所を記入後、自分の部署の主任と技師長のサインを貰い、佐藤副技師長に提出して下さい。
+
+  /一覧へのリンク
+  .nav.justify-content-end.mt-3
+    = link_to "手続き一覧へ", procedures_path, class:"nav-link"

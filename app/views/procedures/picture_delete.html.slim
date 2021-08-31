@@ -1,0 +1,26 @@
+.m-2
+  h2.text-primary.mt-3.mb-3 画像削除依頼書
+  p.mt-2 PACSからの画像削除を行なうためには「画像削除依頼書」の提出が必要です。
+  .row
+    = image_tag '/procedure_pct/picture_delete.jpg', class: "border border-dark rounded col col-12 col-md-8 col-lg-6"
+  p.mt-2
+    | こちらが画像削除依頼書です。
+    br
+    | 所属の欄には「放射線部」と記入して下さい。
+    br
+    | 所属責任者名には技師長の名前を、依頼者名は削除依頼者の名前を記入して下さい。
+    br
+    | 削除理由は簡潔に分かりやすく記載するのが望ましいです。
+    br
+    | 患者ID、患者氏名、診療科、入外区分、撮影日時、撮影種別、削除枚数、Accession番号は
+      削除する画像についての情報です。全て記載して下さい。
+    br
+    | ※撮影種別とはモダリティのことです。
+    br
+    | ※Accession番号はRISの実施入力画面を開いて右上の「詳細情報」から確認できます。
+    br
+    | 全て記載し、該当部署の主任の承諾を得た後に、医療情報部に提出して下さい。
+
+  /一覧へのリンク
+  .nav.justify-content-end.mt-3
+    = link_to "手続き一覧へ", procedures_path, class:"nav-link"

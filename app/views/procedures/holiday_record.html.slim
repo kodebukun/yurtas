@@ -1,0 +1,72 @@
+.m-2
+  h4
+    span.badge.badge-primary 出退勤記録
+  h2.text-primary.mt-3.mb-3 トップページ
+  p.mt-2 出退勤記録は「HOPE ナーススケジューラ 看護師勤務管理支援システム」にて行います。
+  .row
+    = image_tag '/procedure_pct/time_card_login.jpg', class: "rounded col col-12 col-md-8"
+  p.mt-2
+    | こちらがトップ画面です。ここにユーザーIDとパスワードを入力してログインします。
+    br
+    | ユーザーIDは職員番号です。初期パスワードは部署の責任者に問い合わせて下さい。パスワードはログイン後任意のものに変更できます。
+
+
+  = image_tag '/procedure_pct/time_card_home_circle.jpg', class: "rounded w-100 mt-4"
+  p.mt-2 ログインするとこのような画面になります。「時間管理業務」をクリックします。
+
+  = image_tag '/procedure_pct/time_card_management_circle.jpg', class: "rounded w-100 mt-4"
+  p.mt-2
+    | このような画面に移ります。
+    br
+    | スタッフ時間管理入力（後述）：各人の毎月の勤怠情報が一覧で表示されます。（※１）
+    br
+    | 出退勤処理：出退勤メニューが表示されます。（※２）
+
+  h2.text-primary.mt-4.mb-3 出退勤メニュー
+  .row
+    = image_tag '/procedure_pct/time_card_menu_circle.jpg', class: "rounded col col-12 col-md-8 col-lg-6"
+  p.mt-2
+    | こちらが出退勤メニュー画面です。
+    br
+    | 出勤したらウィンドウ下部の出勤ボタンをクリックし、出勤処理を行って下さい。（※１）
+    br
+    | 退勤する場合はウィンドウ下部の退勤ボタンをクリックし、退勤処理を行なって下さい。（※２）
+    br
+    | 当日の超過ボタンをクリックすることで「当日の」時間入力画面に遷移します。（※３）
+    br
+    | 前日の超過ボタンをクリックすることで「前日の」時間入力画面に遷移します。（※４）
+
+
+  h2.text-primary.mt-4.mb-3 時間入力画面
+  = image_tag '/procedure_pct/time_card_input_circle.jpg', class: "rounded w-100"
+  p.mt-2
+    | こちらが時間入力画面です。主に超過勤務の入力に使用します。
+    br
+    | 出勤の欄では出退勤時間の入力、調整や遅刻早退理由の入力が出来ます。（※１）
+    br
+    | 時間外の欄では超過勤務の入力が出来ます。超勤が発生した場合はこちらに入力して下さい。（※２）
+    br
+    | 入力する場合は、「追加」のボタンをクリックして入力フォームを表示させ、実績時間、主理由
+      （必要であれば副理由も）を入力し確定します。
+    br
+    span.text-danger
+      | ※注１）「8:15～8:30」と「17:00～17:15」の時間は超勤時間として報告出来ません。
+        その時間内に発生した超勤は時間をずらして入力するなどして対応して下さい。
+    br
+    span.text-danger
+      | ※注２）出退勤時間や超過勤務の入力・変更は、「当日」と「前日」の分しか出来ません。
+        ２日以上前の内容を編集したい場合は技師長に申し出て下さい。
+
+  h2.text-primary.mt-4.mb-3 時間管理入力画面
+  = image_tag '/procedure_pct/time_card_personal_list.jpg', class: "rounded w-100"
+  p.mt-2
+    | こちらが時間管理入力画面です。各人の毎月の勤怠情報が一覧で確認できます。
+    br
+    | 日付の行をダブルクリックすることで時間入力画面を表示することが出来ます。
+    br
+    span.text-danger
+      | だだし当日の時間入力画面しか表示できません。２日以上前の内容を編集したい場合は技師長に申し出て下さい。
+
+  /一覧へのリンク
+  .nav.justify-content-end.mt-3
+    = link_to "手続き一覧へ", procedures_path, class:"nav-link"

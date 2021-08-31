@@ -345,7 +345,7 @@ User.seed do |s|
   s.admin = false
   s.night_shift = false
   s.day_shift = false
-  s.call = false
+  s.call = true
 end
 
 User.seed do |s|

@@ -1,31 +1,16 @@
-h1
-  | 工事中・・・m(_ _)m
-/
-  .m-2
-    h4.text-primary ヘッダー
-    p.pl-4.text-secondary.mb-3 「通知」、「Home」、「ユーザー名」、「Users」、「Dropdawn」、「Logout」の5つのリンクが表示されます。
+header.jumbotron.my-4.py-4.d-none.d-md-block
+  h1.display-4.font-weight-bold.text-primary Procedures
+  p.mt-4.lead.text-secondary こちらから各種手続きについての情報にアクセス出来ます。
 
-    h4.text-primary 通知
-    p.pl-4.text-secondary.mb-3
-      | 自分宛ての通知一覧へリンクします。また、自分宛ての通知が未読の場合はオレンジの丸いマークが表示されます。
-      br
-      | 通知が来る条件は「全体の投稿があった場合」、「自分の経験部署 / 所属係りへの投稿があった場合」、「自分の投稿にコメントやイイねがあった場合」、「自分がコメントした投稿に追加でコメントがあった場合」です。
-      br
-      | 自分の経験部署や所属係りは自分のユーザー情報ページから編集できます。
-      br
-      | 通知の内容から、それぞれの投稿にリンクします。
+ul#proceduresTab.nav.nav-pills.my-3 role="tablist"
+  li.nav-item
+    a#holiday-tab.nav-link.active aria-controls="holiday" aria-selected="true" data-toggle="pill" href="#holiday" role="tab" 出退勤・休暇関係
+  li.nav-item
+    a#incident-tab.nav-link aria-controls="incident" aria-selected="false" data-toggle="pill" href="#incident" role="tab" インシデント関係
 
-    h4.text-primary Home
-    p.pl-4.text-secondary.mb-3 ホームページにリンクします。
+#proceduresTabContent.tab-content
+  #holiday.tab-pane.fade.show.active aria-labelledby="holiday-tab" role="tabpanel"
+    .card-deck= render partial: "holiday"
 
-    h4.text-primary ユーザー名
-    p.pl-4.text-secondary.mb-3 ユーザー情報ページにリンクします。
-
-    h4.text-primary Users
-    p.pl-4.text-secondary.mb-3 ユーザーリストページにリンクします。
-
-    h4.text-primary Dropdawn
-    p.pl-4.text-secondary.mb-3 「勤務情報」、「掲示板」、「朝ミーティング」、「ファイル置き場」、「機器情報」、「マニュアル」、「手続き情報」、「Yurtasの使い方」へのリンクが表示されます。
-
-    h4.text-primary Logout
-    p.pl-4.text-secondary.mb-3 ログアウトします。
+  #incident.tab-pane.fade aria-labelledby="incident-tab" role="tabpanel"
+    .card-deck= render partial: "incident"
