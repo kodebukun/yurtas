@@ -8,6 +8,11 @@ html
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
     meta[name="viewport" content="width=device-width,initial-scale=1"]
     link[href="https://use.fontawesome.com/releases/v5.12.0/css/all.css" rel="stylesheet"]
+    / PWA
+    link[rel="manifest" href="manifest.json.erb"]
+    / PWACompat for safari on iOS
+    script[async="" crossorigin="anonymous" src="https://unpkg.com/pwacompat"]
+
   body[style="min-height:100vh; display:flex; flex-flow:column;"]
     nav.navbar.navbar-expand-lg.navbar-light.bg-primary[style="min-height:10vh;"]
       .container

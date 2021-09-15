@@ -106,3 +106,6 @@ gem 'rinku'
 
 #active-stogareのvalidation
 gem 'activestorage-validator'
+
+#service-work PWA化ツール
+gem 'serviceworker-rails'

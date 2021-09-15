@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
       session[:user_id] = user.id
       redirect_to index_url, notice: "ログインしました"
     else
-      @error_message = "メールアドレスまたはパスワードが間違っています"
+      @error_message = "IDまたはパスワードが間違っています"
       @login_id = session_params[:login_id]
       @password = session_params[:password]
       render("home/top")
