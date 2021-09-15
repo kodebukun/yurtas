@@ -68,4 +68,11 @@ html
           button.close[data-dismiss="alert"] ×
       = yield
     footer.footer.bg-dark
-      .footer-copyright.text-center.py-4.text-light © 2021 : Yurtas
+      .container.d-flex.align-items-center.justify-content-between
+        = link_to :back do
+          i.fas.fa-arrow-left.btn.btn-outline-light
+        end
+        .footer-copyright.text-center.py-4.text-light
+          | © 2021 : Yurtas
+        div
+        img src="serviceworker-rails/icon-48x48.png" width="30" height="30" alt=""
