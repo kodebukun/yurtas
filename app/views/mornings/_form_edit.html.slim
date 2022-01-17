@@ -1,8 +1,8 @@
 h2.text-primary.mb-3= title
 = form_with model: @morning, local: true do |f|
   .form-group
-    = f.label :title, "タイトル（自由に編集可）"
-    = f.text_field :title, class: "form-control", value: Date.today.strftime("%Y/%m/%d") + " " + @week[Date.today.wday]
+    = f.label :title, "タイトル"
+    = f.text_field :title, class: "form-control"
   .form-group
     = f.label :absentee, "欠席者"
     = f.text_field :absentee, class: "form-control"

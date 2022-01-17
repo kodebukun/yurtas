@@ -1,5 +1,14 @@
 .my-4
   = render partial: "shared/error_message", locals: {content: @comment}
-  = render partial: "form", locals: {title: "コメント投稿", post_id: @post.id}
-  .nav.justify-content-end
-    = link_to "投稿詳細へ戻る", post_path(@post), class:"nav-link"
+  - if @post
+    = render partial: "form", locals: {title: "コメント投稿", post_id: @post.id}
+    .nav.justify-content-end
+      = link_to "投稿詳細へ戻る", post_path(@post), class:"nav-link"
+  - elsif @morning
+    = render partial: "form", locals: {title: "コメント投稿", morning_id: @morning.id}
+    .nav.justify-content-end
+      = link_to "投稿詳細へ戻る", morning_path(@morning), class:"nav-link"
+  - elsif @diary
+    = render partial: "form", locals: {title: "コメント投稿", diary_id: @diary.id}
+    .nav.justify-content-end
+      = link_to "宿直日誌詳細へ戻る", diary_path(@diary), class:"nav-link"

@@ -3,6 +3,7 @@ h2.text-primary.mb-3= title
   .form-group
     = f.label :content, "内容"
     = f.text_area :content, class: "form-control", rows: 10
+    = f.hidden_field :post_id, value: post_id
     = f.hidden_field :morning_id, value: morning_id
-
+    = f.hidden_field :diary_id, value: diary_id
   = f.submit nil, class: "btn btn-primary mt-2"

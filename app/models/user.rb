@@ -19,5 +19,7 @@ class User < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :mornings
   has_one :ranking
+  has_many :diaries, dependent: :destroy
+  has_many :partner_diaries, class_name: 'Diary', foreign_key: 'partner_id'
 
 end

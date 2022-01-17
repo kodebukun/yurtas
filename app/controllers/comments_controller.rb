@@ -3,19 +3,16 @@ class CommentsController < ApplicationController
 
   def new
     @comment = Comment.new
-    @post = Post.find(params[:post_id])
-  end
-
-  def new_morning
-    @comment = Comment.new
-    @morning = Morning.find(params[:morning_id])
+    if params[:post_id]
+      @post = Post.find(params[:post_id])
+    elsif params[:morning_id]
+      @morning = Morning.find(params[:morning_id])
+    elsif params[:diary_id]
+      @diary = Diary.find(params[:diary_id])
+    end
   end
 
   def edit
-    @comment = Comment.find(params[:id])
-  end
-
-  def edit_morning
     @comment = Comment.find(params[:id])
   end
 
@@ -35,8 +32,18 @@ class CommentsController < ApplicationController
     elsif @comment.morning
       @morning = @comment.morning
       if @comment.save
-        #コメントの通知処理は無し
+        #コメントの通知処理
+        @morning.create_notification_comment!(@current_user, @comment.id)
         redirect_to morning_url(@morning), notice: "コメントを投稿しました。"
+      else
+        render :new
+      end
+    elsif @comment.diary
+      @diary = @comment.diary
+      if @comment.save
+        #コメントの通知処理
+        @diary.create_notification_comment!(@current_user, @comment.id)
+        redirect_to diary_url(@diary), notice: "コメントを投稿しました。"
       else
         render :new
       end
@@ -51,6 +58,8 @@ class CommentsController < ApplicationController
         redirect_to post_url(@comment.post), notice: "コメントを編集しました。"
       elsif @comment.morning
         redirect_to morning_url(@comment.morning), notice: "コメントを編集しました。"
+      elsif @comment.diary
+        redirect_to diary_url(@comment.diary), notice: "コメントを編集しました。"
       end
     else
       render :edit
@@ -64,6 +73,8 @@ class CommentsController < ApplicationController
       redirect_to post_url(comment.post), notice: "コメントを削除しました。"
     elsif comment.morning
       redirect_to morning_url(comment.morning), notice: "コメントを削除しました。"
+    elsif comment.diary
+      redirect_to diary_url(comment.diary), notice: "コメントを削除しました。"
     end
   end
 
@@ -77,7 +88,7 @@ class CommentsController < ApplicationController
     end
     #ストロングパラメータ
     def comment_params
-      params.require(:comment).permit(:content, :post_id, :morning_id)
+      params.require(:comment).permit(:content, :post_id, :morning_id, :diary_id)
     end
 
 end

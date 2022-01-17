@@ -8,6 +8,7 @@ class Comment < ApplicationRecord
   belongs_to :user
   belongs_to :post, optional: true
   belongs_to :morning, optional: true
+  belongs_to :diary, optional: true
 
   def create_notification_like!(current_user)
     # すでに「いいね」されているか検索

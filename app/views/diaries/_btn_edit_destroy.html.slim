@@ -1,0 +1,9 @@
+div
+  = link_to edit_path, class: "btn px-0 bg-white" do
+    span.fa-stack
+      i.fas.fa-square.fa-stack-2x.text-primary
+      i.fas.fa-pen.fa-stack-1x.fa-inverse
+  = link_to destroy_path, method: :delete, data: {confirm: "投稿を削除します。よろしいですか？"}, class: "btn px-0 bg-white" do
+    span.fa-stack
+      i.fas.fa-square.fa-stack-2x.text-danger
+      i.far.fa-trash-alt.fa-stack-1x.fa-inverse

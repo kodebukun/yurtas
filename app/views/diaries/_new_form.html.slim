@@ -1,0 +1,17 @@
+h2.text-primary.mb-3= title
+= form_with model: @diary, local: true do |f|
+  .form-group
+    = f.label :designated_date, "宿直日を選択して下さい。", class: 'control-label'
+    = f.date_field :designated_date, class: 'form-control'
+  .form-group
+    = f.label :title, "タイトル（自由に編集可）"
+    = f.text_field :title, class: "form-control", value: "宿直の申し送り事項"
+  .form-group
+    = f.label :partner_id, "パートナー"
+    = f.collection_select :partner_id, User.where(day_shift: true).or(User.where(night_shift: true)), :id, :name, include_blank: true
+  .form-group
+    = f.label :content, "内容"
+    = f.text_area :content, class: "form-control", rows: 10
+    = f.hidden_field :meeting, value: true
+
+  = f.submit nil, class: "btn btn-primary mt-2"

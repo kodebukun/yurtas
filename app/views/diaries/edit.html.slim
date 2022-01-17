@@ -1,0 +1,5 @@
+.my-4
+  = render partial: "shared/error_message", locals: {content: @diary}
+  = render partial: "edit_form", locals: {title: "#{@diary.designated_date.strftime("%Y年%m月%d日")}の宿直日誌の編集"}
+  .nav.justify-content-end.mb-3
+    = link_to "投稿詳細へ戻る", diary_path, class:"nav-link"

@@ -1,0 +1,32 @@
+.my-4
+  h2.text-primary.mb-1
+    | 宿直日誌
+    small.ml-2= "( #{@month.strftime("%Y年%m月")}分 )"
+  .d-flex.justify-content-end
+    = link_to "新規投稿", new_diary_path, class: "btn btn-primary mr-3"
+  /--monthly_diaries--
+  div
+    ul.list-group.list-group-flush
+      - @monthly_diaries.each do |diary|
+        li.list-group-item
+          .d-flex.flex-row
+            h6.mb-2.mr-4= "#{diary.designated_date.strftime("%m/%d")}"
+            h6.mb-2= link_to diary.user.name, diary.user, class: "text-secondary"
+          h5= link_to simple_format(diary.title), diary, class: "text-primary"
+
+    .my-4
+      = paginate @monthly_diaries
+      = page_entries_info @monthly_diaries
+
+  .bg-light.p-4.rounded.border
+    /--prew_month next_month--
+    .d-flex.justify-content-between.mb-3
+      = link_to "← 前の月", diaries_path(month:@month.prev_month), class: "btn btn-secondary"
+      = link_to "今月", diaries_path, class: "btn btn-secondary"
+      = link_to "次の月 →", diaries_path(month:@month.next_month), class: "btn btn-secondary"
+    /--month_select_form--
+    = form_with url: diaries_path, method: :get, local: true, class: "form-inline mb-3" do |f|
+      .form-group
+        = f.label :month, "年月を選択", class: "mr-2"
+        = f.date_select :month, discard_day: true, class: "form-control"
+      = f.submit "決定", class: "btn btn-outline-secondary btn-sm ml-3"

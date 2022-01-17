@@ -1,0 +1,5 @@
+.my-4
+  = render partial: "shared/error_message", locals: {content: @diary}
+  = render partial: "new_form", locals: {title: "新規投稿（宿直日誌）"}
+  .nav.justify-content-end
+    = link_to "宿直日誌一覧へ", diaries_path, class:"nav-link"

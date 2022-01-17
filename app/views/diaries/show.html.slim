@@ -1,45 +1,45 @@
 .my-4
-  / morning user
+  / Post user
   .d-flex.flex-row
-    h4.mt-4= link_to @morning.user.name, @morning.user
-  h4= @morning.title
+    h4.mt-4= link_to @diary.user.name, @diary.user
+  h4= @diary.title
   hr
-  /Morning absentee
-  h5= "欠席者：#{@morning.absentee}"
+
+  /diary_partner
+  - if @diary.diary_partner
+    h5= "宿直日直パートナー：#{@diary.diary_partner.name}"
+  - else
+    h5= "宿直日直パートナー：無し"
 
   hr
-  / Morning content simple_formatで改行 rinkuでurlオートリンク
-  h5= simple_format(Rinku.auto_link(@morning.content, :all, 'target="_blank"').html_safe)
 
-  / morning bottom section
-  .d-flex.justify-content-between.mx-2.mt-3
+  / Post content simple_formatで改行 rinkuでurlオートリンク
+  h5= simple_format(Rinku.auto_link(@diary.content, :all, 'target="_blank"').html_safe)
+
+  / post bottom section
+  .d-flex.justify-content-between.mx-2
     / edit and destroy
-    - if @morning.user_id == @current_user.id
-      div
-        = link_to edit_morning_path, class: "btn px-0 bg-white" do
-          span.fa-stack
-            i.fas.fa-square.fa-stack-2x.text-primary
-            i.fas.fa-pen.fa-stack-1x.fa-inverse
-        = link_to @morning, method: :delete, data: {confirm: "投稿を削除します。よろしいですか？"}, class: "btn px-0 bg-white" do
-          span.fa-stack
-            i.fas.fa-square.fa-stack-2x.text-danger
-            i.far.fa-trash-alt.fa-stack-1x.fa-inverse
+    - if @diary.user_id == @current_user.id
+        = render partial: "btn_edit_destroy", locals: {edit_path: edit_diary_path, destroy_path: diary_path}
     - else
       div
-    / likes of morning
+    / likes of post
     div
-      - if Like.find_by(user_id: @current_user.id, morning_id: @morning.id)
-        = link_to like_path(morning_id: @morning.id), method: :delete, class: "table-link mr-1", style: "text-decoration: none;" do
+      - if Like.find_by(user_id: @current_user.id, diary_id: @diary.id)
+        = link_to like_path(diary_id: @diary.id), method: :delete, class: "table-link mr-1", style: "text-decoration: none;" do
           i.fas.fa-heart.text-danger
       - else
-        = link_to likes_path(morning_id: @morning.id), method: :post, class: "table-link mr-1", style: "text-decoration: none;" do
+        = link_to likes_path(diary_id: @diary.id), method: :post, class: "table-link mr-1", style: "text-decoration: none;" do
           i.fas.fa-heart.text-secondary
-      = @morning.likes.count
-
+      = @diary.likes.count
   hr.mb-1
-  = @morning.created_at.strftime("%Y-%m-%d %H:%M")
+  = "宿直日：#{@diary.designated_date.strftime("%Y-%m-%d")}"
+  br
+  = "投稿日時：#{@diary.created_at.strftime("%Y-%m-%d %H:%M")}"
+  br
+  = "更新日時：#{@diary.updated_at.strftime("%Y-%m-%d %H:%M")}"
   .d-flex.flex-row-reverse.mt-4
-    = link_to "コメントする", new_comment_path(morning_id: @morning.id), class: "btn btn-primary mr-3"
+    = link_to "コメントする", new_comment_path(diary_id: @diary.id), class: "btn btn-primary mr-3"
   / Comment
   - @comments.each do |comment|
     .d-flex.flex-row
@@ -69,7 +69,6 @@
             i.fas.fa-heart.text-secondary
         = comment.likes.count
     hr
-
   /一覧へのリンク
   .nav.justify-content-end.mt-3
-    = link_to "朝ミーティング一覧へ", mornings_path, class:"nav-link"
+    = link_to "宿直日誌一覧へ", diaries_path, class:"nav-link"
