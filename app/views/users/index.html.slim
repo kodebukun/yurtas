@@ -8,7 +8,7 @@ table.table
       th.d-none.d-lg-table-cell.text-info.col.col-lg-3= User.human_attribute_name(:comment)
       th.col.col-1
   tbody
-    - @users.each do |user|
+    - @active_users.each do |user|
       tr.row
         td.col.col-5.col-md-2= link_to user.name, user
         td.col.col-5.col-md-3.col-lg-2= user.phone_no

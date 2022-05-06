@@ -4,6 +4,7 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all.where.not(id: 1 .. 3).order(id: "ASC")
+    @active_users = User.joins(:user_positions).where.not("user_positions.position_id = ?", 5).order(id: "ASC")
   end
 
   def show
