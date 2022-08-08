@@ -1,0 +1,8 @@
+.my-4
+  = render partial: "shared/error_message", locals: {content: @breach}
+  - if @post
+    = render partial: "post_form"
+  -elsif @comment
+    = render partial: "comment_form"
+  .nav.justify-content-end
+    = link_to "匿名掲示板へ", anonymous_posts_path, class:"nav-link"

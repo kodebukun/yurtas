@@ -1,0 +1,2 @@
+module AnonymousPostsHelper
+end

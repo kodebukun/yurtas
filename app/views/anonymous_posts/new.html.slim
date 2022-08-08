@@ -1,0 +1,5 @@
+.my-4
+  = render partial: "shared/error_message", locals: {content: @post}
+  = render partial: "form", locals: {title: "新規投稿（匿名）"}
+  .nav.justify-content-end
+    = link_to "匿名掲示板へ", anonymous_posts_path, class:"nav-link"

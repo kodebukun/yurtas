@@ -1,0 +1,123 @@
+.my-4
+  / post title
+  - if @post.safety == "danger"
+    h4.text-secondary 規約違反の投稿
+  - elsif @post.safety == "judging"
+    h4.text-secondary 規約違反審議中の投稿
+  -else
+    - if @post.resolved == true
+      h4
+        span.badge.badge-info 解決済み
+    h4.mt-3= @post.title
+  hr
+  / Post content simple_formatで改行 rinkuでurlオートリンク
+  - if @post.safety == "danger"
+    h5.my-5.text-secondary この投稿は規約違反のため、非表示になりました。
+  - elsif @post.safety == "judging"
+    h5.my-5.text-secondary この投稿は規約違反報告があったため、現在審議中です。
+  -else
+    h5= simple_format(Rinku.auto_link(@post.content, :all, 'target="_blank"').html_safe)
+
+  - if @post.safety == "safe"
+    /evaluation
+    .row.d-flex.justify-content-center.my-3
+      .d-flex.flex-column.col-lg-8
+        / evaluation bar
+        .progress
+          .progress-bar.bg-danger [role="progressbar" style="width: #{@good_percentage.to_i}%" aria-valuenow="#{@good_percentage.to_i}" aria-valuemin="0" aria-valuemax="100"]
+            = @good_percentage.to_i
+            | %
+          .progress-bar [role="progressbar" style="width: #{@bad_percentage.to_i}%" aria-valuenow="#{@bad_percentage.to_i}" aria-valuemin="0" aria-valuemax="100"]
+            = @bad_percentage.to_i
+            | %
+        /evaluation button
+        .d-flex.justify-content-between
+          - if Evaluation.find_by(user_id: @current_user.id, anonymous_post_id: @post.id, agreement: true)
+            .d-flex.flex-row
+              .mr-1= @good_count
+              = link_to evaluation_path(anonymous_post_id: @post.id), method: :delete, class: "table-link mr-1", style: "text-decoration: none;" do
+                i.fas.fa-thumbs-up.text-danger
+            .d-flex.flex-row
+              = link_to evaluation_path(anonymous_post_id: @post.id), method: :patch, class: "table-link mr-1", style: "text-decoration: none;" do
+                i.fas.fa-thumbs-down.text-secondary
+              .ml-1= @bad_count
+          - elsif Evaluation.find_by(user_id: @current_user.id, anonymous_post_id: @post.id, agreement: false)
+            .d-flex.flex-row
+              .mr-1= @good_count
+              = link_to evaluation_path(anonymous_post_id: @post.id), method: :patch, class: "table-link mr-1", style: "text-decoration: none;" do
+                i.fas.fa-thumbs-up.text-secondary
+            .d-flex.flex-row
+              = link_to evaluation_path(anonymous_post_id: @post.id), method: :delete, class: "table-link mr-1", style: "text-decoration: none;" do
+                i.fas.fa-thumbs-down.text-primary
+              .ml-1= @bad_count
+          - else
+            .d-flex.flex-row
+              .mr-1= @good_count
+              = link_to evaluations_path(anonymous_post_id: @post.id, agreement: true), method: :post, class: "table-link mr-1", style: "text-decoration: none;" do
+                i.fas.fa-thumbs-up.text-secondary
+            .d-flex.flex-row
+              = link_to evaluations_path(anonymous_post_id: @post.id, agreement: false), method: :post, class: "table-link mr-1", style: "text-decoration: none;" do
+                i.fas.fa-thumbs-down.text-secondary
+              .ml-1= @bad_count
+    - if @post.user_id == @current_user.id
+      .d-flex.flex-row-reverse
+        -if @post.resolved == false
+          = link_to "解決済みにする",anonymous_post_path(resolved: true), method: :patch, data: {confirm: "この記事を解決済みにします。よろしいですか？"}, class: "btn btn-secondary btn-sm mr-3"
+        -else
+          = link_to "未解決にする",anonymous_post_path(resolved: false), method: :patch, data: {confirm: "この記事を未解決にします。よろしいですか？"}, class: "btn btn-secondary btn-sm mr-3"
+
+  hr.mb-1
+  .d-flex.justify-content-between.mt-2
+    = @post.created_at.strftime("%Y-%m-%d %H:%M")
+    - if @post.safety == "safe"
+      = link_to "違反を報告する", new_breach_path(anonymous_post_id: @post.id), class: "small"
+  / Comment create button
+  .d-flex.flex-row-reverse.my-3
+    = link_to "コメントする", new_anonymous_comment_path(post_id: @post.id), class: "btn btn-primary mr-3"
+
+  / Comment
+  - @comments.each do |comment|
+    -if comment.safety == "danger"
+      .text-secondary このコメントは規約違反のため、非表示になりました。
+    - elsif comment.safety == "judging"
+      .text-secondary このコメントは規約違反報告があったため、現在審議中です。
+    -else
+      - if comment.user_id == @post.user_id
+        .d-flex.flex-row
+          i.far.fa-smile-wink.text-success.mr-3
+          h6.mt-0.text-success= comment.nickname
+        .text-success= simple_format(comment.content)
+      - elsif comment.position == "agree"
+        .d-flex.flex-row
+          i.far.fa-laugh.text-danger.mr-3
+          h6.mt-0.text-danger= comment.nickname
+        .text-danger= simple_format(comment.content)
+
+      - elsif comment.position == "disagree"
+        .d-flex.flex-row
+          i.far.fa-frown.text-primary.mr-3
+          h6.mt-0.text-primary= comment.nickname
+        .text-primary= simple_format(comment.content)
+      -else
+        .d-flex.flex-row
+          i.far.fa-meh.text-dark.mr-3
+          h6.mt-0.text-dark= comment.nickname
+        .text-dark= simple_format(comment.content)
+
+    - if comment.safety == "safe"
+      .d-flex.justify-content-between.mx-2
+        = comment.created_at.strftime("%Y-%m-%d %H:%M")
+        /likes of comment
+        div
+          - if Like.find_by(user_id: @current_user.id, anonymous_comment_id: comment.id)
+            = link_to like_path(anonymous_comment_id: comment.id), method: :delete, class: "table-link mr-1", style: "text-decoration: none;" do
+              i.fas.fa-heart.text-danger
+          - else
+            = link_to likes_path(anonymous_comment_id: comment.id), method: :post, class: "table-link mr-1", style: "text-decoration: none;" do
+              i.fas.fa-heart.text-secondary
+          = comment.likes.count
+      = link_to "違反を報告する", new_breach_path(anonymous_comment_id: comment.id), class: "d-flex justify-content-end mt-3 small"
+    hr
+  /一覧へのリンク
+  .nav.justify-content-end.mt-3
+    = link_to "匿名掲示板へ", anonymous_posts_path, class:"nav-link"

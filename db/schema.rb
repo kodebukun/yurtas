@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_06_065240) do
+ActiveRecord::Schema.define(version: 2022_08_05_054652) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,38 @@ ActiveRecord::Schema.define(version: 2022_01_06_065240) do
     t.string "checksum", null: false
     t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "anonymous_comments", force: :cascade do |t|
+    t.text "content", null: false
+    t.integer "user_id", null: false
+    t.integer "anonymous_post_id", null: false
+    t.string "nickname", null: false
+    t.string "position", default: "neutral", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "safety", default: "safe", null: false
+  end
+
+  create_table "anonymous_posts", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "content", null: false
+    t.integer "user_id"
+    t.boolean "resolved", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "safety", default: "safe", null: false
+  end
+
+  create_table "breaches", force: :cascade do |t|
+    t.text "content", null: false
+    t.integer "user_id", null: false
+    t.integer "anonymous_post_id"
+    t.integer "anonymous_comment_id"
+    t.boolean "approval", default: false, null: false
+    t.boolean "checked", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "comments", force: :cascade do |t|
@@ -62,6 +94,14 @@ ActiveRecord::Schema.define(version: 2022_01_06_065240) do
     t.date "designated_date", null: false
   end
 
+  create_table "evaluations", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "anonymous_post_id"
+    t.boolean "agreement", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "likes", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "post_id"
@@ -70,6 +110,7 @@ ActiveRecord::Schema.define(version: 2022_01_06_065240) do
     t.datetime "updated_at", null: false
     t.integer "morning_id"
     t.integer "diary_id"
+    t.integer "anonymous_comment_id"
   end
 
   create_table "manufacturers", force: :cascade do |t|
@@ -112,6 +153,10 @@ ActiveRecord::Schema.define(version: 2022_01_06_065240) do
     t.datetime "updated_at", null: false
     t.integer "morning_id"
     t.integer "diary_id"
+    t.integer "anonymous_post_id"
+    t.integer "anonymous_comment_id"
+    t.index ["anonymous_comment_id"], name: "index_notifications_on_anonymous_comment_id"
+    t.index ["anonymous_post_id"], name: "index_notifications_on_anonymous_post_id"
     t.index ["comment_id"], name: "index_notifications_on_comment_id"
     t.index ["morning_id"], name: "index_notifications_on_morning_id"
     t.index ["post_id"], name: "index_notifications_on_post_id"

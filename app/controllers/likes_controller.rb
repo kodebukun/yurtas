@@ -27,6 +27,11 @@ class LikesController < ApplicationController
       #宿直日誌投稿へイイネへの通知処理
       @like.diary.create_notification_like!(@current_user)
       redirect_to diary_url(@like.diary)
+    elsif params[:anonymous_comment_id]
+      @like = Like.create!(user_id: @current_user.id, anonymous_comment_id: params[:anonymous_comment_id])
+      #匿名投稿へイイネへの通知処理
+      @like.anonymous_comment.create_notification_like!(@current_user)
+      redirect_to anonymous_post_url(@like.anonymous_comment.anonymous_post)
     end
   end
 
@@ -53,6 +58,10 @@ class LikesController < ApplicationController
       @like = Like.find_by(user_id: @current_user.id, diary_id: params[:diary_id])
       @like.destroy
       redirect_to diary_url(@like.diary)
+    elsif params[:anonymous_comment_id]
+      @like = Like.find_by(user_id: @current_user.id, anonymous_comment_id: params[:anonymous_comment_id])
+      @like.destroy
+      redirect_to anonymous_post_url(@like.anonymous_comment.anonymous_post)
     end
   end
 

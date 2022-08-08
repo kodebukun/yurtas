@@ -25,6 +25,9 @@ module NotificationsHelper
         elsif notification.diary
           your_diary = link_to "あなたの投稿", diary_path(notification.diary)
           visitor + " さんが " + your_diary + " にいいね！しました。"
+        elsif notification.anonymous_comment
+          your_anonymous_comment = link_to "あなたの匿名コメント", anonymous_post_path(notification.anonymous_comment.anonymous_post)
+          your_anonymous_comment + " にいいね！されました。"
         end
       when "comment" then
         if notification.post
@@ -66,6 +69,14 @@ module NotificationsHelper
       when "diary" then
         new_diary = link_to "新規投稿", diary_path(notification.diary)
         visitor + " さんが宿直日誌に " + new_diary + " しました。"
+      when "anonymous_comment" then
+        your_anonymous_post = link_to "あなたの匿名投稿", anonymous_post_path(notification.anonymous_post)
+        someone_anonymous_post = link_to "あなたがコメントした匿名投稿", anonymous_post_path(notification.anonymous_post)
+        if notification.anonymous_post.user_id == visited.id
+          your_anonymous_post + " にコメントされました。"
+        else
+          someone_anonymous_post + " にコメントされました。"
+        end
     end
   end
 end

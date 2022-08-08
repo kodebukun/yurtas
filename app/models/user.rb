@@ -21,5 +21,9 @@ class User < ApplicationRecord
   has_one :ranking
   has_many :diaries, dependent: :destroy
   has_many :partner_diaries, class_name: 'Diary', foreign_key: 'partner_id'
+  has_many :anonymous_posts, dependent: :destroy
+  has_many :anonymous_comments, dependent: :destroy
+  has_many :evaluations, dependent: :destroy
+  has_many :breachs, dependent: :destroy
 
 end

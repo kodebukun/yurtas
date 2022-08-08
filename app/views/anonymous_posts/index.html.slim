@@ -1,0 +1,25 @@
+.my-4
+  h2.text-primary
+    = "匿名掲示板"
+
+  .d-flex.justify-content-end
+    = link_to "新規投稿", new_anonymous_post_path, class: "btn btn-primary mr-3"
+  /--posts--
+  div
+    ul.list-group.list-group-flush
+      - @posts.each do |post|
+        - if post.safety == "danger"
+          li.list-group-item
+            h5= link_to "規約違反の投稿", post, class: "text-secondary"
+        - elsif post.safety == "judging"
+          li.list-group-item
+            h5= link_to "規約違反審議中の投稿", post, class: "text-secondary"
+        - else
+          li.list-group-item
+            - if post.resolved == true
+              span.badge.badge-info 解決済み
+            h5.mt-2= link_to simple_format(post.title), post, class: "text-primary"
+
+    .mt-4
+      = paginate @posts
+      = page_entries_info @posts

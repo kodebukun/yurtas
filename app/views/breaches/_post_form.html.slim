@@ -1,0 +1,10 @@
+h2.text-primary.mb-3 匿名投稿の違反報告
+p 投稿内容
+p= simple_format(Rinku.auto_link(@post.content, :all, 'target="_blank"').html_safe)
+hr
+= form_with model: @breach, local: true do |f|
+  .form-group
+    = f.label :content, "報告内容"
+    = f.text_area :content, class: "form-control", rows: 10
+    = f.hidden_field :anonymous_post_id, value: @post.id
+  = f.submit "報告する", class: "btn btn-primary mt-2"

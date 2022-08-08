@@ -20,6 +20,10 @@ ja:
       material: 機器
       manufacturer: メーカー
       diary: 宿直日誌
+      anonymous_post: 匿名投稿
+      anonymous_comment: 匿名コメント
+      evaluation: 評価
+      breach: 違反
     attributes:
       user:
         id: ID
@@ -103,6 +107,36 @@ ja:
         designated_date: 宿直日
         created_at: 登録日時
         updated_at: 更新日時
+      anonymous_post:
+        id: ID
+        title: タイトル
+        content: 内容
+        user_id: 投稿者ID
+        breach: 違反
+        resolved: 解決済み
+        created_at: 登録日時
+        updated_at: 更新日時
+      anonymous_comment:
+        id: ID
+        content: 内容
+        user_id: 投稿者ID
+        anonymous_post_id: 投稿ID
+        created_at: 登録日時
+        updated_at: 更新日時
+        breach: 違反
+        nickname: ニックネーム
+        position: 賛成or反対or中立
+      evaluation:
+        user_id: 評価者ID
+        anonymous_post_id: 投稿ID
+        agreement: 同意
+      breach:
+        content: 報告内容
+        user_id: 報告者ID
+        anonymous_post_id: 投稿ID
+        anonymous_comment_id: コメントID
+        approval: 評価
+        checked: 確認済み
 
   date:
     abbr_day_names:

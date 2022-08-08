@@ -1,0 +1,19 @@
+h2.text-primary.mb-3= title
+= form_with model: @comment, local: true do |f|
+  .form-group
+    = f.label :nickname, "ニックネーム"
+    = f.text_field :nickname, class: "form-control"
+  .form-group
+    | どの立場でコメントしますか？：
+    br
+    = f.radio_button :position, "agree", class: "mx-1"
+    | 賛成
+    = f.radio_button :position, "neutral", class: "mr-1 ml-3"
+    | 中立
+    = f.radio_button :position, "disagree", class: "mr-1 ml-3"
+    | 反対
+  .form-group
+    = f.label :content, "内容"
+    = f.text_area :content, class: "form-control", rows: 10
+    = f.hidden_field :anonymous_post_id, value: post_id
+  = f.submit nil, class: "btn btn-primary mt-2"

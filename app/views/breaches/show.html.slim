@@ -1,0 +1,27 @@
+.my-4
+  / Breach content simple_formatで改行 rinkuでurlオートリンク
+  h5 報告内容
+  h5= simple_format(Rinku.auto_link(@breach.content, :all, 'target="_blank"').html_safe)
+
+  hr
+  / post or comment content simple_formatで改行 rinkuでurlオートリンク
+  - if @breach.anonymous_post
+    h5.text-secondary 違反が疑われる投稿
+    h5.text-secondary.my-3= simple_format(Rinku.auto_link(@breach.anonymous_post.content, :all, 'target="_blank"').html_safe)
+  - elsif @breach.anonymous_comment
+    h5.text-info= simple_format(Rinku.auto_link(@breach.anonymous_comment.content, :all, 'target="_blank"').html_safe)
+
+  hr.mb-1
+  = "報告者：#{@breach.user.name}"
+  br
+  = "投稿日時：#{@breach.created_at.strftime("%Y-%m-%d %H:%M")}"
+  br
+  = "更新日時：#{@breach.updated_at.strftime("%Y-%m-%d %H:%M")}"
+
+  .d-flex.flex-row.mt-4
+    = link_to "承認", breach_path(approval: true), method: :patch, data: {confirm: "違反報告を承認します。よろしいですか？"}, class: "btn btn-primary mr-3"
+    = link_to "却下", breach_path(approval: false), method: :patch, data: {confirm: "違反報告を却下します。よろしいですか？"}, class: "btn btn-danger mr-3"
+
+  /一覧へのリンク
+  .nav.justify-content-end.mt-4
+    = link_to "違反報告一覧へ", breaches_path, class:"nav-link"

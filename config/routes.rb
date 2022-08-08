@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
 
+  resources :breaches, except: [:edit]
+
+  resources :evaluations, only: [:create, :destroy, :update]
+
+  resources :anonymous_comments, only: [:new, :create, :destroy]
+
+  resources :anonymous_posts, except: [:edit]
+
   resources :diaries
 
   delete 'notifications/destroy', to: 'notifications#destroy', as: 'destroy_notifications'
