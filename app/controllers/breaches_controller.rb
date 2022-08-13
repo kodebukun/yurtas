@@ -77,8 +77,8 @@ class BreachesController < ApplicationController
 
     #特定Userか確認
     def ensure_specific_user
-      if @current_user.id != 13
-        redirect_to root_url, notice: "権限がありません"
+      if !(@current_user.id == 13 || @current_user.id == 21)
+        redirect_to index_url, notice: "権限がありません"
       end
     end
     #ストロングパラメータ

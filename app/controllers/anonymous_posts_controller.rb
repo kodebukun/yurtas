@@ -3,7 +3,15 @@ class AnonymousPostsController < ApplicationController
   before_action :ensure_correct_user, {only: [:update]}
 
   def index
-    @posts = AnonymousPost.all.order(created_at: "DESC").page(params[:page]).per(10)
+    if params[:sort] == "comment"
+      #コメント数が多い順でpostを取得
+      @posts = AnonymousPost.where(id: AnonymousComment.group(:anonymous_post_id).order("count(anonymous_post_id) desc").pluck(:anonymous_post_id)).page(params[:page]).per(10)
+    elsif params[:sort] == "good"
+      #good数が多い順でpostを取得。このコードだとgoodが0のpostは取得できなかった。
+      @posts = AnonymousPost.where(id: Evaluation.where(agreement: true).group(:anonymous_post_id).order("count(anonymous_post_id) desc").pluck(:anonymous_post_id)).page(params[:page]).per(10)
+    else
+      @posts = AnonymousPost.all.order(created_at: "DESC").page(params[:page]).per(10)
+    end
   end
 
   def show

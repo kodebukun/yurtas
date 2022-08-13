@@ -10,6 +10,10 @@ class AnonymousCommentsController < ApplicationController
       @previous_comment = AnonymousComment.where(anonymous_post_id: @post.id).find_by(user_id: @current_user.id)
       if @previous_comment
         @nickname = @previous_comment.nickname
+      else
+        previous_nicknames = AnonymousComment.where(anonymous_post_id: @post.id).where.not(nickname: "投稿者").select(:nickname).distinct
+        nickname_count = previous_nicknames.count + 1
+        @nickname = "名無し" + "#{nickname_count}"
       end
     end
   end

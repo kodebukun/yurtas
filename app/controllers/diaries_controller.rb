@@ -31,7 +31,7 @@ class DiariesController < ApplicationController
     @diary.user_id = @current_user.id
     if @diary.save
       #新規投稿の通知処理
-      @diary.save_notification_post!(@current_user)
+      #@diary.save_notification_post!(@current_user)
       redirect_to diary_url(@diary), notice: "新規投稿しました。"
     else
       render :new

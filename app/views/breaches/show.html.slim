@@ -12,11 +12,9 @@
     h5.text-info= simple_format(Rinku.auto_link(@breach.anonymous_comment.content, :all, 'target="_blank"').html_safe)
 
   hr.mb-1
-  = "報告者：#{@breach.user.name}"
-  br
+  /= "報告者：#{@breach.user.name}"
+  /br
   = "投稿日時：#{@breach.created_at.strftime("%Y-%m-%d %H:%M")}"
-  br
-  = "更新日時：#{@breach.updated_at.strftime("%Y-%m-%d %H:%M")}"
 
   .d-flex.flex-row.mt-4
     = link_to "承認", breach_path(approval: true), method: :patch, data: {confirm: "違反報告を承認します。よろしいですか？"}, class: "btn btn-primary mr-3"

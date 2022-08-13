@@ -1,8 +1,5 @@
 .my-4
   = render partial: "shared/error_message", locals: {content: @comment}
-  - if @nickname
-    = render partial: "nickname_form", locals: {title: "匿名コメント投稿", post_id: @post.id}
-  - else
-    = render partial: "form", locals: {title: "匿名コメント投稿", post_id: @post.id}
+  = render partial: "nickname_form", locals: {title: "匿名コメント投稿", post_id: @post.id}
   .nav.justify-content-end
     = link_to "匿名投稿詳細へ戻る", anonymous_post_path(@post), class:"nav-link"
