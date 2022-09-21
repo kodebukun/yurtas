@@ -9,7 +9,9 @@
     ul.list-group.list-group-flush
       - @posts.each do |post|
         li.list-group-item
-          h6.mb-3= link_to post.user.name, post.user, class: "text-secondary"
+          - if post.unreads.find_by(user_id: @current_user.id)
+            span.badge.badge-danger.mb-2 New
+          h6.mb-1= link_to post.user.name, post.user, class: "text-secondary"
           h5= link_to simple_format(post.title), post, class: "text-primary"
 
     .mt-4

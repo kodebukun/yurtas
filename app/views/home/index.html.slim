@@ -1,37 +1,22 @@
 .row.mt-3
-  .col-md-6.mb-3
+  .col-md-6.d-none.d-md-block
     .card
-      .card-header
-        h4.text-danger News
+      .card-header.py-1
+        h5.text-danger News
       .card-body.py-1
         ul.list-unstyled
           - @posts.each do |post|
             li.mt-2= link_to "・ #{post.title}", post
         = link_to "もっとみる", posts_path, class: "d-flex justify-content-end"
-  .col-md-6.mb-3
+  .col-md-6.d-md-block
     .card
-      .card-header
-        h4.text-info 朝ミーティング
+      .card-header.py-1
+        h5.text-info 朝ミーティング
       .card-body.py-1
         ul.list-unstyled
           - @mornings.each do |morning|
             li.mt-2= link_to "・ #{morning.title}", morning
         = link_to "もっとみる", mornings_path, class: "d-flex justify-content-end"
 
-.row.text-center
-
-  - if @current_user.id == 5
-    = render partial: "index_cards", locals: {initial_color: "color:#FF0000;", initial: "当", card_title: "直表登録", card_detail: "当直表の登録", card_path: new_attendances_path}
-
-  = render partial: "index_cards", locals: {initial_color: "color:#f6416c;", initial: "勤", card_title: "務情報", card_detail: "勤務情報", card_path: menu_attendances_path}
-  = render partial: "index_cards", locals: {initial_color: "color:#fed049;", initial: "掲", card_title: "示板", card_detail: "掲示板", card_path: top_posts_path}
-  = render partial: "index_cards", locals: {initial_color: "color:#00b8a9;", initial: "朝", card_title: "ミーティング", card_detail: "朝ミーティング", card_path: mornings_path}
-  - if @current_user.id == 21 || @current_user.id == 13
-    = render partial: "index_cards", locals: {initial_color: "color:#190707;", initial: "匿", card_title: "名掲示板", card_detail: "匿名掲示板", card_path: anonymous_posts_path}
-    = render partial: "index_cards", locals: {initial_color: "color:#190707;", initial: "違", card_title: "反報告", card_detail: "違反報告", card_path: breaches_path}
-
-  = render partial: "index_cards", locals: {initial_color: "color:#f08a5d;", initial: "フ", card_title: "ァイル置き場", card_detail: "ファイル置き場", card_path: files_index_path}
-  = render partial: "index_cards", locals: {initial_color: "color:#0779e4;", initial: "機", card_title: "器情報", card_detail: "機器情報", card_path: materials_path}
-  = render partial: "index_cards", locals: {initial_color: "color:#9896f1;", initial: "マ", card_title: "ニュアル", card_detail: "撮影マニュアル", card_path: "https://drive.google.com/drive/folders/1Yq62UGlGR7V2x3TWS9YlyHuE1IhYnWjB?usp=sharing"}
-  = render partial: "index_cards", locals: {initial_color: "color:#f25d9c;", initial: "手", card_title: "続き", card_detail: "各種手続き方法", card_path: procedures_path}
-  = render partial: "index_cards_add_help", locals: {initial_color: "color:#58D3F7;", initial: "ス", card_title: "キル評価", card_detail: "スキル評価", card_path: "https://skillmoralevaluation-r.azurewebsites.net/Account/Login/6", help_path: "https://drive.google.com/drive/folders/18tlXNpqaZk80IlrSlsVWnH_zVYgoVmZd"}
+.mt-3.p-3
+  = render partial: "icon"

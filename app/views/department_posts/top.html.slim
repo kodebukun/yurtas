@@ -5,6 +5,8 @@
       .col-lg-4.col-md-6.mb-4
         .card.h-100
           .card-body
-            h2.card-title.text-primary= department.name
+            h2.card-title.text-primary[style="position:relative;"]= department.name
+            - if department.unreads.find_by(user_id: @current_user.id)
+              i.fas.fa-circle.department-circle
           .card-footer
             = link_to "Find Out More!", department_posts_path(department_id: department.id), class:  "btn btn-outline-secondary"

@@ -1,6 +1,6 @@
 class BreachesController < ApplicationController
 
-  #before_action :ensure_specific_user, {only: [:index, :show, :update, :destroy]}
+  before_action :ensure_specific_user, {only: [:index, :show, :update, :destroy]}
 
   def index
     @breachs = Breach.where(checked: false).order(created_at: "DESC").page(params[:page]).per(10)
@@ -77,7 +77,7 @@ class BreachesController < ApplicationController
 
     #特定Userか確認
     def ensure_specific_user
-      if !(@current_user.id == 13 || @current_user.id == 21)
+      if !(@current_user.id == 13)
         redirect_to index_url, notice: "権限がありません"
       end
     end

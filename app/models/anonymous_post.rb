@@ -7,6 +7,7 @@ class AnonymousPost < ApplicationRecord
   has_many :notifications, dependent: :destroy
   has_many :evaluations, dependent: :destroy
   has_one :breach, dependent: :destroy
+  has_many :unreads, dependent: :destroy
 
   belongs_to :user
 

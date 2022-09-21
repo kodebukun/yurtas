@@ -25,5 +25,6 @@ class User < ApplicationRecord
   has_many :anonymous_comments, dependent: :destroy
   has_many :evaluations, dependent: :destroy
   has_many :breachs, dependent: :destroy
+  has_many :unreads, dependent: :destroy
 
 end

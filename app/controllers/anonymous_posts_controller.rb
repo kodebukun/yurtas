@@ -10,7 +10,7 @@ class AnonymousPostsController < ApplicationController
       #good数が多い順でpostを取得。このコードだとgoodが0のpostは取得できなかった。
       @posts = AnonymousPost.where(id: Evaluation.where(agreement: true).group(:anonymous_post_id).order("count(anonymous_post_id) desc").pluck(:anonymous_post_id)).page(params[:page]).per(10)
     else
-      @posts = AnonymousPost.all.order(created_at: "DESC").page(params[:page]).per(10)
+      @posts = AnonymousPost.all.order(updated_at: "DESC").page(params[:page]).per(10)
     end
   end
 
@@ -27,6 +27,11 @@ class AnonymousPostsController < ApplicationController
       @good_percentage = @good_count / total_evaluation_count.to_f * 100
       @bad_percentage = 100 - @good_percentage.to_i
     end
+    #未読解除処理
+    unread = Unread.find_by(user_id: @current_user.id, anonymous_post_id: @post.id)
+    if unread.present?
+      unread.destroy
+    end
   end
 
   def new
@@ -37,6 +42,11 @@ class AnonymousPostsController < ApplicationController
     @post = AnonymousPost.new(post_params)
     @post.user_id = @current_user.id
     if @post.save
+      #未読ステータス登録処理
+      users = User.where.not(id: @post.user_id)
+      users.each do |user|
+        unread = Unread.create(user_id: user.id, anonymous_post_id: @post.id)
+      end
       redirect_to anonymous_post_url(@post), notice: "新規投稿しました。"
     else
       render :new

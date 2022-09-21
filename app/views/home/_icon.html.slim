@@ -1,0 +1,83 @@
+.d-flex.justify-content-between.mb-3
+
+  .d-flex.flex-column.w-25.mr-2.mr-md-4
+    = link_to menu_attendances_path do
+      .border.p-2.text-center.btn.btn-outline-light.w-100[style="border-radius: 10px;"]
+        i.fas.fa-building.display-4[style="color:#f6416c;"]
+    .small.text-center.mt-1  勤務情報
+
+  .d-flex.flex-column.w-25.mr-2.mr-md-4
+    = link_to top_posts_path do
+      .border.p-2.text-center.btn.btn-outline-light.w-100[style="border-radius:10px; position:relative;"]
+        - if @posts_unread.present?
+          i.fas.fa-circle.index-circle
+          i.far.fa-comment-dots.display-4[style="color:#00b8a9;"]
+        - else
+          i.far.fa-comment-dots.display-4[style="color:#00b8a9;"]
+    .small.text-center.mt-1  掲示板
+
+  .d-flex.flex-column.w-25.mr-2.mr-md-4
+    = link_to anonymous_posts_path do
+      .border.p-2.text-center.btn.btn-outline-light.w-100[style="border-radius:10px; position:relative;"]
+        - if @anonymous_unread.present?
+          i.fas.fa-circle.index-circle
+          i.far.fa-envelope.display-4[style="color:#6E6E6E;"]
+        - else
+          i.far.fa-envelope.display-4[style="color:#6E6E6E;"]
+    .small.text-center.mt-1  Opinion Box
+
+  .d-flex.flex-column.w-25
+    = link_to files_index_path do
+      .border.p-2.text-center.btn.btn-outline-light.w-100[style="border-radius: 10px;"]
+        i.far.fa-folder.display-4[style="color:#f08a5d;"]
+    .small.text-center.mt-1  ファイル
+
+
+.d-flex.justify-content-between.mb-3
+
+  .d-flex.flex-column.w-25.mr-2.mr-md-4
+    = link_to materials_path do
+      .border.p-2.text-center.btn.btn-outline-light.w-100[style="border-radius: 10px;"]
+        i.fas.fa-camera.display-4[style="color:#0779e4;"]
+    .small.text-center.mt-1  機器情報
+
+  .d-flex.flex-column.w-25.mr-2.mr-md-4
+    = link_to "https://drive.google.com/drive/folders/1Yq62UGlGR7V2x3TWS9YlyHuE1IhYnWjB?usp=sharing" do
+      .border.p-2.text-center.btn.btn-outline-light.w-100[style="border-radius: 10px;"]
+        i.fas.fa-book.display-4[style="color:#9896f1;"]
+    .small.text-center.mt-1  マニュアル
+
+  .d-flex.flex-column.w-25.mr-2.mr-md-4
+    = link_to procedures_path do
+      .border.p-2.text-center.btn.btn-outline-light.w-100[style="border-radius: 10px;"]
+        i.fas.fa-pencil-alt.display-4[style="color:#f25d9c;"]
+    .small.text-center.mt-1  手続き
+
+  .d-flex.flex-column.w-25
+    = link_to "https://skillmoralevaluation-r.azurewebsites.net/Account/Login/6" do
+      .border.p-2.text-center.btn.btn-outline-light.w-100[style="border-radius: 10px;"]
+        i.fas.fa-check.display-4[style="color:#58D3F7;"]
+    .small.text-center.mt-1  スキル評価
+
+- if @current_user.id == 5 || @current_user.id == 13
+  .text-info.mb-2 ◎拡張機能
+  .d-flex.justify-content-between.mb-3
+
+    .d-flex.flex-column.w-25.mr-2.mr-md-4
+      = link_to new_attendances_path do
+        .border.p-2.text-center.btn.btn-outline-light.w-100[style="border-radius: 10px;"]
+          i.fas.fa-address-book.display-4[style="color:#f6416c;"]
+      .small.text-center.mt-1  当直表登録
+
+    .d-flex.flex-column.w-25.mr-2.mr-md-4
+      = link_to breaches_path do
+        .border.p-2.text-center.btn.btn-outline-light.w-100[style="border-radius:10px; position:relative;"]
+          - if @breaches_unread.present?
+            i.fas.fa-circle.index-circle.pl-4
+            i.fas.fa-exclamation.display-4[style="color:#585858;"]
+          - else
+            i.fas.fa-exclamation.display-4[style="color:#585858;"]
+      .small.text-center.mt-1  違反報告
+
+    .w-25.mr-2.mr-md-4
+    .w-25

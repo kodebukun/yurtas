@@ -1,6 +1,6 @@
 .my-4
   h3.text-primary
-    = "匿名掲示板　違反報告"
+    = "違反報告"
 
   /--breachs--
   div
@@ -8,7 +8,10 @@
       - @breachs.each do |breach|
         li.list-group-item
           /h6= link_to breach.user.name, breach.user, class: "text-secondary"
-          h5.mt-2.mb-3= link_to "違反報告", breach, class: "text-primary"
+          - if breach.anonymous_post
+            h5.mt-2.mb-3= link_to "匿名投稿の違反報告", breach, class: "text-primary"
+          - elsif breach.anonymous_comment
+            h5.mt-2.mb-3= link_to "匿名コメントの違反報告", breach, class: "text-primary"
           = breach.created_at.strftime("%Y-%m-%d %H:%M")
 
     .mt-4

@@ -25,10 +25,15 @@ class WorkPostsController < ApplicationController
     @post.user_id = @current_user.id
     if @post.save
       #通知処理
-      if @post.meeting
-        @post.save_notification_post!(@current_user)
-      else
-        @post.save_notification_work!(@current_user)
+      #if @post.meeting
+        #@post.save_notification_post!(@current_user)
+      #else
+        #@post.save_notification_work!(@current_user)
+      #end
+      #未読ステータス登録処理
+      users = User.where.not(id: @post.user_id)
+      users.each do |user|
+        unread = Unread.create(user_id: user.id, post_id: @post.id, work_id: @post.work_id)
       end
       redirect_to post_url(@post), notice: "新規投稿しました。"
     else

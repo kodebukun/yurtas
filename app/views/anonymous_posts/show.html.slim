@@ -24,10 +24,10 @@
       .d-flex.flex-column.col-lg-8
         / evaluation bar
         .progress
-          .progress-bar.bg-danger [role="progressbar" style="width: #{@good_percentage.to_i}%" aria-valuenow="#{@good_percentage.to_i}" aria-valuemin="0" aria-valuemax="100"]
+          .progress-bar [role="progressbar" style="width: #{@good_percentage.to_i}%" aria-valuenow="#{@good_percentage.to_i}" aria-valuemin="0" aria-valuemax="100"]
             = @good_percentage.to_i
             | %
-          .progress-bar [role="progressbar" style="width: #{@bad_percentage.to_i}%" aria-valuenow="#{@bad_percentage.to_i}" aria-valuemin="0" aria-valuemax="100"]
+          .progress-bar.bg-danger [role="progressbar" style="width: #{@bad_percentage.to_i}%" aria-valuenow="#{@bad_percentage.to_i}" aria-valuemin="0" aria-valuemax="100"]
             = @bad_percentage.to_i
             | %
         /evaluation button
@@ -36,7 +36,7 @@
             .d-flex.flex-row
               .mr-1= @good_count
               = link_to evaluation_path(anonymous_post_id: @post.id), method: :delete, class: "table-link mr-1", style: "text-decoration: none;" do
-                i.fas.fa-thumbs-up.text-danger
+                i.fas.fa-thumbs-up.text-primary
             .d-flex.flex-row
               = link_to evaluation_path(anonymous_post_id: @post.id), method: :patch, class: "table-link mr-1", style: "text-decoration: none;" do
                 i.fas.fa-thumbs-down.text-secondary
@@ -48,7 +48,7 @@
                 i.fas.fa-thumbs-up.text-secondary
             .d-flex.flex-row
               = link_to evaluation_path(anonymous_post_id: @post.id), method: :delete, class: "table-link mr-1", style: "text-decoration: none;" do
-                i.fas.fa-thumbs-down.text-primary
+                i.fas.fa-thumbs-down.text-danger
               .ml-1= @bad_count
           - else
             .d-flex.flex-row
@@ -68,12 +68,16 @@
 
   hr.mb-1
   .d-flex.justify-content-between.mt-2
+    | 投稿：
     = @post.created_at.strftime("%Y-%m-%d %H:%M")
+    br
+    | 最終更新：
+    = @post.updated_at.strftime("%Y-%m-%d %H:%M")
     - if @post.safety == "safe"
       = link_to "違反を報告する", new_breach_path(anonymous_post_id: @post.id), class: "small"
   / Comment create button
   .d-flex.flex-row-reverse.my-3
-    = link_to "コメントする", new_anonymous_comment_path(post_id: @post.id), class: "btn btn-primary mr-3"
+    = link_to "コメントする", new_anonymous_comment_path(post_id: @post.id), data: {confirm: "規約：特定の個人を非難したり、プライバシーを侵害するような内容は記載しないで下さい。"}, class: "btn btn-primary mr-3"
 
   / Comment
   - @comments.each do |comment|
@@ -84,25 +88,28 @@
     -else
       - if comment.user_id == @post.user_id
         .d-flex.flex-row
-          i.far.fa-smile-wink.text-success.mr-3
-          h6.mt-0.text-success= comment.nickname
-        .text-success= simple_format(comment.content)
+          i.far.fa-smile-wink.text-success.mr-3.align-self-center
+          h6.mt-0.text-success.my-auto= comment.nickname
+        .text-success.mt-2= simple_format(comment.content)
       - elsif comment.position == "agree"
         .d-flex.flex-row
-          i.far.fa-laugh.text-danger.mr-3
-          h6.mt-0.text-danger= comment.nickname
-        .text-danger= simple_format(comment.content)
+          .badge.badge-primary.align-self-center.mr-1 賛成
+          i.far.fa-laugh.text-primary.mr-3.align-self-center
+          h6.mt-0.text-primary.my-auto= comment.nickname
+        .text-primary.mt-2= simple_format(comment.content)
 
       - elsif comment.position == "disagree"
         .d-flex.flex-row
-          i.far.fa-frown.text-primary.mr-3
-          h6.mt-0.text-primary= comment.nickname
-        .text-primary= simple_format(comment.content)
+          .badge.badge-danger.align-self-center.mr-1 反省
+          i.far.fa-frown.text-danger.mr-3.align-self-center
+          h6.mt-0.text-danger.my-auto= comment.nickname
+        .text-danger.mt-2= simple_format(comment.content)
       -else
         .d-flex.flex-row
-          i.far.fa-meh.text-dark.mr-3
-          h6.mt-0.text-dark= comment.nickname
-        .text-dark= simple_format(comment.content)
+          .badge.badge-secondary.align-self-center.mr-1 中立
+          i.far.fa-meh.text-dark.mr-3.align-self-center
+          h6.mt-0.text-dark.my-auto= comment.nickname
+        .text-dark.mt-2= simple_format(comment.content)
 
     - if comment.safety == "safe"
       .d-flex.justify-content-between.mx-2
@@ -117,7 +124,7 @@
               i.fas.fa-heart.text-secondary
           = comment.likes.count
       = link_to "違反を報告する", new_breach_path(anonymous_comment_id: comment.id), class: "d-flex justify-content-end mt-3 small"
-    hr
+    hr.mb-3
   /一覧へのリンク
   .nav.justify-content-end.mt-3
     = link_to "匿名掲示板へ", anonymous_posts_path, class:"nav-link"
