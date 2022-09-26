@@ -17,7 +17,7 @@ class HomeController < ApplicationController
     @posts = Post.where(meeting: true).order(created_at: "DESC").limit(5)
     @mornings = Morning.all.order(created_at: "DESC").limit(5)
     temp = @posts | @mornings
-    @news = temp.sort!{ |a, b| b.created_at <=> a.created_at }.take(5)
+    @news = temp.sort!{ |a, b| b.created_at <=> a.created_at }.take(6)
     @anonymous_unread = Unread.where.not(anonymous_post_id: nil).find_by(user_id: @current_user.id)
     @posts_unread = Unread.where.not(post_id: nil).find_by(user_id: @current_user.id)
     @breaches_unread = Breach.where(checked: false)
