@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
   before_action :ensure_correct_user, {only: [:update, :destroy]}
+  before_action :ensure_graduate
 
   def new
     @comment = Comment.new
@@ -83,6 +84,12 @@ class CommentsController < ApplicationController
     def ensure_correct_user
       @comment = Comment.find(params[:id])
       if @comment.user_id != @current_user.id
+        redirect_to index_url, notice: "権限がありません"
+      end
+    end
+    #卒業生か確認
+    def ensure_graduate
+      if @current_user.positions[0].name == "卒業生"
         redirect_to index_url, notice: "権限がありません"
       end
     end

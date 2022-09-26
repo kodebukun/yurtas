@@ -1,6 +1,7 @@
 class AnonymousPostsController < ApplicationController
   before_action :ensure_administrator, {only: [:destroy]}
   before_action :ensure_correct_user, {only: [:update]}
+  before_action :ensure_graduate, {only: [:new, :create, :update, :destroy]}
 
   def index
     if params[:sort] == "comment"
@@ -16,7 +17,7 @@ class AnonymousPostsController < ApplicationController
 
   def show
     @post = AnonymousPost.find(params[:id])
-    @comments = @post.anonymous_comments.order(created_at: "ASC")
+    @comments = @post.anonymous_comments.order(created_at: "DESC")
     @good_count = @post.evaluations.where(agreement: true).count
     @bad_count = @post.evaluations.where(agreement: false).count
     total_evaluation_count = @post.evaluations.count
@@ -81,6 +82,12 @@ class AnonymousPostsController < ApplicationController
     def ensure_correct_user
       @post = AnonymousPost.find(params[:id])
       if @post.user_id != @current_user.id
+        redirect_to anonymous_posts_url, notice: "権限がありません"
+      end
+    end
+    #卒業生か確認
+    def ensure_graduate
+      if @current_user.positions[0].name == "卒業生"
         redirect_to anonymous_posts_url, notice: "権限がありません"
       end
     end

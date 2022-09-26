@@ -2,13 +2,13 @@
   .col-md-6.d-none.d-md-block
     .card
       .card-header.py-1
-        h5.text-danger News
+        h5.text-danger 掲示板
       .card-body.py-1
         ul.list-unstyled
           - @posts.each do |post|
             li.mt-2= link_to "・ #{post.title}", post
         = link_to "もっとみる", posts_path, class: "d-flex justify-content-end"
-  .col-md-6.d-md-block
+  .col-md-6.d-none.d-md-block
     .card
       .card-header.py-1
         h5.text-info 朝ミーティング
@@ -17,6 +17,21 @@
           - @mornings.each do |morning|
             li.mt-2= link_to "・ #{morning.title}", morning
         = link_to "もっとみる", mornings_path, class: "d-flex justify-content-end"
+
+  .col-md-6.d-md-none
+    .card
+      .card-header.py-1
+        h5.text-danger News
+      .card-body.py-1
+        ul.list-unstyled
+          - @news.each do |new|
+            - if new.class.name == "Post"
+              li.mt-2= link_to "・ #{new.title}", new
+            - elsif new.class.name == "Morning"
+              li.mt-2= link_to "[朝] #{new.title}", new
+      .card-footer.d-flex.justify-content-around.py-2
+        = link_to "掲示板へ", posts_path, class: "card-link"
+        = link_to "朝ミーティングへ", mornings_path, class: "card-link"
 
 .mt-3.p-3
   = render partial: "icon"

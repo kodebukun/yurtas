@@ -90,26 +90,26 @@
         .d-flex.flex-row
           i.far.fa-smile-wink.text-success.mr-3.align-self-center
           h6.mt-0.text-success.my-auto= comment.nickname
-        .text-success.mt-2= simple_format(comment.content)
+        .text-success.mt-2= simple_format(Rinku.auto_link(comment.content, :all, 'target="_blank"').html_safe)
       - elsif comment.position == "agree"
         .d-flex.flex-row
           .badge.badge-primary.align-self-center.mr-1 賛成
           i.far.fa-laugh.text-primary.mr-3.align-self-center
           h6.mt-0.text-primary.my-auto= comment.nickname
-        .text-primary.mt-2= simple_format(comment.content)
+        .text-primary.mt-2= simple_format(Rinku.auto_link(comment.content, :all, 'target="_blank"').html_safe)
 
       - elsif comment.position == "disagree"
         .d-flex.flex-row
           .badge.badge-danger.align-self-center.mr-1 反対
           i.far.fa-frown.text-danger.mr-3.align-self-center
           h6.mt-0.text-danger.my-auto= comment.nickname
-        .text-danger.mt-2= simple_format(comment.content)
+        .text-danger.mt-2= simple_format(Rinku.auto_link(comment.content, :all, 'target="_blank"').html_safe)
       -else
         .d-flex.flex-row
           .badge.badge-secondary.align-self-center.mr-1 中立
           i.far.fa-meh.text-dark.mr-3.align-self-center
           h6.mt-0.text-dark.my-auto= comment.nickname
-        .text-dark.mt-2= simple_format(comment.content)
+        .text-dark.mt-2= simple_format(Rinku.auto_link(comment.content, :all, 'target="_blank"').html_safe)
 
     - if comment.safety == "safe"
       .d-flex.justify-content-between.mx-2

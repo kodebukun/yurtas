@@ -1,6 +1,7 @@
 class DiariesController < ApplicationController
 
   before_action :ensure_correct_user, {only: [:update, :destroy]}
+  before_action :ensure_graduate, {only: [:new, :edit, :create, :update, :destroy]}
 
   def index
     if params[:month]
@@ -15,7 +16,7 @@ class DiariesController < ApplicationController
 
   def show
     @diary = Diary.find(params[:id])
-    @comments = @diary.comments.order(created_at: "ASC")
+    @comments = @diary.comments.order(created_at: "DESC")
   end
 
   def new
@@ -60,6 +61,12 @@ class DiariesController < ApplicationController
     def ensure_correct_user
       @diary = Diary.find(params[:id])
       if @diary.user_id != @current_user.id
+        redirect_to diaries_url, notice: "権限がありません"
+      end
+    end
+    #卒業生か確認
+    def ensure_graduate
+      if @current_user.positions[0].name == "卒業生"
         redirect_to diaries_url, notice: "権限がありません"
       end
     end

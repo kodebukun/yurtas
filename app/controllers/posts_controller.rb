@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :ensure_correct_user, {only: [:update, :destroy]}
+  before_action :ensure_graduate, {only: [:new, :edit, :create, :update, :destroy]}
 
   def top
     #未読があるか、ある場合はどの掲示板の未読か判別
@@ -23,7 +24,7 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
-    @comments = @post.comments.order(created_at: "ASC")
+    @comments = @post.comments.order(created_at: "DESC")
     #未読解除処理
     unread = Unread.find_by(user_id: @current_user.id, post_id: @post.id)
     if unread.present?
@@ -77,6 +78,12 @@ class PostsController < ApplicationController
     def ensure_correct_user
       @post = Post.find(params[:id])
       if @post.user_id != @current_user.id
+        redirect_to posts_url, notice: "権限がありません"
+      end
+    end
+    #卒業生か確認
+    def ensure_graduate
+      if @current_user.positions[0].name == "卒業生"
         redirect_to posts_url, notice: "権限がありません"
       end
     end

@@ -1,5 +1,6 @@
 class MorningsController < ApplicationController
   before_action :ensure_correct_user, {only: [:update, :destroy]}
+  before_action :ensure_graduate, {only: [:new, :edit, :create, :update, :destroy]}
 
 
   def index
@@ -20,7 +21,7 @@ class MorningsController < ApplicationController
 
   def show
     @morning = Morning.find(params[:id])
-    @comments = @morning.comments.order(created_at: "ASC")
+    @comments = @morning.comments.order(created_at: "DESC")
   end
 
   def new
@@ -63,6 +64,12 @@ class MorningsController < ApplicationController
     def ensure_correct_user
       @morning = Morning.find(params[:id])
       if @morning.user_id != @current_user.id
+        redirect_to mornings_url, notice: "権限がありません"
+      end
+    end
+    #卒業生か確認
+    def ensure_graduate
+      if @current_user.positions[0].name == "卒業生"
         redirect_to mornings_url, notice: "権限がありません"
       end
     end

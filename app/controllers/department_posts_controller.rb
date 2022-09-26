@@ -1,5 +1,6 @@
 class DepartmentPostsController < ApplicationController
   before_action :ensure_correct_user, {only: [:update, :destroy]}
+  before_action :ensure_graduate, {only: [:new, :edit, :create, :update, :destroy]}
 
   def top
     @departments = Department.all
@@ -70,6 +71,12 @@ class DepartmentPostsController < ApplicationController
       @post = Post.find(params[:id])
       if @post.user_id != @current_user.id
         redirect_to department_posts_url, notice: "権限がありません"
+      end
+    end
+    #卒業生か確認
+    def ensure_graduate
+      if @current_user.positions[0].name == "卒業生"
+        redirect_to index_url, notice: "権限がありません"
       end
     end
     #ストロングパラメータ
