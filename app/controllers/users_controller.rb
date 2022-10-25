@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :ensure_correct_user, {only: [:edit, :update]}
-  before_action :require_admin, {only: [:new, :create]}
+  before_action :require_admin, {only: [:new, :create, :destroy]}
 
   def index
     @users = User.all.where.not(id: 1 .. 3).order(id: "ASC")
@@ -55,6 +55,13 @@ class UsersController < ApplicationController
       end
     end
   end
+
+  def destroy
+    user = User.find(params[:id])
+    user.destroy
+    redirect_to users_url, notice: "ユーザーを削除しました。"
+  end
+
 
   private
     #本人か確認

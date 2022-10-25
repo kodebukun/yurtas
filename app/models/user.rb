@@ -3,6 +3,8 @@ class User < ApplicationRecord
   validates :login_id, presence: true, uniqueness: true
   validates :password, confirmation: true
   validates :comment, length: {maximum: 30}
+  #anonymous_posts_controllerのbefore_action :ensure_graduateがpositionが無いとエラーになるため
+  validates :position_ids, presence: true
 
   has_secure_password
 
