@@ -1,5 +1,5 @@
 class AnonymousCommentsController < ApplicationController
-  before_action :ensure_administrator, {only: [:update, :destroy]}
+  before_action :require_admin, {only: [:update, :destroy]}
   before_action :ensure_graduate
 
   def new
@@ -52,11 +52,9 @@ class AnonymousCommentsController < ApplicationController
   end
 
   private
-    #管理人か確認
-    def ensure_administrator
-      if @current_user.id != 21
-        redirect_to anonymous_posts_url, notice: "権限がありません"
-      end
+    #管理者か確認
+    def require_admin
+        redirect_to anonymous_posts_url, notice: "権限がありません" unless current_user.admin?
     end
     #卒業生か確認
     def ensure_graduate

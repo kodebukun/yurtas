@@ -69,7 +69,7 @@
 
   - if @user.id == @current_user.id
     = link_to "ユーザー情報編集", edit_user_path, class: "btn btn-secondary mr-3"
-  - if @current_user.id == 21
+  - if @current_user.admin == true
     = link_to "ユーザー削除", @user, method: :delete, data: {confirm: "ユーザー（#{@user.name}）を削除します。よろしいですか？"}, class: "btn btn-danger mr-3"
   .nav.justify-content-end
     = link_to "ユーザーリストへ", users_path, class: "nav-link mt-4"
