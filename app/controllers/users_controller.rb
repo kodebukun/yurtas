@@ -3,8 +3,8 @@ class UsersController < ApplicationController
   before_action :require_admin, {only: [:new, :create, :destroy]}
 
   def index
-    @users = User.all.where.not(id: 1 .. 3).order(id: "ASC")
-    @active_users = User.joins(:user_positions).where.not("user_positions.position_id = ?", 5).order(id: "ASC")
+    @users = User.all.where.not(id: 1 .. 3)
+    @active_users = @users.joins(:user_positions).where.not("user_positions.position_id = ?", 5).order(id: "ASC")
   end
 
   def show

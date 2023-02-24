@@ -1,0 +1,32 @@
+.my-4
+  h2.text-primary １．デバイスの登録
+  h5.text-secondary.mt-4 リストに使用するデバイスを追加して下さい。
+  .d-flex.justify-content-end
+    = link_to "デバイス追加", new_device_path(guide: true), class: "btn btn-primary mr-3"
+    = link_to "次へ", edit_user_access_point_path(@current_user), class: "btn btn-secondary mr-3"
+table.table
+  thead.thead-default
+    tr.text-secondary.row.px-1
+      th.col.col-5.col-md-3= Device.human_attribute_name(:name)
+      th.col.col-2.col-md-1
+      th.col.col-5.col-md-4= Device.human_attribute_name(:os)
+      th.d-none.d-md-table-cell.col.col-md-4 セキュリティソフト
+  tbody
+    - @devices.each do |device|
+      tr.row.px-1
+        - if device.owner == nil || device.owner == ""
+          td.col.col-5.col-md-3= device.name
+        - else
+          td.col.col-5.col-md-3.text-info= device.owner
+        td.col.col-2.col-md-1.d-flex.justify-content-center
+          - if device.device_type == "phone"
+            i.fas.fa-mobile-alt.mx-auto.text-secondary.align-self-center
+          - elsif device.device_type == "pc"
+            i.fas.fa-laptop.mx-auto.text-secondary.align-self-center
+          - elsif device.device_type == "tablet"
+            i.fas.fa-tablet-alt.mx-auto.text-secondary.align-self-center
+        td.col.col-5.col-md-4= device.os
+        td.d-none.d-md-table-cell.col.col-md-4= device.security_soft.name
+
+.nav.justify-content-end.mb-3
+  = link_to "Wi-Fiトップへ戻る", wifis_path, class:"nav-link"

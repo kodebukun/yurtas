@@ -1,0 +1,30 @@
+.my-4
+  h2.text-primary １．デバイスの削除
+  h5.text-secondary.mt-4 使用しないデバイスをリストから削除して下さい。
+  .d-flex.justify-content-end
+    = link_to "次へ", edit_user_access_point_path(@current_user), class: "btn btn-secondary mr-3"
+table.table
+  thead.thead-default
+    tr.text-secondary.row.px-1
+      th.col.col-5.col-md-3= Device.human_attribute_name(:name)
+      th.col.col-5.col-md-4= Device.human_attribute_name(:os)
+      th.d-none.d-md-table-cell.col.col-md-4 セキュリティソフト
+      th.col.col-1
+  tbody
+    - @devices.each do |device|
+      tr.row.px-1
+        - if device.owner == nil || device.owner == ""
+          td.col.col-5.col-md-3= device.name
+        - else
+          td.col.col-5.col-md-3.text-info= device.owner
+        td.col.col-5.col-md-4= device.os
+        td.d-none.d-md-table-cell.col.col-md-4= device.security_soft.name
+        td.col.col-1.pl-0
+          - if device.user.id == @current_user.id
+            = link_to device_path(device, guide: true), method: :delete, data: {confirm: "#{device.name}を削除します。よろしいですか？"}, class:"mr-3", style: "color: #fe635f;" do
+              span.fa-stack
+                i.fas.fa-square.fa-stack-2x
+                i.far.fa-trash-alt.fa-stack-1x.fa-inverse
+
+.nav.justify-content-end.mb-3
+  = link_to "Wi-Fiトップへ戻る", wifis_path, class:"nav-link"

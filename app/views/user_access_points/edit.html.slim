@@ -1,0 +1,50 @@
+.my-4
+  = render partial: "shared/error_message", locals: {content: @user}
+
+  h2.text-primary.mb-3 ２．アクセスポイントの登録 / 解除
+  h5.text-secondary.my-4
+    | 使用するアクセスポイントにチェックを付け、
+    | 使用しないものはチェックを外して下さい。
+  = form_with model: @user, url: user_access_point_path, local: true do |f|
+    - @inspection_rooms.each do |inspection_room|
+      .form-group
+        h5.text-primary= inspection_room.name
+        
+        / 技師室はユーザーによってSSIDの表示・非表示を分ける（2.4Gと5G）
+        - if inspection_room.id == 1
+          - if which_ssid_id_used?(@user) == "2.4g"
+            = f.collection_check_boxes :access_point_ids, AccessPoint.where(id: 1), :id, :ssid do |t|
+              = t.check_box(class: "mr-1")
+              = t.label(class: "mr-3") {t.text}
+          - elsif which_ssid_id_used?(@user) == "5g"
+            = f.collection_check_boxes :access_point_ids, AccessPoint.where(id: 2), :id, :ssid do |t|
+              = t.check_box(class: "mr-1")
+              = t.label(class: "mr-3") {t.text}
+          - elsif which_ssid_id_used?(@user) == "all"
+            = f.collection_check_boxes :access_point_ids, inspection_room.access_points, :id, :ssid do |t|
+              = t.check_box(class: "mr-1")
+              = t.label(class: "mr-3") {t.text}
+          - else
+            .text-secondary
+              | 使用可能なSSIDはありません
+              br
+              small ※必要時は情報セキュリティ係りへ連絡
+
+        / 談話室はユーザーによってSSIDの表示・非表示を分ける（loungeのみ）
+        - elsif inspection_room.id == 2
+          - if which_ssid_id_used?(@user) == "lounge" || which_ssid_id_used?(@user) == "all"
+            = f.collection_check_boxes :access_point_ids, AccessPoint.where(id: 3), :id, :ssid do |t|
+              = t.check_box(class: "mr-1")
+              = t.label(class: "mr-3") {t.text}
+          - else
+            .text-secondary
+              | 使用可能なSSIDはありません
+              br
+              small ※必要時は情報セキュリティ係りへ連絡
+        - else
+          = f.collection_check_boxes :access_point_ids, inspection_room.access_points, :id, :ssid do |t|
+            = t.check_box(class: "mr-1")
+            = t.label(class: "mr-3") {t.text}
+    = f.submit "登録する", class: "btn btn-primary"
+  .nav.justify-content-end.mb-3
+    = link_to "デバイスの追加へ戻る", add_device_wifis_path, class:"nav-link"

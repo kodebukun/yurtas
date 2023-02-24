@@ -1,0 +1,44 @@
+.my-4
+  = render partial: "shared/error_message", locals: {content: @access_point}
+
+  .d-flex.flex-row
+    h3.text-primary.= @access_point.ssid
+
+  table.table.mt-3
+    tbody
+      tr
+        th= AccessPoint.human_attribute_name(:ssid)
+        td= @access_point.ssid
+      tr
+        th= AccessPoint.human_attribute_name(:password)
+        - if @access_point.users.find_by(id: @current_user.id) || @admin == true
+          td= @access_point.password
+        - else
+          td
+            | ******
+      tr
+        th= InspectionRoom.human_attribute_name(:name)
+        td= @access_point.inspection_room.name
+      tr
+        th 登録者数
+        td= @access_point.users.count
+      tr
+        th 登録端末総数
+        td= @all_devices_count
+      tr
+        th= AccessPoint.human_attribute_name(:created_at)
+        td= @access_point.created_at.strftime("%Y-%m-%d %H:%M")
+      tr
+        th= AccessPoint.human_attribute_name(:updated_at)
+        td= @access_point.updated_at.strftime("%Y-%m-%d %H:%M")
+
+  - if @current_user.admin && @admin == true
+    = link_to "AP情報編集", edit_access_point_path, class: "btn btn-secondary mr-3"
+    = link_to "AP削除", @access_point, method: :delete, data: {confirm: "#{@access_point.ssid}を削除します。よろしいですか？"}, class: "btn btn-danger mr-3"
+    /登録者リストセクション
+    .d-flex.flex-row
+      h3.text-primary.my-4 登録者リスト
+    = render partial: "users"
+
+  .nav.justify-content-end
+    = link_to "AP管理へ", admin_access_points_path, class: "nav-link mt-4"

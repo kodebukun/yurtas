@@ -1,0 +1,15 @@
+InspectionRoom.seed(:id,
+{ id: 1, name: "技師室", department_id: 1},
+{ id: 2, name: "技師談話室", department_id: 1},
+{ id: 3, name: "読影室", department_id: 2},
+{ id: 4, name: "血管撮影室", department_id: 4},
+{ id: 5, name: "核医学操作室", department_id: 5},
+{ id: 6, name: "治療棟計画装置室", department_id: 6},
+{ id: 7, name: "治療棟休憩室", department_id: 6},
+{ id: 8, name: "物理室", department_id: 6},
+{ id: 9, name: "MRI操作室", department_id: 3},
+{ id: 10, name: "MRI3番操作室", department_id: 3},
+{ id: 11, name: "PET操作室", department_id: 5},
+{ id: 12, name: "PET談話室", department_id: 5},
+
+)

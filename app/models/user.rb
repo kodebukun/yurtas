@@ -28,5 +28,8 @@ class User < ApplicationRecord
   has_many :evaluations, dependent: :destroy
   has_many :breachs, dependent: :destroy
   has_many :unreads, dependent: :destroy
+  has_many :devices, dependent: :destroy
+  has_many :user_access_points, dependent: :destroy
+  has_many :access_points, through: :user_access_points
 
 end

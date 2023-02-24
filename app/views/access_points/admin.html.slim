@@ -1,0 +1,25 @@
+.my-4
+  h2.text-primary AP管理
+  -if check_wifi_admin(@current_user)
+    .d-flex.justify-content-end
+      = link_to "AP追加", new_access_point_path, class: "btn btn-primary mr-3"
+
+table.table
+  thead.thead-default
+    tr.text-secondary.row.px-1
+      th.col.col-6.col-md-3= AccessPoint.human_attribute_name(:ssid)
+      th.d-none.d-md-table-cell.col.col-md-4.col-lg-3= AccessPoint.human_attribute_name(:password)
+      th.col.col-6.col-md-2= InspectionRoom.human_attribute_name(:name)
+      th.d-none.d-lg-table-cell.col.col-lg-2 登録者数（人）
+      th.d-none.d-md-table-cell.col.col-md-3.col.col-lg-2= AccessPoint.human_attribute_name(:updated_at)
+  tbody
+    - @access_points.each do |access_point|
+      tr.row.px-1
+        td.col.col-6.col-md-3= link_to access_point.ssid, access_point_path(access_point, admin: true)
+        td.d-none.d-md-table-cell.col.col-md-4.col-lg-3= access_point.password
+        td.col.col-6.col-md-2= access_point.inspection_room.name
+        td.d-none.d-lg-table-cell.col.col-lg-2= access_point.users.count
+        td.d-none.d-md-table-cell.col.col-md-3.col.col-lg-2= access_point.updated_at.strftime("%Y-%m-%d %H:%M")
+
+.nav.justify-content-end.mb-3
+  = link_to "Wi-Fiトップへ戻る", wifis_path, class:"nav-link"

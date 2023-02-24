@@ -1,0 +1,8 @@
+.my-4
+  = render partial: "shared/error_message", locals: {content: @device}
+  = render partial: "form", locals: {title: "デバイスの追加"}
+  .nav.justify-content-end.mb-3
+    - if params[:guide] || @guide
+      = link_to "前へ戻る", add_device_wifis_path, class:"nav-link"
+    - else
+      = link_to "デバイス詳細へ戻る", @device, class:"nav-link"

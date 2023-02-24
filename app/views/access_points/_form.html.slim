@@ -1,0 +1,13 @@
+h2.text-primary.mb-3= title
+= form_with model: @access_point, local: true do |f|
+  .form-group
+    = f.label :ssid, "SSID"
+    = f.text_field :ssid, class: "form-control"
+  .form-group
+    = f.label :password, "パスワード"
+    = f.text_field :password, class: "form-control"
+  .form-group
+    = f.label :inspection_room_id, "設置検査室："
+    = f.collection_select(:inspection_room_id, @inspection_rooms, :id, :name, prompt: "検査室を選択して下さい。", class: "form-control")
+
+  = f.submit nil, class: "btn btn-primary"

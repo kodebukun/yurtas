@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_16_060434) do
+ActiveRecord::Schema.define(version: 2022_12_16_045243) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "access_points", force: :cascade do |t|
+    t.string "ssid", null: false
+    t.integer "inspection_room_id", null: false
+    t.string "password", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -84,6 +92,17 @@ ActiveRecord::Schema.define(version: 2022_08_16_060434) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "devices", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "os", null: false
+    t.integer "security_soft_id"
+    t.integer "user_id"
+    t.string "device_type", null: false
+    t.string "owner"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "diaries", force: :cascade do |t|
     t.string "title", null: false
     t.text "content", null: false
@@ -98,6 +117,13 @@ ActiveRecord::Schema.define(version: 2022_08_16_060434) do
     t.integer "user_id", null: false
     t.integer "anonymous_post_id"
     t.boolean "agreement", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "inspection_rooms", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "department_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -189,6 +215,12 @@ ActiveRecord::Schema.define(version: 2022_08_16_060434) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "security_softs", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "unreads", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "post_id"
@@ -197,6 +229,15 @@ ActiveRecord::Schema.define(version: 2022_08_16_060434) do
     t.integer "work_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "user_access_points", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "access_point_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["access_point_id"], name: "index_user_access_points_on_access_point_id"
+    t.index ["user_id"], name: "index_user_access_points_on_user_id"
   end
 
   create_table "user_departments", force: :cascade do |t|
@@ -249,6 +290,8 @@ ActiveRecord::Schema.define(version: 2022_08_16_060434) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "user_access_points", "access_points"
+  add_foreign_key "user_access_points", "users"
   add_foreign_key "user_departments", "departments"
   add_foreign_key "user_departments", "users"
   add_foreign_key "user_positions", "positions"

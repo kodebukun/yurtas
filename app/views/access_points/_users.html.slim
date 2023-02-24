@@ -1,0 +1,12 @@
+table.table
+  thead.thead-default
+    tr.text-secondary.row
+      th.col.col-7.col-md-4= User.human_attribute_name(:name)
+      th.d-none.d-md-table-cell.col.col-md-6= User.human_attribute_name(:email)
+      th.col.col-5.col-md-2 登録端末数
+  tbody
+    - @registered_users.each do |user|
+      tr.row
+        td.col.col-7.col-md-4= link_to user.name, devices_path(admin:true, user_id: user.id)
+        td.d-none.d-md-table-cell.col.col-md-6= user.email
+        td.col.col-5.col-md-2= user.devices.count

@@ -24,6 +24,11 @@ ja:
       anonymous_comment: 匿名コメント
       evaluation: 評価
       breach: 違反
+      unread: 未読
+      access_point: アクセスポイント
+      device: デバイス
+      inspection_room: 検査室
+      security_soft: セキュリティソフト
     attributes:
       user:
         id: ID
@@ -137,6 +142,38 @@ ja:
         anonymous_comment_id: コメントID
         approval: 評価
         checked: 確認済み
+      unread:
+        user_id: ユーザーID
+        post_id: 投稿ID
+        anonymous_post_id: 匿名投稿ID
+        department_id: 部署ID
+        work_id: 係りID
+        created_at: 登録日時
+        updated_at: 更新日時
+      access_point:
+        ssid: SSID
+        inspection_room_id: 検査室ID
+        password: パスワード
+        created_at: 登録日時
+        updated_at: 更新日時
+      device:
+        name: デバイス名
+        os: OS名
+        security_soft_id: セキュリティソフトID
+        user_id: ユーザーID
+        device_type: デバイスタイプ
+        owner: 所有者名
+        created_at: 登録日時
+        updated_at: 更新日時
+      inspection_room:
+        name: 検査室名
+        department_id: 部署ID
+        created_at: 登録日時
+        updated_at: 更新日時
+      security_soft:
+        name: セキュリティソフト名
+        created_at: 登録日時
+        updated_at: 更新日時
 
   date:
     abbr_day_names:

@@ -1,0 +1,31 @@
+h2.text-primary.mb-3= title
+= form_with model: @device, local: true do |f|
+  .form-group
+    = f.label :name, "デバイス名（例：iphone13）"
+    = f.text_field :name, class: "form-control"
+  .form-group
+    = f.label :os, "OS名（例：Windows11）"
+    = f.text_field :os, class: "form-control"
+  .form-group
+    | デバイスタイプ
+    br
+    = f.radio_button :device_type, "phone", class: "mx-1"
+    | スマートフォン
+    = f.radio_button :device_type, "pc", class: "mr-1 ml-3"
+    | PC
+    = f.radio_button :device_type, "tablet", class: "mr-1 ml-3"
+    | タブレット
+    = f.radio_button :device_type, "other", class: "mr-1 ml-3"
+    | その他
+  .form-group
+    = f.label :security_soft_id, "セキュリティソフト"
+    = f.collection_select(:security_soft_id, @security_softs, :id, :name, prompt: "セキュリティソフトを選択して下さい。", class: "form-control")
+  .form-group
+    = f.label :owner, "所有者名（※通常空欄）"
+    = f.text_field :owner, class: "form-control"
+    small#emailHelp.form-text.text-danger
+      | ※デバイス所有者が自分ではない場合のみ記入
+    - if params[:guide] || @guide
+      = f.hidden_field :guide, value: true
+
+  = f.submit nil, class: "btn btn-primary"

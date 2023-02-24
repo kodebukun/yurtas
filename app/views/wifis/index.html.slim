@@ -1,0 +1,29 @@
+header.jumbotron.my-4.py-4.d-none.d-md-block
+  h1.display-4.font-weight-bold.text-primary Wi-Fi
+  p.mt-4.lead.text-secondary こちらからWi-Fi登録の申請・解除・確認が出来ます。
+
+.card-deck.my-5.row
+  .col.col-12.col-md-6.col-lg-3.mb-3.px-3.px-md-0
+    .card
+      .card-body.h4.text-center.text-primary 新規登録
+      i.far.fa-plus-square.fa-6x.mx-auto.text-primary.pb-4
+      .card-footer.text-center
+        = link_to "Find Out More!", add_device_wifis_path, class: "btn btn-outline-secondary"
+  .col.col-12.col-md-6.col-lg-3.mb-3.px-3.px-md-0
+    .card
+      .card-body.h4.text-center.text-danger 登録解除
+      i.far.fa-times-circle.fa-6x.mx-auto.pb-4.text-danger
+      .card-footer.text-center
+        = link_to "Find Out More!", release_device_wifis_path, class: "btn btn-outline-secondary"
+  .col.col-12.col-md-6.col-lg-3.mb-3.px-3.px-md-0
+    .card
+      .card-body.h4.text-center [style="color:#ffa34d;"] マイデバイス
+      i.fas.fa-mobile-alt.fa-6x.mx-auto.pb-4 [style="color:#ffa34d;"]
+      .card-footer.text-center
+        = link_to "Find Out More!", devices_path, class: "btn btn-outline-secondary"
+  .col.col-12.col-md-6.col-lg-3.mb-3.px-3.px-md-0
+    .card
+      .card-body.h4.text-center [style="color:#f67575;"] アクセスポイント
+      i.fas.fa-map-marker-alt.fa-6x.mx-auto.pb-4 [style="color:#f67575;"]
+      .card-footer.text-center
+        = link_to "Find Out More!", access_points_path, class: "btn btn-outline-secondary"

@@ -1,0 +1,5 @@
+.my-4
+  = render partial: "shared/error_message", locals: {content: @access_point}
+  = render partial: "form", locals: {title: "APの追加"}
+  .nav.justify-content-end.mb-3
+    = link_to "AP一覧へ戻る", access_points_path, class:"nav-link"

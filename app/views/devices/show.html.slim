@@ -1,0 +1,47 @@
+.my-4
+  = render partial: "shared/error_message", locals: {content: @device}
+
+  .d-flex.flex-row
+    h3.text-primary.= @device.name
+    - if @device.device_type == "phone"
+      i.fas.fa-mobile-alt.text-primary.align-self-center.ml-3
+    - elsif @device.device_type == "pc"
+      i.fas.fa-laptop.text-primary.align-self-center.ml-3
+    - elsif @device.device_type == "tablet"
+      i.fas.fa-tablet-alt.text-primary.align-self-center.ml-3
+
+
+  table.table.mt-3
+    tbody
+      tr
+        th= Device.human_attribute_name(:name)
+        td= @device.name
+      tr
+        th= Device.human_attribute_name(:device_type)
+        td= @device.device_type
+
+      tr
+        th= Device.human_attribute_name(:os)
+        td= @device.os
+      tr
+        th= SecuritySoft.human_attribute_name(:name)
+        td= @device.security_soft.name
+      tr
+        th= Device.human_attribute_name(:owner)
+        td
+          - if @device.owner == nil
+            = @device.user.name
+          - else
+            = @device.owner
+      tr
+        th= Device.human_attribute_name(:created_at)
+        td= @device.created_at.strftime("%Y-%m-%d %H:%M")
+      tr
+        th= Device.human_attribute_name(:updated_at)
+        td= @device.updated_at.strftime("%Y-%m-%d %H:%M")
+
+  - if @device.user.id == @current_user.id
+    = link_to "デバイス情報編集", edit_device_path, class: "btn btn-secondary mr-3"
+    = link_to "デバイス削除", @device, method: :delete, data: {confirm: "デバイス（#{@device.name}）を削除します。よろしいですか？"}, class: "btn btn-danger mr-3"
+  .nav.justify-content-end
+    = link_to "デバイスリストへ", devices_path, class: "nav-link mt-4"

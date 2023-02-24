@@ -1,5 +1,9 @@
 class ProceduresController < ApplicationController
 
+  def top
+
+  end
+
   def index
   end
 

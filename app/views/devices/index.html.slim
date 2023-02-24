@@ -1,0 +1,33 @@
+.my-4
+  - if @admin
+    h2.text-primary= "#{@user.name}のデバイス"
+  -else
+    h2.text-primary マイデバイス
+  .d-flex.justify-content-end
+    = link_to "デバイス追加", new_device_path, class: "btn btn-primary mr-3"
+table.table
+  thead.thead-default
+    tr.text-secondary.row.px-1
+      th.col.col-5.col-md-3= Device.human_attribute_name(:name)
+      th.col.col-2.col-md-1
+      th.col.col-5.col-md-4= Device.human_attribute_name(:os)
+      th.d-none.d-md-table-cell.col.col-md-4 セキュリティソフト
+  tbody
+    - @devices.each do |device|
+      tr.row.px-1
+        - if device.owner == nil || device.owner == ""
+          td.col.col-5.col-md-3= link_to device.name, device
+        - else
+          td.col.col-5.col-md-3= link_to device.owner, device, class:"text-info"
+        td.col.col-2.col-md-1.d-flex.justify-content-center
+          - if device.device_type == "phone"
+            i.fas.fa-mobile-alt.mx-auto.text-secondary.align-self-center
+          - elsif device.device_type == "pc"
+            i.fas.fa-laptop.mx-auto.text-secondary.align-self-center
+          - elsif device.device_type == "tablet"
+            i.fas.fa-tablet-alt.mx-auto.text-secondary.align-self-center
+        td.col.col-5.col-md-4= device.os
+        td.d-none.d-md-table-cell.col.col-md-4= device.security_soft.name
+
+.nav.justify-content-end.mb-3
+  = link_to "Wi-Fiトップへ戻る", wifis_path, class:"nav-link"

@@ -1,0 +1,28 @@
+.my-4
+  h2.text-primary アクセスポイント
+  -if check_wifi_admin(@current_user)
+    .d-flex.justify-content-end
+      = link_to "管理", admin_access_points_path, class: "btn btn-primary mr-3"
+
+table.table
+  thead.thead-default
+    tr.text-secondary.row.px-1
+      th.col.col-7.col-md-4= AccessPoint.human_attribute_name(:ssid)
+      th.col.col-5.col-md-2= InspectionRoom.human_attribute_name(:name)
+      th.d-none.d-md-table-cell.col.col-md-2 登録者数（人）
+      th.d-none.d-md-table-cell.col.col-md-4= AccessPoint.human_attribute_name(:updated_at)
+  tbody
+    - @access_points.each do |access_point|
+      tr.row.px-1
+        - if access_point.users.find_by(id: @current_user.id)
+          td.col.col-7.col-md-4
+            = link_to access_point.ssid, access_point
+            i.far.fa-check-circle.ml-2.text-primary
+        -else
+          td.col.col-7.col-md-4.text-secondary= access_point.ssid
+        td.col.col-5.col-md-2= access_point.inspection_room.name
+        td.d-none.d-md-table-cell.col.col-md-2= access_point.users.count
+        td.d-none.d-md-table-cell.col.col-md-4= access_point.updated_at.strftime("%Y-%m-%d %H:%M")
+
+.nav.justify-content-end.mb-3
+  = link_to "Wi-Fiトップへ戻る", wifis_path, class:"nav-link"

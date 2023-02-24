@@ -1,5 +1,22 @@
 Rails.application.routes.draw do
 
+  resources :user_access_points, only: [:edit, :update, :destroy]
+
+  resources :access_points do
+    collection do
+      get 'admin'
+    end
+  end
+
+  resources :devices
+
+  resources :wifis, only: [:index] do
+    collection do
+      get 'add_device'
+      get 'release_device'
+    end
+  end
+
   resources :breaches, except: [:edit]
 
   resources :evaluations, only: [:create, :destroy, :update]
@@ -67,6 +84,7 @@ Rails.application.routes.draw do
 
   resources :procedures, only: [:index] do
     collection do
+      get 'top'
       get 'holiday_record'
       get 'holiday_change'
       get 'holiday_paid'
