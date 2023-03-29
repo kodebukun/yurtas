@@ -32,7 +32,8 @@
         th= AccessPoint.human_attribute_name(:updated_at)
         td= @access_point.updated_at.strftime("%Y-%m-%d %H:%M")
 
-  - if @current_user.admin && @admin == true
+  /check_wifi_adminは、user_access_points_helperにある
+  - if check_wifi_admin(@current_user) && @admin == true
     = link_to "AP情報編集", edit_access_point_path, class: "btn btn-secondary mr-3"
     = link_to "AP削除", @access_point, method: :delete, data: {confirm: "#{@access_point.ssid}を削除します。よろしいですか？"}, class: "btn btn-danger mr-3"
     /登録者リストセクション
