@@ -11,5 +11,6 @@ InspectionRoom.seed(:id,
 { id: 10, name: "MRI3番操作室", department_id: 3},
 { id: 11, name: "PET操作室", department_id: 5},
 { id: 12, name: "PET談話室", department_id: 5},
+{ id: 13, name: "核医学受付", department_id: 5},
 
 )
