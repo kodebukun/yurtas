@@ -454,7 +454,7 @@ User.seed do |s|
 end
 
 User.seed do |s|
-  s.id = 83
+  s.id = 82
   s.name = "萩原　靖倫"
   s.login_id = 7068
   s.password = "bj1261"
@@ -467,7 +467,7 @@ User.seed do |s|
 end
 
 User.seed do |s|
-  s.id = 84
+  s.id = 83
   s.name = "金子　崇"
   s.login_id = 5724
   s.password = "sg1262"
@@ -480,7 +480,7 @@ User.seed do |s|
 end
 
 User.seed do |s|
-  s.id = 85
+  s.id = 84
   s.name = "小野　崇"
   s.login_id = 7518
   s.password = "gr1263"
@@ -493,7 +493,7 @@ User.seed do |s|
 end
 
 User.seed do |s|
-  s.id = 86
+  s.id = 85
   s.name = "佐藤　啓"
   s.login_id = 7534
   s.password = "sg1269"
@@ -506,7 +506,7 @@ User.seed do |s|
 end
 
 User.seed do |s|
-  s.id = 87
+  s.id = 86
   s.name = "大原　紳"
   s.login_id = 7544
   s.password = "pp1271"
@@ -519,7 +519,7 @@ User.seed do |s|
 end
 
 User.seed do |s|
-  s.id = 88
+  s.id = 87
   s.name = "石井　芳樹"
   s.login_id = 7546
   s.password = "pp1272"
