@@ -3,8 +3,8 @@
     h2.text-primary= "#{@user.name}のデバイス"
   -else
     h2.text-primary マイデバイス
-  .d-flex.justify-content-end
-    = link_to "デバイス追加", new_device_path, class: "btn btn-primary mr-3"
+    .d-flex.justify-content-end
+      = link_to "デバイス追加", new_device_path, class: "btn btn-primary mr-3"
 table.table
   thead.thead-default
     tr.text-secondary.row.px-1

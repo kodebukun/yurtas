@@ -5,11 +5,18 @@ class AnonymousPostsController < ApplicationController
 
   def index
     if params[:sort] == "comment"
-      #コメント数が多い順でpostを取得
-      @posts = AnonymousPost.where(id: AnonymousComment.group(:anonymous_post_id).order("count(anonymous_post_id) desc").pluck(:anonymous_post_id)).page(params[:page]).per(10)
+      #コメント数が多い順でpostを取得。このコードだとcommentが0のpostは取得できなかった。
+      #.group(:anonymous_post_id)：同じ:anonymous_post_idでグループ化
+      #.order(Arel.sql("count(anonymous_post_id) desc"))：anonymous_post_idの数の多い順に並び替え。
+      #Rails6.0からは、orderの中にSQLを直書きしてはいけないので、Arel.sqlで囲む。
+      #.pluck(:anonymous_post_id)：pluckで要素を取り出す
+      @posts = AnonymousPost.find(AnonymousComment.group(:anonymous_post_id).order(Arel.sql("count(anonymous_post_id) desc")).pluck(:anonymous_post_id))
+      #.paginate_array(@posts):オブジェクトじゃなく、配列に対してpaginateするときはこちらを使う。
+      @posts = Kaminari.paginate_array(@posts).page(params[:page]).per(10)
     elsif params[:sort] == "good"
       #good数が多い順でpostを取得。このコードだとgoodが0のpostは取得できなかった。
-      @posts = AnonymousPost.where(id: Evaluation.where(agreement: true).group(:anonymous_post_id).order("count(anonymous_post_id) desc").pluck(:anonymous_post_id)).page(params[:page]).per(10)
+      @posts = AnonymousPost.find(Evaluation.group(:anonymous_post_id).where(agreement: true).order(Arel.sql("count(anonymous_post_id) desc")).pluck(:anonymous_post_id))
+      @posts = Kaminari.paginate_array(@posts).page(params[:page]).per(10)
     else
       @posts = AnonymousPost.all.order(updated_at: "DESC").page(params[:page]).per(10)
     end
@@ -71,7 +78,7 @@ class AnonymousPostsController < ApplicationController
   end
 
   private
-    
+
     #管理者か確認
     def require_admin
         redirect_to anonymous_posts_url, notice: "権限がありません" unless current_user.admin?
