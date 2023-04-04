@@ -5,9 +5,12 @@
   - elsif @post.safety == "judging"
     h4.text-secondary 規約違反審議中の投稿
   -else
-    - if @post.resolved == true
+    - if @post.resolved == true && @post.discuss == false
       h4
         span.badge.badge-info 解決済み
+    - elsif @post.resolved == false && @post.discuss == true
+      h4
+        span.badge.badge-warning 会議中
     h4.mt-3= @post.title
   hr
   / Post content simple_formatで改行 rinkuでurlオートリンク
@@ -59,12 +62,16 @@
               = link_to evaluations_path(anonymous_post_id: @post.id, agreement: false), method: :post, class: "table-link mr-1", style: "text-decoration: none;" do
                 i.fas.fa-thumbs-down.text-secondary
               .ml-1= @bad_count
-    - if @post.user_id == @current_user.id
+    - if @post.user_id == @current_user.id || @current_user.id == 3
       .d-flex.flex-row-reverse
         -if @post.resolved == false
-          = link_to "解決済みにする",anonymous_post_path(resolved: true), method: :patch, data: {confirm: "この記事を解決済みにします。よろしいですか？"}, class: "btn btn-secondary btn-sm mr-3"
-        -else
-          = link_to "未解決にする",anonymous_post_path(resolved: false), method: :patch, data: {confirm: "この記事を未解決にします。よろしいですか？"}, class: "btn btn-secondary btn-sm mr-3"
+          = link_to "解決済みにする",anonymous_post_path(resolved: "true"), method: :patch, data: {confirm: "この記事を解決済みにします。よろしいですか？"}, class: "btn btn-info btn-sm mr-3"
+        -elsif @post.resolved == true
+          = link_to "未解決にする",anonymous_post_path(resolved: "false"), method: :patch, data: {confirm: "この記事を未解決にします。よろしいですか？"}, class: "btn btn-secondary btn-sm mr-3"
+        -if @post.discuss == false
+          = link_to "会議中にする",anonymous_post_path(discuss: "true"), method: :patch, data: {confirm: "この記事を会議中にします。よろしいですか？"}, class: "btn btn-warning btn-sm mr-3"
+        -elsif @post.discuss == true
+          = link_to "会議中を解除",anonymous_post_path(discuss: "false"), method: :patch, data: {confirm: "この記事の会議中を解除します。よろしいですか？"}, class: "btn btn-secondary btn-sm mr-3"
 
   hr.mb-1
   .d-flex.justify-content-between.mt-2

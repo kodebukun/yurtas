@@ -63,11 +63,18 @@ class AnonymousPostsController < ApplicationController
 
   def update
     @post = AnonymousPost.find(params[:id])
-    @post.update(resolved: params[:resolved])
-    if @post.resolved == true
+    if params[:resolved] == "true"
+      @post.update(resolved: true, discuss: false)
       redirect_to anonymous_post_url(@post), notice: "解決済みにしました。"
-    else
+    elsif params[:resolved] == "false"
+      @post.update(resolved: false)
       redirect_to anonymous_post_url(@post), notice: "未解決にしました。"
+    elsif params[:discuss] == "true"
+      @post.update(resolved: false, discuss: true)
+      redirect_to anonymous_post_url(@post), notice: "会議中にしました。"
+    elsif params[:discuss] == "false"
+      @post.update(discuss: false)
+      redirect_to anonymous_post_url(@post), notice: "会議中を解除しました。"
     end
   end
 
