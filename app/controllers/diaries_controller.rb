@@ -66,7 +66,7 @@ class DiariesController < ApplicationController
     end
     #卒業生か確認
     def ensure_graduate
-      if @current_user.positions[0].name == "卒業生"
+      if @current_user.position_ids.include?(5)
         redirect_to diaries_url, notice: "権限がありません"
       end
     end

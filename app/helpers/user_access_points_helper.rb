@@ -7,7 +7,9 @@ module UserAccessPointsHelper
       return "2.4g"
     elsif user.id == 10 || user.id == 19 || user.id == 22 || user.id == 25 || user.id == 26 || user.id == 28 || user.id == 30 || user.id == 31 || user.id == 37 || user.id == 40 || user.id == 48 || user.id == 51 || user.id == 53
       return "lounge"
-    elsif  user.id == 59 || user.id == 60 || user.id == 61 || user.id == 62 || user.id == 21
+    elsif user.position_ids.include?(6) || user.position_ids.include?(9)
+      return "lounge"
+    elsif  user.id == 21
       return "all"
     else
       return false

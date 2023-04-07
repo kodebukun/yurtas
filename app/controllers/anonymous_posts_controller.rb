@@ -90,16 +90,16 @@ class AnonymousPostsController < ApplicationController
     def require_admin
         redirect_to anonymous_posts_url, notice: "権限がありません" unless current_user.admin?
     end
-    #投稿者本人か確認
+    #投稿者本人か確認（id:3 Opinion管理人はバッチを付けるため除外）
     def ensure_correct_user
       @post = AnonymousPost.find(params[:id])
-      if @post.user_id != @current_user.id
+      if @post.user_id != @current_user.id && @current_user.id != 3
         redirect_to anonymous_posts_url, notice: "権限がありません"
       end
     end
     #卒業生か確認
     def ensure_graduate
-      if @current_user.positions[0].name == "卒業生"
+      if @current_user.position_ids.include?(5)
         redirect_to anonymous_posts_url, notice: "権限がありません"
       end
     end

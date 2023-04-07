@@ -9,8 +9,9 @@
     - @inspection_rooms.each do |inspection_room|
       .form-group
         h5.text-primary= inspection_room.name
-        
+
         / 技師室はユーザーによってSSIDの表示・非表示を分ける（2.4Gと5G）
+        / which_ssid_id_used?はuser_access_points_helperにある
         - if inspection_room.id == 1
           - if which_ssid_id_used?(@user) == "2.4g"
             = f.collection_check_boxes :access_point_ids, AccessPoint.where(id: 1), :id, :ssid do |t|
