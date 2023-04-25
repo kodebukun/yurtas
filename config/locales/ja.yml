@@ -52,7 +52,7 @@ ja:
         updated_at: 更新日時
       department:
         id: ID
-        name: 経験部署
+        name: 所属部署
         created_at: 登録日時
         updated_at: 更新日時
       work:

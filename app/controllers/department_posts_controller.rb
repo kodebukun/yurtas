@@ -8,7 +8,11 @@ class DepartmentPostsController < ApplicationController
 
   def index
     @department = Department.find(params[:department_id])
-    @posts = Post.where(department_id: @department.id, rule: false).order(created_at: "DESC").page(params[:page]).per(10)
+    if @current_user.departments.ids.include?(@department.id)
+      @posts = Post.where(department_id: @department.id, rule: false).order(created_at: "DESC").page(params[:page]).per(10)
+    else
+      @posts = Post.where(department_id: @department.id, rule: false).where(meeting: true).order(created_at: "DESC").page(params[:page]).per(10)
+    end
     @role_posts = Post.where(department_id: @department.id, rule: true).order(created_at: "DESC").page(params[:page]).per(10)
   end
 
@@ -32,8 +36,12 @@ class DepartmentPostsController < ApplicationController
       #else
         #@post.save_notification_department!(@current_user)
       #end
-      #未読ステータス登録処理
-      users = User.where.not(id: @post.user_id)
+      #未読ステータス登録処理（meeting：falseの場合は該当部署にだけ未読処理）
+      if @post.meeting == true
+        users = User.where.not(id: @post.user_id)
+      else
+        users = @post.department.users.where.not(id: @post.user_id)
+      end
       users.each do |user|
         unread = Unread.create(user_id: user.id, post_id: @post.id, department_id: @post.department_id)
       end

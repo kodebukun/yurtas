@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   before_action :ensure_correct_user, {only: [:update, :destroy]}
   before_action :ensure_graduate, {only: [:new, :edit, :create, :update, :destroy]}
+  before_action :ensure_correct_work_user, {only: [:show]}
 
   def top
     #未読があるか、ある場合はどの掲示板の未読か判別
@@ -26,8 +27,8 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @comments = @post.comments.order(created_at: "DESC")
     #未読解除処理
-    unread = Unread.find_by(user_id: @current_user.id, post_id: @post.id)
-    if unread.present?
+    unreads = Unread.where(user_id: @current_user.id, post_id: @post.id)
+    unreads.each do |unread|
       unread.destroy
     end
   end
@@ -90,6 +91,13 @@ class PostsController < ApplicationController
     #ストロングパラメータ
     def post_params
       params.require(:post).permit(:title, :content, :meeting)
+    end
+    #該当係りに所属しているか確認
+    def ensure_correct_work_user
+      post = Post.find(params[:id])
+      if post.work_id.present? == true && post.meeting == false && @current_user.works.ids.include?(post.work_id) == false
+        redirect_to posts_url, notice: "非公開の投稿です"
+      end
     end
 
 end

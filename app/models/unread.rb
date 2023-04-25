@@ -7,5 +7,6 @@ class Unread < ApplicationRecord
   belongs_to :anonymous_post, optional: true
   belongs_to :department, optional: true
   belongs_to :work, optional: true
+  belongs_to :comment, optional: true
 
 end

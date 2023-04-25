@@ -14,7 +14,7 @@
       = f.label :phone_no, "Phone"
       = f.text_field :phone_no, class: "form-control"
     .form-group
-      = f.label "経験部署"
+      = f.label "所属部署"
       br
       = f.collection_check_boxes :department_ids, @departments, :id, :name do |t|
         = t.check_box(class: "mr-1")

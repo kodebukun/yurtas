@@ -24,9 +24,30 @@ class CommentsController < ApplicationController
     if @comment.post
       @post = @comment.post
       if @comment.save
-        #コメントの通知処理
-        @post.create_notification_comment!(@current_user, @comment.id)
-        redirect_to post_url(@post), notice: "コメントを投稿しました。"
+        #係りか部署の投稿に対するコメントは、該当係り/部署の人にだけ未読処理
+        if @post.department_id.present? && @post.work_id == nil
+          users = @post.department.users.where.not(id: @comment.user_id)
+          users.each do |user|
+            same_unread = Unread.find_by(user_id: user.id, post_id: @post.id, department_id: @post.department_id)
+            if same_unread.blank?
+              unread = Unread.create(user_id: user.id, post_id: @post.id, department_id: @post.department_id)
+            end
+          end
+          redirect_to post_url(@post), notice: "コメントを投稿しました。"
+        elsif @post.department_id == nil && @post.work_id.present?
+          users = @post.work.users.where.not(id: @comment.user_id)
+          users.each do |user|
+            same_unread = Unread.find_by(user_id: user.id, post_id: @post.id, work_id: @post.work_id)
+            if same_unread.blank?
+              unread = Unread.create(user_id: user.id, post_id: @post.id, work_id: @post.work_id)
+            end
+          end
+          redirect_to post_url(@post), notice: "コメントを投稿しました。"
+        else
+          #その他はコメントの通知処理
+          @post.create_notification_comment!(@current_user, @comment.id)
+          redirect_to post_url(@post), notice: "コメントを投稿しました。"
+        end
       else
         render :new
       end

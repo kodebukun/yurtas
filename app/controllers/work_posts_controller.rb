@@ -8,7 +8,11 @@ class WorkPostsController < ApplicationController
 
   def index
     @work = Work.find(params[:work_id])
-    @posts = Post.where(work_id: @work.id).order(created_at: "DESC").page(params[:page]).per(10)
+    if @current_user.works.ids.include?(@work.id)
+      @posts = Post.where(work_id: @work.id).order(created_at: "DESC").page(params[:page]).per(10)
+    else
+      @posts = Post.where(work_id: @work.id).where(meeting: true).order(created_at: "DESC").page(params[:page]).per(10)
+    end
   end
 
   def new
@@ -31,8 +35,12 @@ class WorkPostsController < ApplicationController
       #else
         #@post.save_notification_work!(@current_user)
       #end
-      #未読ステータス登録処理
-      users = User.where.not(id: @post.user_id)
+      #未読ステータス登録処理（meeting：falseの場合は該当係りにだけ未読処理）
+      if @post.meeting == true
+        users = User.where.not(id: @post.user_id)
+      else
+        users = @post.work.users.where.not(id: @post.user_id)
+      end
       users.each do |user|
         unread = Unread.create(user_id: user.id, post_id: @post.id, work_id: @post.work_id)
       end
