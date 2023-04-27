@@ -1,6 +1,7 @@
 class MaterialsController < ApplicationController
 
   before_action :require_admin, {only: [:destroy]}
+  before_action :ensure_graduate, {only: [:new, :edit, :create, :update, :destroy]}
 
   def index
   end
@@ -77,6 +78,13 @@ class MaterialsController < ApplicationController
     #管理者か確認
     def require_admin
         redirect_to materials_url, notice: "権限がありません" unless current_user.admin?
+    end
+
+    #卒業生か確認
+    def ensure_graduate
+      if @current_user.position_ids.include?(5)
+        redirect_to materials_url, notice: "権限がありません"
+      end
     end
 
     #ストロングパラメータ
