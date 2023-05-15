@@ -5,7 +5,7 @@ module UserAccessPointsHelper
       return "5g"
     elsif user.id == 12 || user.id == 20 || user.id == 33 || user.id == 38 || user.id == 41 || user.id == 47 || user.id == 49 || user.id == 50 || user.id == 56 || user.id == 107 || user.id == 108 || user.id == 109 || user.id == 110
       return "2.4g"
-    elsif user.id == 10 || user.id == 19 || user.id == 22 || user.id == 25 || user.id == 26 || user.id == 28 || user.id == 30 || user.id == 31 || user.id == 37 || user.id == 40 || user.id == 48 || user.id == 51 || user.id == 53
+    elsif user.id == 10 || user.id == 19 || user.id == 22 || user.id == 23 || user.id == 25 || user.id == 26 || user.id == 28 || user.id == 30 || user.id == 31 || user.id == 37 || user.id == 40 || user.id == 48 || user.id == 51 || user.id == 53
       return "lounge"
     elsif user.position_ids.include?(6) || user.position_ids.include?(9)
       return "lounge"
