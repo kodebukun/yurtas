@@ -1,6 +1,6 @@
 header.jumbotron.my-4.py-4.d-none.d-md-block
-  h1.display-4.font-weight-bold.text-primary Manuals
-  p.mt-4.lead.text-secondary 放射線部のマニュアルを参照できます。
+  h1.display-4.font-weight-bold.text-primary Document Hub
+  p.mt-4.lead.text-secondary 放射線部のマニュアルやインシデントを参照できます。
 
 .card-deck.my-5
   .col.col-12.col-md-6.mb-3
@@ -11,7 +11,7 @@ header.jumbotron.my-4.py-4.d-none.d-md-block
         = link_to "Find Out More!", "https://drive.google.com/drive/folders/1Yq62UGlGR7V2x3TWS9YlyHuE1IhYnWjB?usp=sharing", class: "btn btn-outline-secondary"
   .col.col-12.col-md-6.mb-3
     .card
-      .card-body.h4.text-center [style="color:#ffa34d;"] 動画（準備中･･･）
-      i.fas.fa-video.fa-6x.mx-auto.pb-4 [style="color:#ffa34d;"]
+      .card-body.h4.text-center [style="color:#ffa34d;"] インシデント
+      i.fas.fa-exclamation-triangle.fa-6x.mx-auto.pb-4 [style="color:#ffa34d;"]
       .card-footer.text-center
-        = link_to "Find Out More!", "#", class: "btn btn-outline-secondary"
+        = link_to "Find Out More!", top_incidents_path, class: "btn btn-outline-secondary"

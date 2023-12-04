@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_04_04_070742) do
+ActiveRecord::Schema.define(version: 2023_11_27_034910) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -118,6 +118,21 @@ ActiveRecord::Schema.define(version: 2023_04_04_070742) do
     t.integer "user_id", null: false
     t.integer "anonymous_post_id"
     t.boolean "agreement", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "incidents", force: :cascade do |t|
+    t.string "shift", null: false
+    t.datetime "occurred_at", null: false
+    t.integer "department_id", null: false
+    t.string "place", null: false
+    t.integer "years", null: false
+    t.string "target", null: false
+    t.string "happened", null: false
+    t.text "response"
+    t.text "measure"
+    t.text "excuse"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

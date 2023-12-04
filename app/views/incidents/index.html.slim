@@ -1,0 +1,32 @@
+.my-4
+  /--device size md以上で表示--
+  header.jumbotron.my-4.py-4.d-none.d-md-block
+    h1.display-4.font-weight-bold.text-primary Incidents
+    p.mt-4.lead.text-secondary= "#{@department.name}のインシデントです。"
+    .d-flex.justify-content-end
+      = link_to "新規投稿", new_incident_path, class: "btn btn-primary mr-3"
+
+  /--device size md未満で表示--
+  h4.text-primary.d-md-none= "#{@department.name}のインシデント"
+  .d-flex.justify-content-end.my-2.d-md-none
+    = link_to "新規投稿", new_incident_path, class: "btn btn-primary mr-3"
+
+  /--posts--
+  div
+    ul.list-group.list-group-flush
+      - @incidents.each do |incident|
+          li.list-group-item
+            /- if post.unreads.find_by(user_id: @current_user.id)
+            /  span.badge.badge-danger.mr-2 New
+            /- if post.resolved == true && post.discuss == false
+            /  span.badge.badge-info 解決済み
+            /- elsif post.resolved == false && post.discuss == true
+            /  span.badge.badge-warning 会議中
+            h6.mb-1.text-secondary= "発生日時：#{incident.occurred_at.strftime("%Y年%m月%d日 %H:%M")}"
+            h5.mt-2= link_to simple_format(incident.happened), incident, class: "text-primary"
+
+    .my-4
+      = paginate @incidents
+      = page_entries_info @incidents
+    .nav.justify-content-end
+      = link_to "インシデントトップへ", top_incidents_path, class:"nav-link"

@@ -1,0 +1,5 @@
+.my-4
+  = render partial: "shared/error_message", locals: {content: @incident}
+  = render partial: "form", locals: {title: "新規投稿（インシデント）"}
+  .nav.justify-content-end
+    = link_to "インシデントトップへ", top_incidents_path, class:"nav-link"

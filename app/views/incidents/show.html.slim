@@ -1,0 +1,27 @@
+.my-4
+  /発生日
+  h6.mb-1.text-secondary= "#{@incident.occurred_at.strftime("%Y年%m月%d日 %H:%M")} 発生"
+  h4.mb-3.text-primary= "#{@incident.happened}について"
+  p= "勤務体系：#{@incident.shift}"
+  p= "発生部署：#{@incident.department.name}"
+  p= "発生場所：#{@incident.place}"
+  p= "インシデント対象：#{@incident.target}"
+  hr
+  h5= "事例発生時の対応"
+  p= @incident.response
+  hr
+  h5= "対策"
+  p= @incident.measure
+  hr
+  h5= "本音コーナー"
+  p= @incident.excuse
+  hr
+  / edit and destroy
+  = render partial: "btn_edit_destroy", locals: {edit_path: edit_incident_path, destroy_path: incident_path}
+  hr.mb-1
+  = "投稿日時：#{@incident.created_at.strftime("%Y-%m-%d %H:%M")}"
+  br
+  = "更新日時：#{@incident.updated_at.strftime("%Y-%m-%d %H:%M")}"
+  /一覧へのリンク
+  .nav.justify-content-end.mt-3
+    = link_to "インシデント一覧へ", incidents_path(department_id: @department.id), class:"nav-link"

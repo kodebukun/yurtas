@@ -5,5 +5,6 @@ class Department < ApplicationRecord
   has_many :posts
   has_many :unreads
   has_many :inspection_rooms, dependent: :destroy
+  has_many :incidents
 
 end

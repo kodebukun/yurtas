@@ -29,6 +29,7 @@ ja:
       device: デバイス
       inspection_room: 検査室
       security_soft: セキュリティソフト
+      incident: インシデント
     attributes:
       user:
         id: ID
@@ -172,6 +173,20 @@ ja:
         updated_at: 更新日時
       security_soft:
         name: セキュリティソフト名
+        created_at: 登録日時
+        updated_at: 更新日時
+      incident:
+        shift: 勤務体系
+        occurred_at: 発生日時
+        department_id: 部署ID
+        department: 部署
+        place: 発生場所
+        years: 経験年数
+        target: 対象
+        happened: どうなったか
+        response: 事例に対する対応
+        measure: 対策
+        excuse: 言い訳
         created_at: 登録日時
         updated_at: 更新日時
 

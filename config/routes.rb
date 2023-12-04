@@ -1,5 +1,12 @@
 Rails.application.routes.draw do
 
+  get 'incidents/index'
+  resources :incidents do
+    collection do
+      get 'top'
+    end
+  end
+
   resources :user_access_points, only: [:edit, :update, :destroy]
 
   resources :access_points do
