@@ -8,6 +8,7 @@ class WorkPostsController < ApplicationController
 
   def index
     @work = Work.find(params[:work_id])
+    #自分が所属する係りの場合は全て表示、所属しない係りの場合はmeeting:trueのみ表示の処理
     if @current_user.works.ids.include?(@work.id)
       @posts = Post.where(work_id: @work.id).order(created_at: "DESC").page(params[:page]).per(10)
     else

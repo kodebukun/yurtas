@@ -8,11 +8,13 @@ class DepartmentPostsController < ApplicationController
 
   def index
     @department = Department.find(params[:department_id])
-    if @current_user.departments.ids.include?(@department.id)
-      @posts = Post.where(department_id: @department.id, rule: false).order(created_at: "DESC").page(params[:page]).per(10)
-    else
-      @posts = Post.where(department_id: @department.id, rule: false).where(meeting: true).order(created_at: "DESC").page(params[:page]).per(10)
-    end
+    @posts = Post.where(department_id: @department.id, rule: false).order(created_at: "DESC").page(params[:page]).per(10)
+    #自分が所属する部署の場合は全て表示、所属しない部署の場合はmeeting:trueのみ表示の処理
+    #if @current_user.departments.ids.include?(@department.id)
+    #  @posts = Post.where(department_id: @department.id, rule: false).order(created_at: "DESC").page(params[:page]).per(10)
+    #else
+    #  @posts = Post.where(department_id: @department.id, rule: false).where(meeting: true).order(created_at: "DESC").page(params[:page]).per(10)
+    #end
     @role_posts = Post.where(department_id: @department.id, rule: true).order(created_at: "DESC").page(params[:page]).per(10)
   end
 
