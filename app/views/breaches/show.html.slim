@@ -25,8 +25,8 @@
   = "報告日時：#{@breach.created_at.strftime("%Y-%m-%d %H:%M")}"
 
   .d-flex.flex-row.mt-4
-    = link_to "違反である", breach_path(approval: true), method: :patch, data: {confirm: "報告された投稿/コメントを規約違反と認定します。よろしいですか？"}, class: "btn btn-primary mr-3"
-    = link_to "違反ではない", breach_path(approval: false), method: :patch, data: {confirm: "報告された投稿/コメントは規約違反ではないとします。よろしいですか？"}, class: "btn btn-danger mr-3"
+    = link_to "違反である", checked_update_incidents_path(approval: true), method: :patch, data: {confirm: "報告された投稿/コメントを規約違反と認定します。よろしいですか？"}, class: "btn btn-primary mr-3"
+    = link_to "違反ではない", checked_update_incidents_path(approval: false), method: :patch, data: {confirm: "報告された投稿/コメントは規約違反ではないとします。よろしいですか？"}, class: "btn btn-danger mr-3"
 
   /一覧へのリンク
   .nav.justify-content-end.mt-4

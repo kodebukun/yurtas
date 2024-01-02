@@ -11,12 +11,12 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @works = @user.works.all
     @positions = @user.positions.all
-    @departments = @user.departments.all
+    @departments = @user.departments.all.order(order: "ASC")
   end
 
   def new
     @user = User.new
-    @departments = Department.all
+    @departments = Department.all.order(order: "ASC")
     @works = Work.all
     @positions = Position.all
   end
@@ -33,13 +33,13 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
-    @departments = Department.all
+    @departments = Department.all.order(order: "ASC")
     @works = Work.all
   end
 
   def update
     @user = User.find(params[:id])
-    @departments = Department.all
+    @departments = Department.all.order(order: "ASC")
     @works = Work.all
     if user_params[:password].present? || user_params[:password_confirmation].present?
       if @user.update(user_params)

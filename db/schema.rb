@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_11_27_034910) do
+ActiveRecord::Schema.define(version: 2023_12_30_183805) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -91,6 +91,7 @@ ActiveRecord::Schema.define(version: 2023_11_27_034910) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "order"
   end
 
   create_table "devices", force: :cascade do |t|
@@ -135,6 +136,10 @@ ActiveRecord::Schema.define(version: 2023_11_27_034910) do
     t.text "excuse"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "title"
+    t.text "content"
+    t.integer "user_id", null: false
+    t.boolean "checked", default: false
   end
 
   create_table "inspection_rooms", force: :cascade do |t|
@@ -245,6 +250,7 @@ ActiveRecord::Schema.define(version: 2023_11_27_034910) do
     t.integer "work_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "incident_id"
   end
 
   create_table "user_access_points", force: :cascade do |t|

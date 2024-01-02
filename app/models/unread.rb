@@ -8,5 +8,6 @@ class Unread < ApplicationRecord
   belongs_to :department, optional: true
   belongs_to :work, optional: true
   belongs_to :comment, optional: true
+  belongs_to :incident, optional: true
 
 end

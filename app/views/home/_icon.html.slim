@@ -39,8 +39,12 @@
 
     .d-flex.flex-column.w-25.mr-2.mr-md-4
       = link_to manuals_index_path do
-        .border.py-2.text-center.btn.btn-outline-light.w-100[style="border-radius: 10px;"]
-          i.fas.fa-book.display-4[style="color:#9896f1;"]
+        .border.py-2.text-center.btn.btn-outline-light.w-100[style="border-radius: 10px; position:relative;"]
+          - if @incidents_unread.present?
+            i.fas.fa-circle.index-circle
+            i.fas.fa-book.display-4[style="color:#9896f1;"]
+          - else
+            i.fas.fa-book.display-4[style="color:#9896f1;"]
       .small.text-center.mt-1  ドキュメント
 
     .d-flex.flex-column.w-25.mr-2.mr-md-4

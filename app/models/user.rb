@@ -31,5 +31,6 @@ class User < ApplicationRecord
   has_many :devices, dependent: :destroy
   has_many :user_access_points, dependent: :destroy
   has_many :access_points, through: :user_access_points
+  has_many :incidents
 
 end

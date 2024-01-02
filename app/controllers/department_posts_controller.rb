@@ -3,7 +3,7 @@ class DepartmentPostsController < ApplicationController
   before_action :ensure_graduate, {only: [:new, :edit, :create, :update, :destroy]}
 
   def top
-    @departments = Department.all
+    @departments = Department.all.order(order: "ASC")
   end
 
   def index

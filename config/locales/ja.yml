@@ -183,12 +183,14 @@ ja:
         place: 発生場所
         years: 経験年数
         target: 対象
-        happened: どうなったか
+        happened: 分類
         response: 事例に対する対応
         measure: 対策
         excuse: 言い訳
         created_at: 登録日時
         updated_at: 更新日時
+        title: タイトル
+        content: 内容
 
   date:
     abbr_day_names:

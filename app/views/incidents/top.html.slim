@@ -5,11 +5,17 @@
     p.mt-4.lead.text-secondary 部署をお選び下さい。
     .d-flex.justify-content-end
       = link_to "新規投稿", new_incident_path, class: "btn btn-primary mr-3"
+      /--チェックボタンは医療安全係りのみ表示--
+      - if @current_user.works.include?(Work.find(6)) && @unchecked_incident
+        = link_to "チェック", check_incidents_path, class: "btn btn-danger mr-3"
 
   /--device size md未満で表示--
   h4.text-primary.d-md-none 部署をお選び下さい。
   .d-flex.justify-content-end.my-2.d-md-none
     = link_to "新規投稿", new_incident_path, class: "btn btn-primary mr-3"
+    /--チェックボタンは医療安全係りのみ表示--
+    - if @current_user.works.include?(Work.find(6)) && @unchecked_incident
+      = link_to "チェック", check_incidents_path, class: "btn btn-danger mr-3"
 
   .row.text-center.mt-4
     - @departments.each do |department|
@@ -17,6 +23,8 @@
         .card.h-100
           .card-body
             h2.card-title.text-primary[style="position:relative;"]= department.name
+            - if my_unreads_department_id(@my_unreads, department) == department.id
+              i.fas.fa-circle.department-circle
           .card-footer
             = link_to "Find Out More!", incidents_path(department_id: department.id), class:  "btn btn-outline-secondary"
   .nav.justify-content-end

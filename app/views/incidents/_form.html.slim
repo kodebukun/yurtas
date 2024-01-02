@@ -1,5 +1,8 @@
 h2.text-primary.mb-3= title
 = form_with model: @incident, local: true do |f|
+  .form-group
+    = f.label :title, "タイトル"
+    = f.text_field :title, class: "form-control"
   .form-groupe.mb-1
     = f.label :shift, "勤務体系：", class: 'control-label'
     = f.select :shift, Incident::SHIFTS, prompt: "選択して下さい"
@@ -19,16 +22,19 @@ h2.text-primary.mb-3= title
     = f.label :target, "インシデント対象：", class: 'control-label'
     = f.select :target, Incident::TARGETS, prompt: "選択して下さい"
   .form-groupe.mb-3
-    = f.label :happened, "どうなった？：", class: 'control-label'
+    = f.label :happened, "インシデント分類：", class: 'control-label'
     = f.select :happened, Incident::HAPPPENEDS, prompt: "選択して下さい"
   .form-group
+    = f.label :content, "インシデントの内容"
+    = f.text_area :content, class: "form-control", rows: 5
+  .form-group
     = f.label :response, "事例発生時の対応"
-    = f.text_area :response, class: "form-control", rows: 10
+    = f.text_area :response, class: "form-control", rows: 5
   .form-group
     = f.label :measure, "対策"
-    = f.text_area :measure, class: "form-control", rows: 10
+    = f.text_area :measure, class: "form-control", rows: 5
   .form-group
     = f.label :excuse, "本音コーナー"
-    = f.text_area :excuse, class: "form-control", rows: 10
+    = f.text_area :excuse, class: "form-control", rows: 3
 
   = f.submit nil, class: "btn btn-primary mt-2"

@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
 
-  get 'incidents/index'
   resources :incidents do
     collection do
       get 'top'
+      get 'check'
+      patch 'checked_update'
     end
   end
 

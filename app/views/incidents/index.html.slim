@@ -15,15 +15,20 @@
   div
     ul.list-group.list-group-flush
       - @incidents.each do |incident|
+        - if incident.checked == false && incident.user != @current_user
           li.list-group-item
-            /- if post.unreads.find_by(user_id: @current_user.id)
-            /  span.badge.badge-danger.mr-2 New
+            h6.mb-1.text-secondary= "発生日時：#{incident.occurred_at.strftime("%Y年%m月%d日 %H:%M")}"
+            h5.text-secondary 審査中の投稿
+        - else
+          li.list-group-item
+            - if incident.unreads.find_by(user_id: @current_user.id)
+              span.badge.badge-danger.mr-2 New
             /- if post.resolved == true && post.discuss == false
             /  span.badge.badge-info 解決済み
             /- elsif post.resolved == false && post.discuss == true
             /  span.badge.badge-warning 会議中
             h6.mb-1.text-secondary= "発生日時：#{incident.occurred_at.strftime("%Y年%m月%d日 %H:%M")}"
-            h5.mt-2= link_to simple_format(incident.happened), incident, class: "text-primary"
+            h5.mt-2= link_to simple_format(incident.title), incident, class: "text-primary"
 
     .my-4
       = paginate @incidents

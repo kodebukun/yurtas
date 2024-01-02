@@ -1,11 +1,15 @@
 .my-4
   /発生日
   h6.mb-1.text-secondary= "#{@incident.occurred_at.strftime("%Y年%m月%d日 %H:%M")} 発生"
-  h4.mb-3.text-primary= "#{@incident.happened}について"
+  h4.mb-3.text-primary= @incident.title
   p= "勤務体系：#{@incident.shift}"
   p= "発生部署：#{@incident.department.name}"
   p= "発生場所：#{@incident.place}"
   p= "インシデント対象：#{@incident.target}"
+  p= "インシデント分類：#{@incident.happened}"
+  hr
+  h5= "インシデントの内容"
+  p= @incident.content
   hr
   h5= "事例発生時の対応"
   p= @incident.response
@@ -17,7 +21,12 @@
   p= @incident.excuse
   hr
   / edit and destroy
-  = render partial: "btn_edit_destroy", locals: {edit_path: edit_incident_path, destroy_path: incident_path}
+  - if @current_user.works.include?(Work.find(6)) || @incident.user == @current_user
+    = render partial: "btn_edit_destroy", locals: {edit_path: edit_incident_path, destroy_path: incident_path}
+  - if @current_user.works.include?(Work.find(6)) && @incident.checked == false
+    = link_to "承認する", checked_update_incidents_path(id: @incident.id, checked: true), method: :patch, data: {confirm: "この投稿を承認します。よろしいですか？"}, class: "btn btn-info mr-3"
+  - elsif @current_user.works.include?(Work.find(6)) && @incident.checked == true
+    = link_to "未承認に戻す", checked_update_incidents_path(id: @incident.id), method: :patch, data: {confirm: "この投稿を未承認に戻します。よろしいですか？"}, class: "btn btn-secondary mr-3"
   hr.mb-1
   = "投稿日時：#{@incident.created_at.strftime("%Y-%m-%d %H:%M")}"
   br
