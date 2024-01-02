@@ -138,7 +138,7 @@ ActiveRecord::Schema.define(version: 2023_12_30_183805) do
     t.datetime "updated_at", null: false
     t.string "title"
     t.text "content"
-    t.integer "user_id", null: false
+    t.integer "user_id"
     t.boolean "checked", default: false
   end
 
