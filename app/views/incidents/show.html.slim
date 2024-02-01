@@ -21,7 +21,7 @@
   p= @incident.excuse
   hr
   / edit and destroy
-  - if @current_user.works.include?(Work.find(6)) || @incident.user == @current_user
+  - if @current_user.works.include?(Work.find(6)) || @incident.user.id == @current_user.id
     = render partial: "btn_edit_destroy", locals: {edit_path: edit_incident_path, destroy_path: incident_path}
   - if @current_user.works.include?(Work.find(6)) && @incident.checked == false
     = link_to "承認する", checked_update_incidents_path(id: @incident.id, checked: true), method: :patch, data: {confirm: "この投稿を承認します。よろしいですか？"}, class: "btn btn-info mr-3"

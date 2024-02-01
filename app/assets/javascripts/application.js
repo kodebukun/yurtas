@@ -18,3 +18,7 @@
 //= require popper
 //= require bootstrap
 //= require serviceworker-companion
+
+$(function () {
+  $('[data-toggle="popover"]').popover()
+}) // popoverのために追加

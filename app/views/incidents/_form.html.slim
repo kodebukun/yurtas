@@ -1,28 +1,29 @@
 h2.text-primary.mb-3= title
+p.text-danger ※は必須項目です。内容は登録後にも編集できます。
 = form_with model: @incident, local: true do |f|
   .form-group
-    = f.label :title, "タイトル"
+    = f.label :title, "タイトル (※)"
     = f.text_field :title, class: "form-control"
   .form-groupe.mb-1
-    = f.label :shift, "勤務体系：", class: 'control-label'
+    = f.label :shift, "勤務体系 (※)：", class: 'control-label'
     = f.select :shift, Incident::SHIFTS, prompt: "選択して下さい"
   .form-group.mb-2.row
-    = f.label :occurred_at, "発生日時：", class: 'control-label ml-3'
+    = f.label :occurred_at, "発生日時 (※)：", class: 'control-label ml-3'
     = f.datetime_field :occurred_at, class: 'form-control ml-3 col-11 col-md-4 col-lg-3'
   .form-groupe.mb-1
-    = f.label :department_id, "発生部署：", class: 'control-label'
+    = f.label :department_id, "発生部署 (※)：", class: 'control-label'
     = f.collection_select :department_id, @departments, :id, :name, prompt: "選択してください"
   .form-groupe.mb-1
-    = f.label :place, "場所：", class: 'control-label'
+    = f.label :place, "場所 (※)：", class: 'control-label'
     = f.select :place, Incident::PLACES, prompt: "選択して下さい"
   .form-group.row
-    = f.label :years, "経験年数：", class: 'control-label ml-3'
+    = f.label :years, "経験年数 (※)：", class: 'control-label ml-3'
     = f.number_field :years, class: "form-control col-6 col-md-2 col-lg-1"
   .form-groupe.mb-1
-    = f.label :target, "インシデント対象：", class: 'control-label'
+    = f.label :target, "インシデント対象 (※)：", class: 'control-label'
     = f.select :target, Incident::TARGETS, prompt: "選択して下さい"
   .form-groupe.mb-3
-    = f.label :happened, "インシデント分類：", class: 'control-label'
+    = f.label :happened, "インシデント分類 (※)：", class: 'control-label'
     = f.select :happened, Incident::HAPPPENEDS, prompt: "選択して下さい"
   .form-group
     = f.label :content, "インシデントの内容"
@@ -35,6 +36,7 @@ h2.text-primary.mb-3= title
     = f.text_area :measure, class: "form-control", rows: 5
   .form-group
     = f.label :excuse, "本音コーナー"
+    = render partial: "question_popover"
     = f.text_area :excuse, class: "form-control", rows: 3
 
   = f.submit nil, class: "btn btn-primary mt-2"
