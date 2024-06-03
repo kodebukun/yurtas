@@ -16,7 +16,7 @@ h2.text-primary.mb-3= title
       = f.radio_button :position, "disagree", class: "mr-1 ml-3"
       | 反対
   .form-group
-    = f.label :content, "内容（200字以内）"
+    = f.label :content, "内容（300字以内）"
     = f.text_area :content, class: "form-control", rows: 10
     = f.hidden_field :anonymous_post_id, value: post_id
   = f.submit nil, class: "btn btn-primary mt-2"
