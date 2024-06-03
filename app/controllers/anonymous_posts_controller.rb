@@ -18,8 +18,14 @@ class AnonymousPostsController < ApplicationController
       @posts = AnonymousPost.find(Evaluation.group(:anonymous_post_id).where(agreement: true).order(Arel.sql("count(anonymous_post_id) desc")).pluck(:anonymous_post_id))
       @posts = Kaminari.paginate_array(@posts).page(params[:page]).per(10)
     else
-      @posts = AnonymousPost.all.order(updated_at: "DESC").page(params[:page]).per(10)
+      #通常はrecent_postsで2か月以内の投稿かつ未解決の投稿を取得
+      @posts = AnonymousPost.all.recent_posts.order(updated_at: "DESC").page(params[:page]).per(10)
     end
+  end
+
+  def index_past
+    #通常はpast_postsで2か月以前の投稿と解決済みの投稿を取得
+    @posts = AnonymousPost.all.past_posts.order(updated_at: "DESC").page(params[:page]).per(10)
   end
 
   def show

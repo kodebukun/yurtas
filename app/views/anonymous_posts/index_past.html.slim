@@ -1,26 +1,22 @@
 .my-4
   /--device size md以上で表示--
   header.jumbotron.my-4.py-4.d-none.d-md-block
-    h1.display-4.font-weight-bold.text-primary Opinion Box
+    h1.display-4.font-weight-bold.text-primary Opinion Box Past
     p.mt-2.lead.text-secondary
-      | 「もっと働きやすい職場」を作っていくために、みんなの「声」を聞かせて下さい！
-      br
-      | 相手を尊重した、問題解決への建設的な声が集まることを期待しています。
+      | 最近更新されてない、もしくは解決済みの投稿です。
 
     .d-flex.justify-content-end
       = link_to "新規投稿", new_anonymous_post_path, data: {confirm: "規約：特定の個人を非難したり、プライバシーを侵害するような内容は記載しないで下さい。"}, class: "btn btn-primary mr-3"
-      = link_to "過去分", index_past_anonymous_posts_path, class: "btn btn-info mr-3"
+      = link_to "直近分", anonymous_posts_path, class: "btn btn-info mr-3"
   /--device size smallで表示--
   header.jumbotron.my-4.py-4.d-md-none
-    h1.display-5.font-weight-bold.text-primary Opinion Box
+    h1.display-5.font-weight-bold.text-primary Opinion Box Past
     p.mt-2.lead.text-secondary.small
-      | 「もっと働きやすい職場」を作っていくために、みんなの「声」を聞かせて下さい！
-      br
-      | 相手を尊重した、問題解決への建設的な声が集まることを期待しています。
+      | 最近更新されてない、もしくは解決済みの投稿です。
 
     .d-flex.justify-content-end
       = link_to "新規投稿", new_anonymous_post_path, data: {confirm: "規約：特定の個人を非難したり、プライバシーを侵害するような内容は記載しないで下さい。"}, class: "btn btn-primary mr-3"
-      = link_to "過去分", index_past_anonymous_posts_path, class: "btn btn-info mr-3"
+      = link_to "直近分", anonymous_posts_path, class: "btn btn-info mr-3"
 
   /--posts--
   div
@@ -41,15 +37,3 @@
             - elsif post.resolved == false && post.discuss == true
               span.badge.badge-warning 会議中
             h5.mt-2= link_to simple_format(post.title), post, class: "text-primary"
-
-    .my-4
-      /= paginate @posts
-      /= page_entries_info @posts
-
-    .bg-light.py-2.px-4.rounded.border
-      /--prew_month next_month--
-      h6 並び替え
-      .mb-3.row
-        = link_to "内容が新しい順", anonymous_posts_path, class: "btn btn-secondary col-11 col-sm-3 col-md-3 m-2"
-        = link_to "コメント数が多い順", anonymous_posts_path(sort: "comment"), class: "btn btn-secondary col-11 col-sm-4 col-md-4 m-2"
-        = link_to "Goodが多い順", anonymous_posts_path(sort: "good"), class: "btn btn-secondary col-11 col-sm-3 col-md-3 my-2 m-2"

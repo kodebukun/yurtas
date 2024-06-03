@@ -1,6 +1,6 @@
 class AnonymousPost < ApplicationRecord
-  validates :title, {presence: true, length: {maximum: 140}}
-  validates :content, {presence: true}
+  validates :title, {presence: true, length: {maximum: 50}}
+  validates :content, {presence: true, length: {maximum: 300}}
   validates :user_id, {presence: true}
 
   has_many :anonymous_comments, dependent: :destroy
@@ -34,6 +34,22 @@ class AnonymousPost < ApplicationRecord
       notification.checked = true
     end
     notification.save if notification.valid?
+  end
+
+  #2か月以前の投稿と解決済みの投稿を取得（クラスメソッドとして定義）
+  def self.past_posts
+    now = Time.current
+    start_month = 6.months.ago.all_month.first
+    past_posts = self.where.not(updated_at: start_month..now, resolved: false)
+    return past_posts
+  end
+
+  #2か月以内の投稿かつ未解決の投稿を取得（クラスメソッドとして定義）
+  def self.recent_posts
+    now = Time.current
+    start_month = 6.months.ago.all_month.first
+    @recent_posts = self.where(updated_at: start_month..now, resolved: false)
+    return @recent_posts
   end
 
 end

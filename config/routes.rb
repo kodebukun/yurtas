@@ -31,7 +31,11 @@ Rails.application.routes.draw do
 
   resources :anonymous_comments, only: [:new, :create, :destroy]
 
-  resources :anonymous_posts, except: [:edit]
+  resources :anonymous_posts, except: [:edit] do
+    collection do
+      get 'index_past'
+    end
+  end
 
   resources :diaries
 
