@@ -45,13 +45,13 @@ html
                 a#navbarDropdown.nav-link.dropdown-toggle.text-white[href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"]
                   |  Dropdown
                 .dropdown-menu[aria-labelledby="navbarDropdown"]
-                  = link_to "勤務情報", menu_attendances_path, class: "dropdown-item"
                   = link_to "掲示板", top_posts_path, class: "dropdown-item"
-                  = link_to "朝ミーティング", mornings_path, class: "dropdown-item"
-                  = link_to "ファイル置き場", files_index_path, class: "dropdown-item"
                   = link_to "機器情報", materials_path, class: "dropdown-item"
-                  = link_to "マニュアル", manuals_index_path, class: "dropdown-item"
-                  = link_to "手続き方法", procedures_path, class: "dropdown-item"
+                  = link_to "ファイル", files_index_path, class: "dropdown-item"
+                  = link_to "手続き", top_procedures_path, class: "dropdown-item"
+                  = link_to "勤務情報", menu_attendances_path, class: "dropdown-item"
+                  = link_to "ドキュメント", manuals_index_path, class: "dropdown-item"
+                  = link_to "Opinion box", anonymous_posts_path, class: "dropdown-item"
                   = link_to "スキル評価", "https://skillmoralevaluation-r.azurewebsites.net/Account/Login/6", class: "dropdown-item"
                   .dropdown-divider
                   = link_to "Yurtasの使い方", help_path, class: "dropdown-item"

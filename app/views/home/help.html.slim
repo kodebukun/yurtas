@@ -6,15 +6,21 @@ ul#materialsTab.nav.nav-pills.my-3 role="tablist"
   li.nav-item
     a#index-tab.nav-link aria-controls="index" aria-selected="false" data-toggle="pill" href="#index" role="tab" ホーム
   li.nav-item
-    a#attendance-tab.nav-link aria-controls="attendance" aria-selected="false" data-toggle="pill" href="#attendance" role="tab" 勤務情報
-  li.nav-item
     a#post-tab.nav-link aria-controls="post" aria-selected="false" data-toggle="pill" href="#post" role="tab" 掲示板
-  li.nav-item
-    a#file-tab.nav-link aria-controls="file" aria-selected="false" data-toggle="pill" href="#file" role="tab" ファイル置き場
   li.nav-item
     a#material-tab.nav-link aria-controls="material" aria-selected="false" data-toggle="pill" href="#material" role="tab" 機器情報
   li.nav-item
-    a#manual-tab.nav-link aria-controls="manual" aria-selected="false" data-toggle="pill" href="#manual" role="tab" マニュアル
+    a#file-tab.nav-link aria-controls="file" aria-selected="false" data-toggle="pill" href="#file" role="tab" ファイル
+  li.nav-item
+    a#file-tab.nav-link aria-controls="procedure" aria-selected="false" data-toggle="pill" href="#procedure" role="tab" 手続き
+  li.nav-item
+    a#attendance-tab.nav-link aria-controls="attendance" aria-selected="false" data-toggle="pill" href="#attendance" role="tab" 勤務情報
+  li.nav-item
+    a#manual-tab.nav-link aria-controls="manual" aria-selected="false" data-toggle="pill" href="#manual" role="tab" ドキュメント
+  li.nav-item
+    a#opinion-tab.nav-link aria-controls="opinion" aria-selected="false" data-toggle="pill" href="#opinion" role="tab" Opinion box
+  li.nav-item
+    a#skill-tab.nav-link aria-controls="skill" aria-selected="false" data-toggle="pill" href="#skill" role="tab" スキル評価
 
 
 #materialsTabContent.tab-content
@@ -41,3 +47,12 @@ ul#materialsTab.nav.nav-pills.my-3 role="tablist"
 
   #manual.tab-pane.fade aria-labelledby="manual-tab" role="tabpanel"
     .card-deck= render partial: "help_manual"
+
+  #procedure.tab-pane.fade aria-labelledby="procedure-tab" role="tabpanel"
+    .card-deck= render partial: "help_procedure"
+
+  #opinion.tab-pane.fade aria-labelledby="opinion-tab" role="tabpanel"
+    .card-deck= render partial: "help_opinion"
+
+  #skill.tab-pane.fade aria-labelledby="skill-tab" role="tabpanel"
+    .card-deck= render partial: "help_skill"
