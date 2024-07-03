@@ -40,7 +40,7 @@ class AnonymousPost < ApplicationRecord
   def self.past_posts
     now = Time.current
     start_month = 6.months.ago.all_month.first
-    past_posts = self.where.not(updated_at: start_month..now, resolved: false)
+    past_posts = self.where.not(updated_at: start_month..now)
     return past_posts
   end
 
