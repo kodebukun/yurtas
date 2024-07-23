@@ -18,8 +18,11 @@ class IncidentsController < ApplicationController
       @incident.update(checked: true)
       #未読ステータス登録処理
       users = User.where.not(id: @incident.user_id)
-      users.each do |user|
-        unread = Unread.create(user_id: user.id, incident_id: @incident.id)
+      start_date = Date.new(2024, 7, 1)
+      if @incident.occurred_at.to_date >= start_date
+        users.each do |user|
+          unread = Unread.create(user_id: user.id, incident_id: @incident.id)
+        end
       end
       redirect_to top_incidents_url, notice: "承認しました。"
     else
