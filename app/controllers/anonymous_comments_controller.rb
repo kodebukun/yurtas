@@ -32,8 +32,10 @@ class AnonymousCommentsController < ApplicationController
       #未読ステータス登録処理
       users = User.where.not(id: @comment.user_id)
       users.each do |user|
+        #既に未読ある人や、技師以外には未読付かないようにする処理
         same_unread = Unread.find_by(user_id: user.id, anonymous_post_id: @post.id)
-        if same_unread.blank?
+        position_ids = user.positions.ids
+        if same_unread.blank? && [1, 2, 3, 4].any? {|i| position_ids.include?(i)}
           unread = Unread.create(user_id: user.id, anonymous_post_id: @post.id)
         end
       end

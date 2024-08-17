@@ -21,7 +21,11 @@ class IncidentsController < ApplicationController
       start_date = Date.new(2024, 7, 1)
       if @incident.occurred_at.to_date >= start_date
         users.each do |user|
-          unread = Unread.create(user_id: user.id, incident_id: @incident.id)
+          #技師以外には未読付かないようにする処理
+          position_ids = user.positions.ids
+          if [1, 2, 3, 4].any? {|i| position_ids.include?(i)}
+            unread = Unread.create(user_id: user.id, incident_id: @incident.id)
+          end
         end
       end
       redirect_to top_incidents_url, notice: "承認しました。"
