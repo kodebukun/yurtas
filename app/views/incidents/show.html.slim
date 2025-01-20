@@ -34,3 +34,21 @@
   /一覧へのリンク
   .nav.justify-content-end.mt-3
     = link_to "インシデント一覧へ", incidents_path(department_id: @department.id), class:"nav-link"
+
+/エラー対策のためJavascriptの再初期化
+javascript:
+  document.addEventListener("turbolinks:load", function () {
+      console.log("Turbolinks: ページが読み込まれました");
+
+      document.querySelectorAll(".clickable").forEach(function(element) {
+          if (!element.dataset.initialized) {
+              console.log("初期化開始: ", element);
+              element.addEventListener("click", function () {
+                  console.log("クリックイベントが発火しました", this);
+              });
+              element.dataset.initialized = true; // 初期化済みフラグ
+          } else {
+              console.log("すでに初期化済み");
+          }
+      });
+  });
