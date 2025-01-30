@@ -109,8 +109,8 @@ gem 'activestorage-validator'
 gem 'serviceworker-rails'
 
 #画像アップロード用
-gem 'cloudinary'
-gem 'carrierwave'
+gem 'cloudinary', '~> 1.25.0'
+gem 'carrierwave', '~> 2.0'
 
 #tasks定期実行用
 gem 'whenever', require: false
