@@ -18,8 +18,3 @@
 //= require popper
 //= require bootstrap
 //= require serviceworker-companion
-$(document).on('turbolinks:load', function() {
-  $(function () {
-    $('[data-toggle="popover"]').popover()
-  });
-}); // popoverのために追加。リロードしなくても発火するようぬturbolinks無効化。

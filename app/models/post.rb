@@ -7,10 +7,13 @@ class Post < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :unreads, dependent: :destroy
+  has_many :images, dependent: :destroy
+  accepts_nested_attributes_for :images, allow_destroy: true
 
   belongs_to :user
   belongs_to :work, optional: true
   belongs_to :department, optional: true
+
 
   def create_notification_like!(current_user)
     # すでに「いいね」されているか検索
@@ -95,5 +98,4 @@ class Post < ApplicationRecord
       notification.save if notification.valid?
     end
   end
-
 end

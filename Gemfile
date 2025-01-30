@@ -80,9 +80,6 @@ group :development, :test do
   gem 'bcrypt_pbkdf'
 end
 
-#dotenv追加
-gem 'dotenv-rails'
-
 #bootstrap
 gem 'bootstrap', '~> 4.1.1'
 gem 'jquery-rails'
@@ -109,3 +106,10 @@ gem 'activestorage-validator'
 
 #service-work PWA化ツール
 gem 'serviceworker-rails'
+
+#画像アップロード用
+gem 'cloudinary'
+gem 'carrierwave' # ファイルアップロード用
+
+#tasks定期実行用
+gem 'whenever', require: false

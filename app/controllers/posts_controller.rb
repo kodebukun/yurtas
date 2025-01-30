@@ -35,6 +35,7 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
+    @post.images.build
   end
 
   def edit
@@ -44,7 +45,9 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.user_id = @current_user.id
+
     if @post.save
+      params[:post][:images]&.each { |image| @post.images.create(image: image) }
       #新規投稿の通知処理
       #@post.save_notification_post!(@current_user)
       #未読ステータス登録処理
@@ -60,12 +63,28 @@ class PostsController < ApplicationController
 
   def update
     @post = Post.find(params[:id])
+
+    if params[:post][:delete_images].present?
+      params[:post][:delete_images].each do |image_id|
+        # 削除処理
+        image = @post.images.find_by(id: image_id)
+        # 画像が見つかった場合のみ削除
+        if image
+          image.destroy
+        else
+          Rails.logger.warn("Image not found with ID: #{image_id}")
+        end
+      end
+    end
+
     if @post.update(post_params)
-      redirect_to post_url, notice: "投稿を編集しました。"
+      params[:post][:images]&.each { |image| @post.images.create(image: image) }
+      redirect_to @post, notice: "更新が成功しました"
     else
       render :edit
     end
   end
+
 
   def destroy
     post = Post.find(params[:id])
@@ -99,5 +118,6 @@ class PostsController < ApplicationController
         redirect_to posts_url, notice: "非公開の投稿です"
       end
     end
+
 
 end

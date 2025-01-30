@@ -7,6 +7,19 @@
   / Post content simple_formatで改行 rinkuでurlオートリンク
   h5= simple_format(Rinku.auto_link(@post.content, :all, 'target="_blank"').html_safe)
 
+  /images
+  - if @post.images.present?
+    ul.no-bullets
+      - @post.images.each do |image|
+        li
+          - if image.file_type == 'image'
+            = image_tag image.image.url, style: 'max-width: 800px; max-height: 800px; width: 100%; height: auto;', class: 'mt-4'
+          - elsif image.file_type == 'pdf'
+            = link_to image.image.url do
+              .d-flex.flex-column.mt-4
+                i.far.fa-file-pdf.display-1
+                | 添付：PDFファイル
+
   / post bottom section
   .d-flex.justify-content-between.mx-2
     / edit and destroy
