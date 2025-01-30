@@ -1,6 +1,5 @@
 if ENV['CLOUDINARY_URL'].present? && Rails.env.production?
   require 'cloudinary'
-  require 'cloudinary/storage'
 
   CarrierWave.configure do |config|
     config.cache_storage = :file # ローカルキャッシュ
