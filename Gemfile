@@ -113,3 +113,5 @@ gem 'carrierwave'
 
 #tasks定期実行用
 gem 'whenever', require: false
+
+gem 'ffi', '~> 1.14.2'

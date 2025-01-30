@@ -131,7 +131,7 @@ GEM
     factory_bot_rails (6.4.3)
       factory_bot (~> 6.4)
       railties (>= 5.0.0)
-    ffi (1.17.1-x86_64-linux-gnu)
+    ffi (1.14.2)
     globalid (1.1.0)
       activesupport (>= 5.0)
     hpricot (0.8.6)
@@ -379,6 +379,7 @@ DEPENDENCIES
   dotenv-rails
   ed25519
   factory_bot_rails
+  ffi (~> 1.14.2)
   html2slim
   jbuilder (~> 2.5)
   jquery-rails
