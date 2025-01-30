@@ -1,6 +1,6 @@
 # config valid only for current version of Capistrano
 
-lock "~> 3.14.1" # Capistranoのバージョン
+lock "~> 3.19.2" # Capistranoのバージョン
 
 set :application, 'yurtas' # アプリケーション名
 set :repo_url, 'https://github.com/kodebukun/yurtas' # クローンするGitHubリポジトリ（xxxxはユーザ名、yyyyはアプリ名）

@@ -109,7 +109,7 @@ gem 'serviceworker-rails'
 
 #画像アップロード用
 gem 'cloudinary'
-gem 'carrierwave' # ファイルアップロード用
+gem 'carrierwave'
 
 #tasks定期実行用
 gem 'whenever', require: false
