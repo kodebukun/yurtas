@@ -87,6 +87,7 @@ gem 'jquery-rails'
 #RSpec、FactoryBot追加
 gem 'rspec-rails'
 gem 'factory_bot_rails'
+gem 'factory_bot', '~> 6.1.0'
 
 #Slim化
 gem 'slim-rails'
