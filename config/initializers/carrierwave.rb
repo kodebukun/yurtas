@@ -1,3 +1,5 @@
+require 'carrierwave'
+
 CarrierWave.configure do |config|
   config.cache_storage = :file # 開発環境のキャッシュ保存
 

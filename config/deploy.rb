@@ -11,6 +11,14 @@ set :keep_releases, 3 # 保持するバージョンの数
 set :rbenv_ruby, '2.6.6' # Rubyのバージョン
 set :rbenv_type, :system
 set :log_level, :debug # 出力するログのレベル 概要レベルにしたければ :info とする
+set :rails_env, 'production'
+
+set :default_env, {
+  'RAILS_ENV' => 'production',
+  'CLOUDINARY_CLOUD_NAME' => ENV['CLOUDINARY_CLOUD_NAME'],
+  'CLOUDINARY_API_KEY' => ENV['CLOUDINARY_API_KEY'],
+  'CLOUDINARY_API_SECRET' => ENV['CLOUDINARY_API_SECRET']
+}
 
 namespace :deploy do
   desc 'Restart application'
