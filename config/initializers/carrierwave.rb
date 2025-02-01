@@ -1,3 +1,6 @@
+require 'cloudinary'
+require 'cloudinary/carrier_wave'
+
 CarrierWave.configure do |config|
   if Rails.env.production?
     config.storage = :cloudinary
