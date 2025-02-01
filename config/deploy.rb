@@ -13,24 +13,6 @@ set :rbenv_type, :system
 set :log_level, :debug # 出力するログのレベル 概要レベルにしたければ :info とする
 set :rails_env, 'production'
 
-set :default_env, {
-  'RAILS_ENV' => 'production',
-  'CLOUDINARY_CLOUD_NAME' => ENV['CLOUDINARY_CLOUD_NAME'],
-  'CLOUDINARY_API_KEY' => ENV['CLOUDINARY_API_KEY'],
-  'CLOUDINARY_API_SECRET' => ENV['CLOUDINARY_API_SECRET']
-}
-
-before 'deploy:assets:precompile', 'deploy:setup_carrierwave'
-
-namespace :deploy do
-  task :setup_carrierwave do
-    on roles(:app) do
-      within release_path do
-        execute :bundle, :exec, :rails, 'runner', "'require \"cloudinary\"; require \"cloudinary/carrier_wave\"'"
-      end
-    end
-  end
-end
 
 namespace :deploy do
   desc 'Restart application'
