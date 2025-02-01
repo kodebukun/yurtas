@@ -1,5 +1,6 @@
-require 'carrierwave'
-
+# require 'carrierwave'
+# begin endでコメントアウト
+=begin
 CarrierWave.configure do |config|
   config.cache_storage = :file # 開発環境のキャッシュ保存
 
@@ -15,3 +16,4 @@ CarrierWave.configure do |config|
     config.storage = :file
   end
 end
+=end

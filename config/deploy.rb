@@ -51,18 +51,3 @@ namespace :deploy do
     end
   end
 end
-
-namespace :deploy do
-  desc 'Precompile assets locally and upload to servers'
-  task :precompile do
-    on roles(:web) do
-      within release_path do
-        with rails_env: fetch(:rails_env) do
-          execute :rake, 'assets:precompile'
-        end
-      end
-    end
-  end
-
-  before 'deploy:restart', 'deploy:precompile'
-end

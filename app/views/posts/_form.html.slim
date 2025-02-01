@@ -21,10 +21,10 @@ h2.text-primary.mb-3= title
               = check_box_tag "post[delete_images][]", image.id
               |  削除する
 
-  / エラー直るまでコメントアウト           
-    .form-group
-      = f.label :images, "新しい画像/PDFを追加： "
-      = f.file_field :images, multiple: true, accept: "image/*,application/pdf"
+  / エラー直るまでコメントアウト
+  .form-group
+    = f.label :images, "新しい画像/PDFを追加： "
+    = f.file_field :images, multiple: true, accept: "image/*,application/pdf"
 
 
   = f.hidden_field :meeting, value: true
