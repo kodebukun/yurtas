@@ -103,7 +103,7 @@ GEM
       archive-zip (~> 0.10)
       nokogiri (~> 1.8)
     chronic (0.10.2)
-    cloudinary (1.24.0)
+    cloudinary (1.25.0)
       aws_cf_signer
       rest-client (>= 2.0.0)
     coffee-rails (4.2.2)
@@ -372,9 +372,9 @@ DEPENDENCIES
   capistrano-rbenv
   capistrano3-unicorn
   capybara (>= 2.15)
-  carrierwave (~> 2.2)
+  carrierwave (~> 2.0)
   chromedriver-helper
-  cloudinary (~> 1.24.0)
+  cloudinary (~> 1.25.0)
   coffee-rails (~> 4.2)
   dotenv-rails
   ed25519
