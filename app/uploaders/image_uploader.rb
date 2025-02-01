@@ -1,13 +1,6 @@
 class ImageUploader < CarrierWave::Uploader::Base
 
-  storage :cloudinary if Rails.env.production?
   include Cloudinary::CarrierWave
-
-  if Rails.env.production?
-    storage :cloudinary
-  else
-    storage :file
-  end
 
   # 許可するファイル形式
   def extension_allowlist
