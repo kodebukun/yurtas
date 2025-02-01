@@ -20,6 +20,18 @@ set :default_env, {
   'CLOUDINARY_API_SECRET' => ENV['CLOUDINARY_API_SECRET']
 }
 
+before 'deploy:assets:precompile', 'deploy:setup_carrierwave'
+
+namespace :deploy do
+  task :setup_carrierwave do
+    on roles(:app) do
+      within release_path do
+        execute :bundle, :exec, :rails, 'runner', "'require \"cloudinary\"; require \"cloudinary/carrier_wave\"'"
+      end
+    end
+  end
+end
+
 namespace :deploy do
   desc 'Restart application'
   task :restart do
