@@ -1,5 +1,6 @@
 class ImageUploader < CarrierWave::Uploader::Base
-
+  
+  storage :cloudinary if Rails.env.production?
   include Cloudinary::CarrierWave
 
   # 許可するファイル形式
