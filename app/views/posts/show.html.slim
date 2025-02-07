@@ -13,9 +13,9 @@
       - @post.images.each do |image|
         li
           - if image.file_type == 'image'
-            = image_tag image.image.url, style: 'max-width: 800px; max-height: 800px; width: 100%; height: auto;', class: 'mt-4'
+            = image_tag image.image.url(secure: true), style: 'max-width: 800px; max-height: 800px; width: 100%; height: auto;', class: 'mt-4'
           - elsif image.file_type == 'pdf'
-            = link_to image.image.url do
+            = link_to image.image.url(secure: true) do
               .d-flex.flex-column.mt-4
                 i.far.fa-file-pdf.display-1
                 | 添付：PDFファイル

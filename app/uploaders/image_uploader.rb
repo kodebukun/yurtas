@@ -7,6 +7,7 @@ class ImageUploader < CarrierWave::Uploader::Base
     %w[jpg jpeg gif png pdf]
   end
 
+
   # ファイルサイズの上限（必要に応じて追加）
   # process :validate_max_size
   # MAX_FILESIZE = 5.megabytes
