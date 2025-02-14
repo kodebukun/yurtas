@@ -13,10 +13,10 @@
       - @post.images.each do |image|
         li
           - if image.file_type == 'image'
-            = image_tag image.image.url(secure: true), style: 'max-width: 800px; height: auto; width: 100%; height: auto;', class: 'mt-4'
+            = image_tag image.image.url(secure: true), style: 'max-width: 800px; height: auto; width: 100%; height: auto;', class: 'my-2'
           - elsif image.file_type == 'pdf'
             = link_to image.image.url(secure: true) do
-              .d-flex.flex-row
+              .d-flex.flex-row.my-2
                 i.far.fa-file-pdf.h4.mr-2
                 = File.basename(image[:image])
 
