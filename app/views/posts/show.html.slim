@@ -16,9 +16,9 @@
             = image_tag image.image.url(secure: true), style: 'max-width: 800px; height: auto; width: 100%; height: auto;', class: 'mt-4'
           - elsif image.file_type == 'pdf'
             = link_to image.image.url(secure: true) do
-              .d-flex.flex-column.mt-4
-                i.far.fa-file-pdf.display-1
-                | 添付：PDFファイル
+              .d-flex.flex-row
+                i.far.fa-file-pdf.h4.mr-2
+                = File.basename(image[:image])
 
   / post bottom section
   .d-flex.justify-content-between.mx-2
