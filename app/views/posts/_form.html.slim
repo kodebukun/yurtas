@@ -18,7 +18,7 @@ h2.text-primary.mb-3= title
               |  削除する
             - elsif image.file_type == 'pdf'
               /File.basename(image[:image])でPDFのタイトル取得
-              = f.label :check_box_tag, "PDFファイル：#{File.basename(image[:image])}", class: 'mr-2'
+              = f.label :check_box_tag, "・#{image.file_name}", class: 'mr-2'
               = check_box_tag "post[delete_images][]", image.id
               |  削除する
 

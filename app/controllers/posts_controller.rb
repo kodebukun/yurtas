@@ -47,7 +47,11 @@ class PostsController < ApplicationController
     @post.user_id = @current_user.id
 
     if @post.save
-      params[:post][:images]&.each { |image| @post.images.create(image: image) }
+      #params[:post][:images]&.each { |image| @post.images.create(image: image) }
+      params[:post][:images]&.each do |image|
+        img = @post.images.build(image: image)
+        img.save
+      end
       #新規投稿の通知処理
       #@post.save_notification_post!(@current_user)
       #未読ステータス登録処理

@@ -6,7 +6,7 @@ class Image < ApplicationRecord
 
   # ファイル種別を判別するためのロジック
   before_save :set_file_type
-
+  before_save :set_original_filename
 
   private
 
@@ -19,4 +19,11 @@ class Image < ApplicationRecord
       self.file_type = 'unknown'
     end
   end
+
+  def set_original_filename
+    if image.file.respond_to?(:original_filename)
+      self.file_name = image.file.original_filename
+    end
+  end
+
 end

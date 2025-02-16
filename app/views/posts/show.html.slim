@@ -18,7 +18,7 @@
             = link_to image.image.url(secure: true) do
               .d-flex.flex-row.my-2
                 i.far.fa-file-pdf.h4.mr-2
-                = File.basename(image[:image])
+                = image.file_name
 
   / post bottom section
   .d-flex.justify-content-between.mx-2
