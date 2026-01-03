@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2025_02_16_020425) do
+ActiveRecord::Schema.define(version: 2026_01_03_083052) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -124,12 +124,13 @@ ActiveRecord::Schema.define(version: 2025_02_16_020425) do
   end
 
   create_table "images", force: :cascade do |t|
-    t.bigint "post_id", null: false
+    t.bigint "post_id"
     t.string "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "file_type"
     t.string "file_name", default: "default_name", null: false
+    t.bigint "department_id"
     t.index ["post_id"], name: "index_images_on_post_id"
   end
 
