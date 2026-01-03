@@ -10,21 +10,21 @@ h2.text-primary.mb-3= title
   - if @post.images.any? { |image| image.image.present? }
     .form-group
       ul.no-bullets
-        / - @post.images.each do |image|
-        /   li.my-2
-        /     - if image.file_type == 'image'
-        /       = image_tag image.image.url(secure: true), style: 'max-width: 100px; max-height: 100px;', class: 'mr-2'
-        /       = check_box_tag "post[delete_images][]", image.id
-        /       |  削除する
-        /     - elsif image.file_type == 'pdf'
-        /       /File.basename(image[:image])でPDFのタイトル取得
-        /       = f.label :check_box_tag, "・#{image.file_name}", class: 'mr-2'
-        /       = check_box_tag "post[delete_images][]", image.id
-        /       |  削除する
+        - @post.images.each do |image|
+          li.my-2
+            - if image.file_type == 'image'
+              = image_tag image.image.url(secure: true), style: 'max-width: 100px; max-height: 100px;', class: 'mr-2'
+              = check_box_tag "post[delete_images][]", image.id
+              |  削除する
+            - elsif image.file_type == 'pdf'
+              /File.basename(image[:image])でPDFのタイトル取得
+              = f.label :check_box_tag, "・#{image.file_name}", class: 'mr-2'
+              = check_box_tag "post[delete_images][]", image.id
+              |  削除する
 
-  / .form-group
-  /   = f.label :images, "新しい画像/PDFを追加： "
-  /   = f.file_field :images, multiple: true, accept: "image/*,application/pdf"
+  .form-group
+    = f.label :images, "新しい画像/PDFを追加： "
+    = f.file_field :images, multiple: true, accept: "image/*,application/pdf"
 
   .form-group
     | 投稿方法：

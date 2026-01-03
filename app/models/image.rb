@@ -1,6 +1,7 @@
 class Image < ApplicationRecord
-  belongs_to :post
-  #belongs_to :dependent
+  belongs_to :post, optional: true
+  belongs_to :department, optional: true
+  belongs_to :work, optional: true
 
   # CarrierWave の設定
   mount_uploader :image, ImageUploader

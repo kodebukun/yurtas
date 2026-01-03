@@ -18,6 +18,7 @@ class WorkPostsController < ApplicationController
 
   def new
     @post = Post.new
+    @post.images.build
     @work = Work.find(params[:work_id])
   end
 
@@ -30,6 +31,10 @@ class WorkPostsController < ApplicationController
     @post = Post.new(post_params)
     @post.user_id = @current_user.id
     if @post.save
+      params[:post][:images]&.each do |image|
+        img = @post.images.build(image: image)
+        img.save
+      end
       #通知処理
       #if @post.meeting
         #@post.save_notification_post!(@current_user)
@@ -54,7 +59,22 @@ class WorkPostsController < ApplicationController
 
   def update
     @post = Post.find(params[:id])
+
+    if params[:post][:delete_images].present?
+      params[:post][:delete_images].each do |image_id|
+        # 削除処理
+        image = @post.images.find_by(id: image_id)
+        # 画像が見つかった場合のみ削除
+        if image
+          image.destroy
+        else
+          Rails.logger.warn("Image not found with ID: #{image_id}")
+        end
+      end
+    end
+
     if @post.update(post_params)
+      params[:post][:images]&.each { |image| @post.images.create(image: image) }
       #meetingオンの場合、全体に通知処理
       if @post.meeting
         @post.save_notification_post!(@current_user)
