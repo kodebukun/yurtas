@@ -20,7 +20,7 @@
   = simple_format(Rinku.auto_link(@breach.content, :all, 'target="_blank"').html_safe)
   hr
 
-  /= "報告者：#{@breach.user.name}"
+  = "報告者：#{@breach.user.name}"
   /br
   = "報告日時：#{@breach.created_at.strftime("%Y-%m-%d %H:%M")}"
 
