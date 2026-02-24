@@ -18,3 +18,15 @@
 //= require popper
 //= require bootstrap
 //= require serviceworker-companion
+
+//BootstrapのpopoverとTooltip初期化
+document.addEventListener('DOMContentLoaded', function() {
+  // Popover
+  document.querySelectorAll('[data-toggle="popover"]').forEach(function(el) {
+    new bootstrap.Popover(el)
+  })
+  // Tooltip
+  document.querySelectorAll('[data-toggle="tooltip"]').forEach(function(el) {
+    new bootstrap.Tooltip(el)
+  })
+})

@@ -35,7 +35,7 @@ p.text-danger ※は必須項目です。内容は登録後にも編集できま
     = f.label :measure, "対策"
     = f.text_area :measure, class: "form-control", rows: 5
   .form-group
-    = f.label :excuse, "本音コーナー"
+    = f.label :excuse, "本音コーナー (※)"
     = render partial: "question_popover"
     = f.text_area :excuse, class: "form-control", rows: 3
 

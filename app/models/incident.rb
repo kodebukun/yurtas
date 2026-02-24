@@ -7,6 +7,7 @@ class Incident < ApplicationRecord
   validates :target, {presence: true}
   validates :happened, {presence: true, length: {maximum: 140}}
   validates :user_id, {presence: true}
+  validates :excuse, {presence: true}
 
   has_many :unreads, dependent: :destroy
 
