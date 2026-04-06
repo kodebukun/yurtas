@@ -1,5 +1,8 @@
 class BreachesController < ApplicationController
 
+  # 違反管理権限を持つユーザーID（将来的にadminフラグへの統合を推奨）
+  BREACH_MANAGER_IDS = [4, 5, 13].freeze
+
   before_action :ensure_specific_user, {only: [:index, :show, :update, :destroy]}
 
   def index
@@ -77,7 +80,7 @@ class BreachesController < ApplicationController
 
     #特定Userか確認
     def ensure_specific_user
-      if !(@current_user.id == 13 || @current_user.id == 4 || @current_user.id == 5 || @current_user.admin)
+      unless @current_user.admin? || BREACH_MANAGER_IDS.include?(@current_user.id)
         redirect_to index_url, notice: "権限がありません"
       end
     end

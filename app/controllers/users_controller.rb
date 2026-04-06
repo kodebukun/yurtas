@@ -27,6 +27,9 @@ class UsersController < ApplicationController
     if @user.save
       redirect_to user_url(@user), notice: "ユーザー登録が完了しました"
     else
+      @departments = Department.all.order(order: "ASC")
+      @works = Work.all
+      @positions = Position.all
       render :new
     end
   end
@@ -69,10 +72,6 @@ class UsersController < ApplicationController
       if @current_user.id != params[:id].to_i
         redirect_to index_url, notice: "権限がありません"
       end
-    end
-    #管理者か確認
-    def require_admin
-        redirect_to signup_text_url, notice: "権限がありません" unless current_user.admin?
     end
     #ストロングパラメーター
     def user_params

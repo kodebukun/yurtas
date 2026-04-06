@@ -1,9 +1,9 @@
 class IncidentsController < ApplicationController
 
   before_action :ensure_graduate, {only: [:new, :edit, :create, :update, :destroy]}
+  before_action :load_departments, {only: [:top, :new, :edit, :create, :update]}
 
   def top
-    @departments = Department.all.order(order: "ASC")
     @my_unreads = Unread.where(user_id: @current_user).where.not(incident_id: nil)
     @unchecked_incident = Incident.find_by(checked: false)
   end
@@ -17,15 +17,15 @@ class IncidentsController < ApplicationController
     if params[:checked]
       @incident.update(checked: true)
       #未読ステータス登録処理
-      users = User.where.not(id: @incident.user_id)
       start_date = Date.new(2024, 7, 1)
       if @incident.occurred_at.to_date >= start_date
-        users.each do |user|
-          #技師以外には未読付かないようにする処理
-          position_ids = user.positions.ids
-          if [1, 2, 3, 4].any? {|i| position_ids.include?(i)}
-            unread = Unread.create(user_id: user.id, incident_id: @incident.id)
-          end
+        #技師以外には未読付かないようにする処理（position_ids N+1を解消）
+        technician_users = User.where.not(id: @incident.user_id)
+                               .joins(:positions)
+                               .where(positions: { id: [1, 2, 3, 4] })
+                               .distinct
+        technician_users.each do |user|
+          Unread.create(user_id: user.id, incident_id: @incident.id)
         end
       end
       redirect_to top_incidents_url, notice: "承認しました。"
@@ -57,12 +57,10 @@ class IncidentsController < ApplicationController
 
   def new
     @incident = Incident.new
-    @departments = Department.all.order(order: "ASC")
   end
 
   def edit
     @incident = Incident.find(params[:id])
-    @departments = Department.all.order(order: "ASC")
   end
 
   def create
@@ -71,7 +69,6 @@ class IncidentsController < ApplicationController
     if @incident.save
       redirect_to incident_url(@incident), notice: "新規投稿しました。"
     else
-      @departments = Department.all.order(order: "ASC")
       render :new
     end
   end
@@ -81,7 +78,6 @@ class IncidentsController < ApplicationController
     if @incident.update(incident_params)
       redirect_to incident_url, notice: "投稿を編集しました。"
     else
-      @departments = Department.all.order(order: "ASC")
       render :edit
     end
   end
@@ -93,15 +89,13 @@ class IncidentsController < ApplicationController
   end
 
   private
+    def load_departments
+      @departments = Department.all.order(order: "ASC")
+    end
+
     #ストロングパラメーター
     def incident_params
       params.require(:incident).permit(:shift, :occurred_at , :department_id, :place, :years, :target, :happened, :response, :measure, :excuse, :content, :title)
-    end
-    #卒業生か確認
-    def ensure_graduate
-      if @current_user.position_ids.include?(5)
-        redirect_to incidents_url, notice: "権限がありません"
-      end
     end
 
 end

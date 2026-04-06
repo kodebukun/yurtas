@@ -103,12 +103,6 @@ class DepartmentPostsController < ApplicationController
         redirect_to department_posts_url, notice: "権限がありません"
       end
     end
-    #卒業生か確認
-    def ensure_graduate
-      if @current_user.position_ids.include?(5)
-        redirect_to index_url, notice: "権限がありません"
-      end
-    end
     #ストロングパラメータ
     def post_params
       params.require(:post).permit(:title, :content, :rule, :meeting, :department_id)

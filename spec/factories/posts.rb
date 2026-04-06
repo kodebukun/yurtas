@@ -1,10 +1,7 @@
 FactoryBot.define do
   factory :post do
-    title { "MyString" }
-    content { "MyText" }
-    user_id { 1 }
-    work_id { 1 }
-    department_id { 1 }
-    meeting { false }
+    title { "テスト投稿" }
+    content { "テスト本文" }
+    association :user
   end
 end

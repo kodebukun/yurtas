@@ -1,10 +1,16 @@
 FactoryBot.define do
   factory :user do
-    name { "MyString" }
-    login_id { 1 }
-    password { "MyString" }
-    email { "MyString" }
-    phone_no { "MyString" }
-    image_name { "MyString" }
+    sequence(:login_id) { |n| n }
+    sequence(:email) { |n| "user#{n}@example.com" }
+    name { "テストユーザー" }
+    password { "password" }
+    password_confirmation { "password" }
+
+    after(:build) do |user|
+      if user.position_ids.blank?
+        position = FactoryBot.create(:position)
+        user.position_ids = [position.id]
+      end
+    end
   end
 end

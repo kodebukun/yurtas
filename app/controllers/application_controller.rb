@@ -12,4 +12,14 @@ class ApplicationController < ActionController::Base
     redirect_to root_url, notice: "ログインが必要です" unless current_user
   end
 
+  def require_admin
+    redirect_to root_url, notice: "権限がありません" unless current_user.admin?
+  end
+
+  def ensure_graduate
+    if @current_user.position_ids.include?(5)
+      redirect_to root_url, notice: "権限がありません"
+    end
+  end
+
 end

@@ -54,16 +54,6 @@ class AnonymousCommentsController < ApplicationController
   end
 
   private
-    #管理者か確認
-    def require_admin
-        redirect_to anonymous_posts_url, notice: "権限がありません" unless current_user.admin?
-    end
-    #卒業生か確認
-    def ensure_graduate
-      if @current_user.position_ids.include?(5)
-        redirect_to anonymous_posts_url, notice: "権限がありません"
-      end
-    end
     #ストロングパラメータ
     def comment_params
       params.require(:anonymous_comment).permit(:content, :anonymous_post_id, :nickname, :position)

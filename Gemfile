@@ -88,6 +88,7 @@ gem 'jquery-rails'
 gem 'rspec-rails'
 gem 'factory_bot_rails'
 gem 'factory_bot', '~> 6.1.0'
+gem 'database_cleaner-active_record'
 
 #Slim化
 gem 'slim-rails'
