@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :ensure_correct_user, {only: [:edit, :update]}
-  before_action :require_admin, {only: [:new, :create, :destroy]}
+  before_action :require_admin, {only: [:destroy]}
 
   def index
     @users = User.all.where.not(id: 1 .. 3)
