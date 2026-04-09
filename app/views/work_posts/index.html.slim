@@ -13,6 +13,7 @@
             span.badge.badge-danger.mb-2 New
           h6.mb-1= link_to post.user.name, post.user, class: "text-secondary"
           h5= link_to simple_format(post.title), post
+          p= post.created_at.strftime("%Y/%m/%d")
 
     .mt-4
       = paginate @posts
