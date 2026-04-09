@@ -78,6 +78,7 @@ Rails.application.routes.draw do
       get 'ranking'
       put 'ranking_update'
       patch 'ranking_update'
+      patch 'ranking_bulk_update'
       get 'roster'
     end
   end

@@ -67,7 +67,7 @@
         th= User.human_attribute_name(:updated_at)
         td= @user.updated_at.strftime("%Y-%m-%d %H:%M")
 
-  - if @user.id == @current_user.id
+  - if @user.id == @current_user.id || @current_user.admin == true
     = link_to "ユーザー情報編集", edit_user_path, class: "btn btn-secondary mr-3"
   - if @current_user.admin == true
     = link_to "ユーザー削除", @user, method: :delete, data: {confirm: "ユーザー（#{@user.name}）を削除します。よろしいですか？"}, class: "btn btn-danger mr-3"

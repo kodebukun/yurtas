@@ -33,4 +33,30 @@ class User < ApplicationRecord
   has_many :access_points, through: :user_access_points
   has_many :incidents
 
+  after_create :add_to_ranking, if: -> { call }
+  after_update :sync_ranking, if: :saved_change_to_call?
+
+  private
+
+  def add_to_ranking
+    max_rank = Ranking.maximum(:rank) || 0
+    Ranking.create!(user_id: id, rank: max_rank + 1)
+  end
+
+  def sync_ranking
+    if call # false → true
+      max_rank = Ranking.maximum(:rank) || 0
+      Ranking.create!(user_id: id, rank: max_rank + 1)
+    else # true → false
+      ranking = Ranking.find_by(user_id: id)
+      return unless ranking
+
+      deleted_rank = ranking.rank
+      ranking.destroy
+      Ranking.where('rank > ?', deleted_rank).order(:rank).each do |r|
+        r.update_columns(rank: r.rank - 1)
+      end
+    end
+  end
+
 end

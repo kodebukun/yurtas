@@ -15,7 +15,7 @@ table.table
         td.d-none.d-md-table-cell.col.col-md-5.col-lg-4= user.email
         td.d-none.d-lg-table-cell.text-info.col.col-lg-3= user.comment
         td.col.col-1.pl-0
-          - if user.id == @current_user.id
+          - if user.id == @current_user.id || @current_user.admin == true
             = link_to edit_user_path(user), class:"mr-3", style: "color: #fe635f;" do
               span.fa-stack
                 i.fas.fa-square.fa-stack-2x

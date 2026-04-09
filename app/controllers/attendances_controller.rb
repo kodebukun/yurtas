@@ -47,6 +47,18 @@ class AttendancesController < ApplicationController
     end
   end
 
+  def ranking_bulk_update
+    user_ids = Array(params[:user_ids]).reject(&:blank?)
+    return redirect_to ranking_attendances_url, notice: "順位に変更はありません" if user_ids.blank?
+
+    ActiveRecord::Base.transaction do
+      user_ids.each_with_index do |user_id, index|
+        Ranking.find_by!(user_id: user_id).update!(rank: index + 1)
+      end
+    end
+    redirect_to ranking_attendances_url, notice: "順位を更新しました"
+  end
+
   def roster
   end
 

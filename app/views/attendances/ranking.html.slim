@@ -1,29 +1,54 @@
-.mb-3
-table.table
-  thead.thead-default
-    tr.text-secondary
-      th= Ranking.human_attribute_name(:rank)
-      th= User.human_attribute_name(:name)
-      th.d-none.d-lg-table-cell= User.human_attribute_name(:phone_no)
-      th.d-none.d-lg-table-cell= Department.human_attribute_name(:name)
-      th 順位変更
-  tbody
-    - @users.each do |user|
-      tr
-        td= user.ranking.rank
-        td= link_to user.name, user
-        td.d-none.d-lg-table-cell= user.phone_no
-        td.d-none.d-lg-table-cell
-          - user.departments.each do |department|
-            = "#{department.name}　"
-        td
-          = link_to ranking_update_attendances_path(bottom_user_id: user.id), method: :patch, class:"mr-2 text-primary" do
-            span.fa-stack
-              i.fas.fa-square.fa-stack-2x
-              i.fas.fa-sort-amount-down-alt.fa-stack-1x.fa-inverse
-          = link_to "#!", class: "text-danger", "data-toggle": "modal", "data-target": "#Modal#{user.id}" do
-            span.fa-stack
-              i.fas.fa-square.fa-stack-2x
-              i.fas.fa-sign-in-alt.fa-stack-1x.fa-inverse
+.my-4
+  .d-flex.justify-content-between.align-items-center.mb-2
+    h4.mb-0.text-primary 呼び出しランキング
+    button#ranking-sort-btn.btn.btn-outline-primary.btn-sm 並べ替えモード
 
-          = render partial: "rank_modal", locals: {user_id: user.id, modal_id: "Modal#{user.id}"}
+  / 通常表示
+  #ranking-normal
+    .mb-3
+    table.table
+      thead.thead-default
+        tr.text-secondary
+          th= Ranking.human_attribute_name(:rank)
+          th= User.human_attribute_name(:name)
+          th.d-none.d-lg-table-cell= User.human_attribute_name(:phone_no)
+          th.d-none.d-lg-table-cell= Department.human_attribute_name(:name)
+          th 順位変更
+      tbody
+        - @users.each do |user|
+          tr
+            td= user.ranking.rank
+            td= link_to user.name, user
+            td.d-none.d-lg-table-cell= user.phone_no
+            td.d-none.d-lg-table-cell
+              - user.departments.each do |department|
+                = "#{department.name}　"
+            td
+              = link_to ranking_update_attendances_path(bottom_user_id: user.id), method: :patch, class:"mr-2 text-primary" do
+                span.fa-stack
+                  i.fas.fa-square.fa-stack-2x
+                  i.fas.fa-sort-amount-down-alt.fa-stack-1x.fa-inverse
+              = link_to "#!", class: "text-danger", "data-toggle": "modal", "data-target": "#Modal#{user.id}" do
+                span.fa-stack
+                  i.fas.fa-square.fa-stack-2x
+                  i.fas.fa-sign-in-alt.fa-stack-1x.fa-inverse
+
+              = render partial: "rank_modal", locals: {user_id: user.id, modal_id: "Modal#{user.id}"}
+
+/ 並べ替えモード（初期非表示）
+#ranking-sort-mode.d-none.my-4
+  p.text-muted.mb-1 名前をタップして新しい順位を設定してください
+  p#sort-progress.font-weight-bold.mb-2
+    | 0 / #{@users.count} 人選択済み
+
+  ul.list-group.mb-3#sort-member-list
+    - @users.each do |user|
+      li.list-group-item.sort-member-item[data-user-id=user.id style="cursor:pointer;"]
+        span.sort-number.badge.badge-primary.mr-2.d-none
+        = user.name
+
+  = form_with url: ranking_bulk_update_attendances_path, method: :patch, local: true, id: "sort-form" do |f|
+    #sort-hidden-inputs
+    .d-flex
+      button#sort-save-btn.btn.btn-primary.mr-2[type="submit" disabled="disabled"] 保存
+      button#sort-cancel-btn.btn.btn-secondary[type="button"] キャンセル

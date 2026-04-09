@@ -1,26 +1,19 @@
 require 'rails_helper'
 
 RSpec.describe "UserAccessPoints", type: :request do
+  let(:position) { create(:position) }
+  let(:user) { create(:user, position_ids: [position.id]) }
 
-  describe "GET /new" do
-    it "returns http success" do
-      get "/user_access_points/new"
-      expect(response).to have_http_status(:success)
-    end
+  def login(u)
+    post '/login', params: { session: { login_id: u.login_id, password: 'password' } }
   end
 
-  describe "GET /create" do
-    it "returns http success" do
-      get "/user_access_points/create"
-      expect(response).to have_http_status(:success)
+  describe "GET /user_access_points/:id/edit" do
+    context "未ログインのとき" do
+      it "rootにリダイレクトされる" do
+        get "/user_access_points/1/edit"
+        expect(response).to redirect_to(root_url)
+      end
     end
   end
-
-  describe "GET /destroy" do
-    it "returns http success" do
-      get "/user_access_points/destroy"
-      expect(response).to have_http_status(:success)
-    end
-  end
-
 end

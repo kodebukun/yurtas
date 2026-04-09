@@ -67,9 +67,9 @@ class UsersController < ApplicationController
 
 
   private
-    #本人か確認
+    #本人または管理者か確認
     def ensure_correct_user
-      if @current_user.id != params[:id].to_i
+      if @current_user.id != params[:id].to_i && @current_user.admin == false
         redirect_to index_url, notice: "権限がありません"
       end
     end
