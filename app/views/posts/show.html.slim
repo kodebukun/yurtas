@@ -79,6 +79,6 @@
     - if @post.department
       = link_to "#{@post.department.name}の掲示板へ", department_posts_path(department_id: @post.department.id), class:"nav-link"
     -elsif @post.work
-      = link_to "#{@post.work.name}の掲示板へ", work_posts_path(work_id: @post.work.id), class:"nav-link"
+      = link_to "#{@post.work.label}の掲示板へ", work_posts_path(work_id: @post.work.id), class:"nav-link"
     -else
       = link_to "掲示板へ", posts_path, class:"nav-link"

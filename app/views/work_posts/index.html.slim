@@ -1,6 +1,6 @@
 .my-4
   h2.text-primary
-    = "#{@work.name}の掲示板"
+    = "#{@work.label}の掲示板"
 
   .d-flex.justify-content-end
     = link_to "新規投稿", new_work_post_path(work_id: @work.id), class: "btn btn-primary mr-3"

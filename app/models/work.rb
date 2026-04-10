@@ -6,4 +6,8 @@ class Work < ApplicationRecord
   has_many :unreads
   has_many :images, dependent: :destroy
 
+  def label
+    display_name.presence || name
+  end
+
 end

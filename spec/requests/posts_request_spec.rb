@@ -62,6 +62,30 @@ RSpec.describe "Posts", type: :request do
     end
   end
 
+  describe "GET /posts/:id（work紐付き投稿）" do
+    let(:work) { create(:work) }
+    let(:work_with_display_name) { create(:work, :with_display_name) }
+    let(:work_post) { create(:post, user: user, work: work) }
+    let(:work_post_with_display_name) { create(:post, user: user, work: work_with_display_name) }
+
+    context "ログイン済みで所属係りの投稿を見るとき" do
+      before { login(user) }
+
+      it "display_nameがないworkはnameが掲示板リンクに表示される" do
+        user.works << work
+        get post_url(work_post)
+        expect(response.body).to include("#{work.name}の掲示板へ")
+      end
+
+      it "display_nameがあるworkはdisplay_nameが掲示板リンクに表示される" do
+        user.works << work_with_display_name
+        get post_url(work_post_with_display_name)
+        expect(response.body).to include("事業場安全衛生の掲示板へ")
+        expect(response.body).not_to include("飯田地区事業場安全衛生の掲示板へ")
+      end
+    end
+  end
+
   describe "DELETE /posts/:id" do
     context "投稿者本人のとき" do
       it "投稿が削除される" do
