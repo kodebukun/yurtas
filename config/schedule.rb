@@ -18,6 +18,11 @@ every '0 2 1 * *' do
   rake "images:delete_old"
 end
 
+# 毎週日曜日の午前3時に180日以上前の閲覧履歴を削除
+every :sunday, at: '3:00 am' do
+  rake "page_views:cleanup"
+end
+
 # Example:
 #
 # set :output, "/path/to/my/cron_log.log"

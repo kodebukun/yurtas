@@ -22,4 +22,15 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def record_page_view(page)
+    record = PageView.where(user_id: current_user.id, page: page)
+                     .where('updated_at >= ?', 30.minutes.ago)
+                     .first
+    if record
+      record.touch
+    else
+      PageView.create!(user_id: current_user.id, page: page)
+    end
+  end
+
 end

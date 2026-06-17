@@ -30,6 +30,7 @@ ja:
       inspection_room: 検査室
       security_soft: セキュリティソフト
       incident: インシデント
+      page_view: 閲覧履歴
     attributes:
       user:
         id: ID
@@ -175,6 +176,12 @@ ja:
         name: セキュリティソフト名
         created_at: 登録日時
         updated_at: 更新日時
+      page_view:
+        id: ID
+        user_id: ユーザーID
+        page: ページ
+        created_at: 初回閲覧日時
+        updated_at: 最終閲覧日時
       incident:
         shift: 勤務体系
         occurred_at: 発生日時

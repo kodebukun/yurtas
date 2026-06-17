@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2026_04_10_010715) do
+ActiveRecord::Schema.define(version: 2026_06_17_011848) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -223,6 +223,15 @@ ActiveRecord::Schema.define(version: 2026_04_10_010715) do
     t.index ["visitor_id"], name: "index_notifications_on_visitor_id"
   end
 
+  create_table "page_views", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "page", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id", "page"], name: "index_page_views_on_user_id_and_page"
+    t.index ["user_id"], name: "index_page_views_on_user_id"
+  end
+
   create_table "positions", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -326,6 +335,7 @@ ActiveRecord::Schema.define(version: 2026_04_10_010715) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "images", "posts"
+  add_foreign_key "page_views", "users"
   add_foreign_key "user_access_points", "access_points"
   add_foreign_key "user_access_points", "users"
   add_foreign_key "user_departments", "departments"

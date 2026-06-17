@@ -1,0 +1,32 @@
+.my-4
+  h3.text-primary
+    = "ページ閲覧履歴"
+
+  .mb-3
+    = form_tag page_views_path, method: :get, class: "mb-2" do
+      .d-flex.align-items-center
+        = month_field_tag :month, params[:month], class: "form-control form-control-sm mr-2"
+        = submit_tag "月", class: "btn btn-sm btn-outline-primary"
+
+    = form_tag page_views_path, method: :get, class: "mb-2" do
+      .d-flex.align-items-center
+        = date_field_tag :date, params[:date], class: "form-control form-control-sm mr-2"
+        = submit_tag "日", class: "btn btn-sm btn-outline-primary"
+
+    = link_to "リセット", page_views_path, class: "btn btn-sm btn-outline-secondary"
+
+  div
+    ul.list-group.list-group-flush
+      - @page_views.each do |pv|
+        li.list-group-item
+          .d-flex.justify-content-between.align-items-center
+            span= pv.user.name
+            span.badge.badge-primary.badge-pill= pv.page
+          .text-muted.small.mt-1
+            = pv.created_at.strftime("%Y-%m-%d %H:%M")
+            |  〜
+            = pv.updated_at.strftime("%H:%M")
+
+  .mt-4
+    = paginate @page_views
+    = page_entries_info @page_views

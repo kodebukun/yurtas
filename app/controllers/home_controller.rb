@@ -9,6 +9,7 @@ class HomeController < ApplicationController
   end
 
   def index
+    record_page_view("home")
     @posts = Post.where(meeting: true).order(created_at: "DESC").limit(5)
     @mornings = Morning.all.order(created_at: "DESC").limit(5)
     temp = @posts | @mornings

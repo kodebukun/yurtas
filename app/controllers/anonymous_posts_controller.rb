@@ -4,6 +4,7 @@ class AnonymousPostsController < ApplicationController
   before_action :ensure_graduate, {only: [:new, :create, :update, :destroy]}
 
   def index
+    record_page_view("opi")
     if params[:sort] == "comment"
       #コメント数が多い順でpostを取得。このコードだとcommentが0のpostは取得できなかった。
       #.group(:anonymous_post_id)：同じ:anonymous_post_idでグループ化

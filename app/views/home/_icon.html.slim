@@ -83,5 +83,12 @@
             i.fas.fa-exclamation.display-4[style="color:#585858;"]
       .small.text-center.mt-1  違反報告
 
-    .w-25.mr-2.mr-md-4
+    - if @current_user.admin
+      .d-flex.flex-column.w-25.mr-2.mr-md-4
+        = link_to page_views_path do
+          .border.p-2.text-center.btn.btn-outline-light.w-100[style="border-radius: 10px;"]
+            i.fas.fa-eye.display-4[style="color:#2196F3;"]
+        .small.text-center.mt-1  閲覧履歴
+    - else
+      .w-25.mr-2.mr-md-4
     .w-25

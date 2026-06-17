@@ -25,6 +25,7 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :page_views, only: [:index]
   resources :breaches, except: [:edit]
 
   resources :evaluations, only: [:create, :destroy, :update]
