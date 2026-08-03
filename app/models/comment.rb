@@ -4,7 +4,6 @@ class Comment < ApplicationRecord
 
   has_many :notifications, dependent: :destroy
   has_many :likes, dependent: :destroy
-  has_many :unreads, dependent: :destroy
 
   belongs_to :user
   belongs_to :post, optional: true
