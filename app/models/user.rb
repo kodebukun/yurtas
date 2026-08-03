@@ -32,6 +32,7 @@ class User < ApplicationRecord
   has_many :user_access_points, dependent: :destroy
   has_many :access_points, through: :user_access_points
   has_many :incidents
+  has_many :push_subscriptions, dependent: :destroy
 
   after_create :add_to_ranking, if: -> { call }
   after_update :sync_ranking, if: :saved_change_to_call?

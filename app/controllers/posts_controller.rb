@@ -47,18 +47,21 @@ class PostsController < ApplicationController
     @post.user_id = @current_user.id
 
     if @post.save
+      failed_images = []
       params[:post][:images]&.each do |image|
         img = @post.images.build(image: image)
-        img.save
+        failed_images << img.errors.full_messages.join("、") unless img.save
       end
       #新規投稿の通知処理
-      #@post.save_notification_post!(@current_user)
+      @post.save_notification_post!(@current_user)
       #未読ステータス登録処理
       users = User.where.not(id: @post.user_id)
       users.each do |user|
         unread = Unread.create(user_id: user.id, post_id: @post.id)
       end
-      redirect_to post_url(@post), notice: "新規投稿しました。"
+      notice = "新規投稿しました。"
+      notice += " ただし一部の画像/PDFの保存に失敗しました（#{failed_images.join("、")}）" if failed_images.any?
+      redirect_to post_url(@post), notice: notice
     else
       render :new
     end
@@ -81,8 +84,14 @@ class PostsController < ApplicationController
     end
 
     if @post.update(post_params)
-      params[:post][:images]&.each { |image| @post.images.create(image: image) }
-      redirect_to @post, notice: "更新が成功しました"
+      failed_images = []
+      params[:post][:images]&.each do |image|
+        img = @post.images.create(image: image)
+        failed_images << img.errors.full_messages.join("、") unless img.persisted?
+      end
+      notice = "更新が成功しました"
+      notice += " ただし一部の画像/PDFの保存に失敗しました（#{failed_images.join("、")}）" if failed_images.any?
+      redirect_to @post, notice: notice
     else
       render :edit
     end

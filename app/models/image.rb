@@ -6,11 +6,21 @@ class Image < ApplicationRecord
   # CarrierWave の設定
   mount_uploader :image, ImageUploader
 
+  # ファイルサイズの上限チェック
+  validate :image_size_within_limit
+
   # ファイル種別を判別するためのロジック
   before_save :set_file_type
   before_save :set_original_filename
 
   private
+
+  def image_size_within_limit
+    return unless image.file
+    if image.file.size > ImageUploader::MAX_FILESIZE
+      errors.add(:image, "のファイルサイズは#{ImageUploader::MAX_FILESIZE / 1.megabyte}MB以下にしてください。")
+    end
+  end
 
   def set_file_type
     if image.content_type.start_with?('image')

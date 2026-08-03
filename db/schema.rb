@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2026_06_17_011848) do
+ActiveRecord::Schema.define(version: 2026_07_27_004037) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -250,6 +250,17 @@ ActiveRecord::Schema.define(version: 2026_06_17_011848) do
     t.boolean "rule", default: false, null: false
   end
 
+  create_table "push_subscriptions", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "endpoint", null: false
+    t.string "p256dh", null: false
+    t.string "auth", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["endpoint"], name: "index_push_subscriptions_on_endpoint", unique: true
+    t.index ["user_id"], name: "index_push_subscriptions_on_user_id"
+  end
+
   create_table "rankings", force: :cascade do |t|
     t.integer "rank", null: false
     t.integer "user_id", null: false
@@ -336,6 +347,7 @@ ActiveRecord::Schema.define(version: 2026_06_17_011848) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "images", "posts"
   add_foreign_key "page_views", "users"
+  add_foreign_key "push_subscriptions", "users"
   add_foreign_key "user_access_points", "access_points"
   add_foreign_key "user_access_points", "users"
   add_foreign_key "user_departments", "departments"

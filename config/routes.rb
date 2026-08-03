@@ -43,6 +43,9 @@ Rails.application.routes.draw do
   delete 'notifications/destroy', to: 'notifications#destroy', as: 'destroy_notifications'
   resources :notifications, only: [:index]
 
+  resources :push_subscriptions, only: [:create]
+  delete 'push_subscriptions/destroy', to: 'push_subscriptions#destroy', as: 'destroy_push_subscription'
+
   resources :mornings do
     collection do
       get 'print'

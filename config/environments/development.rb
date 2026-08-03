@@ -1,7 +1,4 @@
 Rails.application.configure do
-  #logレベル（warn以上）、ローテション（10M/1file 5fileまで）
-  config.log_level = :warn
-  config.logger = Logger.new("log/production.log", 5, 10 * 1024 * 1024)
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded on
@@ -60,5 +57,8 @@ Rails.application.configure do
 
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
-  config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+  # NOTE: disabled because this project lives on a WSL2 drvfs mount (/mnt/c/...),
+  # where inotify-based detection is unreliable; falling back to the default
+  # polling-based ActiveSupport::FileUpdateChecker.
+  # config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 end

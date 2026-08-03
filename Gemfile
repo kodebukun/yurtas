@@ -109,6 +109,9 @@ gem 'activestorage-validator'
 #service-work PWA化ツール
 gem 'serviceworker-rails'
 
+#Web Push通知
+gem 'webpush'
+
 #画像アップロード用
 gem 'cloudinary', '~> 1.25.0'
 gem 'carrierwave', '~> 2.0'

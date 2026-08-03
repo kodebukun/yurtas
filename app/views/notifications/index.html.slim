@@ -1,4 +1,6 @@
 h1.font-weight-bold.text-primary.mt-4.mb-2 通知
+.mb-3
+  button#push-subscribe-btn.btn.btn-outline-secondary.btn-sm プッシュ通知を有効にする
 - notifications = @notifications.where.not(visitor_id: @current_user.id)
 - if notifications.exists?
   ul.list-group

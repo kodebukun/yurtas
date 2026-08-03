@@ -8,12 +8,8 @@ class ImageUploader < CarrierWave::Uploader::Base
   end
 
 
-  # ファイルサイズの上限（必要に応じて追加）
-  # process :validate_max_size
-  # MAX_FILESIZE = 5.megabytes
-  # def validate_max_size
-  #   raise CarrierWave::IntegrityError, "ファイルサイズは#{MAX_FILESIZE / 1.megabyte}MB以下にしてください。" if file.size > MAX_FILESIZE
-  # end
+  # ファイルサイズの上限（Imageモデル側のバリデーションで使用）
+  MAX_FILESIZE = 10.megabytes
 
   #アップロード時に画像をリサイズ＆圧縮
   #process convert: 'jpg', if: :is_image?
