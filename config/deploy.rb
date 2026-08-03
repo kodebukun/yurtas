@@ -5,7 +5,7 @@ lock "~> 3.19.2" # Capistranoのバージョン
 set :application, 'yurtas' # アプリケーション名
 set :repo_url, 'https://github.com/kodebukun/yurtas' # クローンするGitHubリポジトリ（xxxxはユーザ名、yyyyはアプリ名）
 set :deploy_to, '/var/www/yurtas' # デプロイ先のディレクトリ
-set :linked_files, %w{.env config/secrets.yml} # シンボリックリンクを貼るファイル
+set :linked_files, %w{.env config/secrets.yml config/master.key} # シンボリックリンクを貼るファイル
 set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets public/uploads public/storage public/attendances_pdf} # シンボリックリンクを貼るディレクトリ
 set :keep_releases, 3 # 保持するバージョンの数
 set :rbenv_ruby, '2.6.6' # Rubyのバージョン
