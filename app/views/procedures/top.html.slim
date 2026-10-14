@@ -1,17 +1,26 @@
-header.jumbotron.my-4.py-4.d-none.d-md-block
-  h1.display-4.font-weight-bold.text-primary Procedures
-  p.mt-4.lead.text-secondary こちらから各種手続きについての情報にアクセス出来ます。
+.mt-3.p-3
+  .d-flex.justify-content-between.mb-3
 
-.card-deck.my-5.row
-  .col.col-12.col-md-6.mb-3
-    .card
-      .card-body.h3.text-center.text-primary 手続き
-      i.fas.fa-pencil-alt.fa-6x.mx-auto.text-primary.pb-4
-      .card-footer.text-center
-        = link_to "Find Out More!", procedures_path, class: "btn btn-outline-secondary"
-  .col.col-12.col-md-6.mb-3
-    .card
-      .card-body.h3.text-center [style="color:#ffa34d;"] Wi-Fi
-      i.fas.fa-wifi.fa-6x.mx-auto.pb-4 [style="color:#ffa34d;"]
-      .card-footer.text-center
-        = link_to "Find Out More!", wifis_path, class: "btn btn-outline-secondary"
+    .d-flex.flex-column.w-25.mr-2.mr-md-4
+      = link_to "#" do
+        .border.p-2.text-center.btn.btn-outline-light.w-100[style="border-radius:10px; position:relative;"]
+          i.fas.fa-pencil-alt.display-4[style="color:#f25d9c;"]
+      .small.text-center.mt-1  手続き（準備中）
+    
+    .d-flex.flex-column.w-25.mr-2.mr-md-4
+      = link_to "#" do
+        .border.p-2.text-center.btn.btn-outline-light.w-100[style="border-radius: 10px;"]
+          i.fas.fa-book.display-4[style="color:#16a085;"]
+      .small.text-center.mt-1  マニュアル（準備中）
+
+    .d-flex.flex-column.w-25.mr-2.mr-md-4
+      = link_to materials_path do
+        .border.p-2.text-center.btn.btn-outline-light.w-100[style="border-radius: 10px;"]
+          i.fas.fa-camera.display-4[style="color:#0779e4;"]
+      .small.text-center.mt-1  機器情報（準備中）
+    
+    .d-flex.flex-column.w-25.mr-2.mr-md-4
+      = link_to files_index_path do
+        .border.p-2.text-center.btn.btn-outline-light.w-100[style="border-radius: 10px;"]
+          i.far.fa-folder.display-4[style="color:#f08a5d;"]
+      .small.text-center.mt-1  ファイル

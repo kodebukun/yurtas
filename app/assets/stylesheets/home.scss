@@ -1,3 +1,11 @@
 // Place all the styles related to the home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+// メニューアイコン: スマホ幅で枠からはみ出さないよう画面幅に合わせて縮小
+// (fa-wifi など横長のアイコンは 1.25em 幅あるため)
+@media (max-width: 509px) {
+  .btn .display-4 {
+    font-size: 11vw;
+  }
+}

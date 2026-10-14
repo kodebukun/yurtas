@@ -34,8 +34,17 @@ class User < ApplicationRecord
   has_many :incidents
   has_many :push_subscriptions, dependent: :destroy
 
+  # 1-4: 診療放射線技師系, 6: 看護師, 7: 医学物理士
+  STAFF_POSITION_IDS = [1, 2, 3, 4, 6, 7].freeze
+
+  scope :staff, -> { where(id: UserPosition.where(position_id: STAFF_POSITION_IDS).select(:user_id)) }
+
   after_create :add_to_ranking, if: -> { call }
   after_update :sync_ranking, if: :saved_change_to_call?
+
+  def staff?
+    positions.where(id: STAFF_POSITION_IDS).exists?
+  end
 
   private
 

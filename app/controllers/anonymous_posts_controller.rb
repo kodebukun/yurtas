@@ -58,13 +58,9 @@ class AnonymousPostsController < ApplicationController
     @post.user_id = @current_user.id
     if @post.save
       #未読ステータス登録処理
-      users = User.where.not(id: @post.user_id)
-      users.each do |user|
-        #技師以外には未読付かないようにする処理
-        position_ids = user.positions.ids
-        if [1, 2, 3, 4].any? {|i| position_ids.include?(i)}
-          unread = Unread.create(user_id: user.id, anonymous_post_id: @post.id)
-        end
+      #対象職種以外には未読付かないようにする
+      User.staff.where.not(id: @post.user_id).each do |user|
+        Unread.create(user_id: user.id, anonymous_post_id: @post.id)
       end
       redirect_to anonymous_post_url(@post), notice: "新規投稿しました。"
     else

@@ -9,44 +9,38 @@
         - else
           i.far.fa-comment-dots.display-4[style="color:#00b8a9;"]
     .small.text-center.mt-1  掲示板
+  
+  .d-flex.flex-column.w-25.mr-2.mr-md-4
+    = link_to wifis_path do
+      .border.p-2.text-center.btn.btn-outline-light.w-100[style="border-radius: 10px;"]
+        i.fas.fa-wifi.display-4[style="color:#559af8;"]
+    .small.text-center.mt-1  Wi-Fi
 
   .d-flex.flex-column.w-25.mr-2.mr-md-4
-    = link_to materials_path do
+    = link_to top_incidents_path do
       .border.p-2.text-center.btn.btn-outline-light.w-100[style="border-radius: 10px;"]
-        i.fas.fa-camera.display-4[style="color:#0779e4;"]
-    .small.text-center.mt-1  機器情報
-
+        i.fas.fa-exclamation-triangle.display-4[style="color:#f08a5d;"]
+    .small.text-center.mt-1  インシデント
+  
   .d-flex.flex-column.w-25.mr-2.mr-md-4
-    = link_to files_index_path do
-      .border.p-2.text-center.btn.btn-outline-light.w-100[style="border-radius: 10px;"]
-        i.far.fa-folder.display-4[style="color:#f08a5d;"]
-    .small.text-center.mt-1  ファイル
+      = link_to top_procedures_path do
+        .border.py-2.text-center.btn.btn-outline-light.w-100[style="border-radius: 10px; position:relative;"]
+          - if @incidents_unread.present?
+            i.fas.fa-circle.index-circle
+            i.fas.fa-search.display-4[style="color:#ff69b4;"]
+          - else
+            i.fas.fa-search.display-4[style="color:#ff69b4;"]
+      .small.text-center.mt-1  調べる
 
-  .d-flex.flex-column.w-25
-    = link_to top_procedures_path do
-      .border.p-2.text-center.btn.btn-outline-light.w-100[style="border-radius: 10px;"]
-        i.fas.fa-pencil-alt.display-4[style="color:#f25d9c;"]
-    .small.text-center.mt-1  手続き
-
-- if @current_user.positions.ids.include?(1) || @current_user.positions.ids.include?(2) || @current_user.positions.ids.include?(3) || @current_user.positions.ids.include?(4)
+- if @current_user.staff?
   .d-flex.justify-content-between.mb-3
 
     .d-flex.flex-column.w-25.mr-2.mr-md-4
       = link_to menu_attendances_path do
         .border.py-2.text-center.btn.btn-outline-light.w-100[style="border-radius: 10px;"]
           i.fas.fa-building.display-4[style="color:#f6416c;"]
-      .small.text-center.mt-1  勤務情報
-
-    .d-flex.flex-column.w-25.mr-2.mr-md-4
-      = link_to manuals_index_path do
-        .border.py-2.text-center.btn.btn-outline-light.w-100[style="border-radius: 10px; position:relative;"]
-          - if @incidents_unread.present?
-            i.fas.fa-circle.index-circle
-            i.fas.fa-book.display-4[style="color:#9896f1;"]
-          - else
-            i.fas.fa-book.display-4[style="color:#9896f1;"]
-      .small.text-center.mt-1  ドキュメント
-
+      .small.text-center.mt-1  当直
+    
     .d-flex.flex-column.w-25.mr-2.mr-md-4
       = link_to anonymous_posts_path do
         .border.p-2.text-center.btn.btn-outline-light.w-100[style="border-radius:10px; position:relative;"]
@@ -57,11 +51,10 @@
             i.far.fa-envelope.display-4[style="color:#6E6E6E;"]
       .small.text-center.mt-1  Opinion Box
 
-    .d-flex.flex-column.w-25
-      = link_to "https://skillmoralevaluation-r.azurewebsites.net/Account/Login/6" do
-        .border.p-2.text-center.btn.btn-outline-light.w-100[style="border-radius: 10px;"]
-          i.fas.fa-check.display-4[style="color:#58D3F7;"]
-      .small.text-center.mt-1  スキル評価
+    .d-flex.flex-column.w-25.mr-2.mr-md-4
+      
+    .d-flex.flex-column.w-25.mr-2.mr-md-4
+    
 
 - if @current_user.id == 5 || @current_user.id == 13 || @current_user.id == 4 || @current_user.admin
   .text-info.mb-2 ◎拡張機能

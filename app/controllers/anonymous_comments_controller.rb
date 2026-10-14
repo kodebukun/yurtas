@@ -30,14 +30,9 @@ class AnonymousCommentsController < ApplicationController
       #postのupdated_atを更新
       @post.touch
       #未読ステータス登録処理
-      users = User.where.not(id: @comment.user_id)
-      users.each do |user|
-        #既に未読ある人や、技師以外には未読付かないようにする処理
-        same_unread = Unread.find_by(user_id: user.id, anonymous_post_id: @post.id)
-        position_ids = user.positions.ids
-        if same_unread.blank? && [1, 2, 3, 4].any? {|i| position_ids.include?(i)}
-          unread = Unread.create(user_id: user.id, anonymous_post_id: @post.id)
-        end
+      #既に未読ある人や、対象職種以外には未読付かないようにする
+      User.staff.where.not(id: @comment.user_id).each do |user|
+        Unread.find_or_create_by(user_id: user.id, anonymous_post_id: @post.id)
       end
       #コメントの通知処理
       @post.create_notification_comment!(@current_user, @comment.id)
