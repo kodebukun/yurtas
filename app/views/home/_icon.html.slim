@@ -19,17 +19,18 @@
   .d-flex.flex-column.w-25.mr-2.mr-md-4
     = link_to top_incidents_path do
       .border.p-2.text-center.btn.btn-outline-light.w-100[style="border-radius: 10px;"]
-        i.fas.fa-exclamation-triangle.display-4[style="color:#f08a5d;"]
+        - if @incidents_unread.present?
+          i.fas.fa-circle.index-circle
+          i.fas.fa-exclamation-triangle.display-4[style="color:#f08a5d;"]
+        - else
+          i.fas.fa-exclamation-triangle.display-4[style="color:#f08a5d;"]
+
     .small.text-center.mt-1  インシデント
   
   .d-flex.flex-column.w-25.mr-2.mr-md-4
       = link_to top_procedures_path do
         .border.py-2.text-center.btn.btn-outline-light.w-100[style="border-radius: 10px; position:relative;"]
-          - if @incidents_unread.present?
-            i.fas.fa-circle.index-circle
-            i.fas.fa-search.display-4[style="color:#ff69b4;"]
-          - else
-            i.fas.fa-search.display-4[style="color:#ff69b4;"]
+          i.fas.fa-search.display-4[style="color:#ff69b4;"]
       .small.text-center.mt-1  調べる
 
 - if @current_user.staff?
