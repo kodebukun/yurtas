@@ -3,6 +3,8 @@ var CACHE_NAME = CACHE_VERSION + ':sw-cache-';
 
 function onInstall(event) {
   console.log('[Serviceworker]', "Installing!", event);
+  // 新しいSWを待機させずすぐ有効化する（iOSのホーム画面アプリは古いSWが残り続けやすいため）
+  self.skipWaiting();
   event.waitUntil(
     caches.open(CACHE_NAME).then(function prefill(cache) {
       return cache.addAll([
@@ -34,6 +36,9 @@ function onActivate(event) {
           return caches.delete(cacheName);
         })
       );
+    }).then(function() {
+      // 開いているページの制御を新しいSWに即切り替える
+      return self.clients.claim();
     })
   );
 }
