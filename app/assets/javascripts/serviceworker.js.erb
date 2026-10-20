@@ -40,6 +40,10 @@ function onActivate(event) {
 
 // Borrowed from https://github.com/TalAter/UpUp
 function onFetch(event) {
+  // GET以外（フォーム送信など）はブラウザに任せる。
+  // iOS Safariではファイル付きPOSTをService Worker経由でfetchすると本文が欠落し、CSRFエラー(422)になるため
+  if (event.request.method !== 'GET') return;
+
   event.respondWith(
     // try to return untouched request from network first
     fetch(event.request).catch(function() {
