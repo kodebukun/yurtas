@@ -20,7 +20,17 @@ class PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.where(meeting: true).order(created_at: "DESC").page(params[:page]).per(10)
+    @keyword = params[:keyword].to_s.strip
+    @posts = Post.where(meeting: true).search(@keyword).order(created_at: "DESC").page(params[:page]).per(10)
+  end
+
+  def search
+    @keyword = params[:keyword].to_s.strip
+    if @keyword.present?
+      @posts = Post.visible_to(@current_user).search(@keyword).includes(:user, :work, :department).order(created_at: "DESC").page(params[:page]).per(10)
+    else
+      @posts = Post.none.page(params[:page])
+    end
   end
 
   def show

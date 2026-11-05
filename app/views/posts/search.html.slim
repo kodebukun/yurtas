@@ -1,0 +1,29 @@
+.my-4
+  h2.text-primary 掲示板の検索
+
+  = render "search_form"
+
+  - if @keyword.present?
+    p.text-secondary= "「#{@keyword}」の検索結果：#{@posts.total_count}件"
+  /--posts--
+  div
+    ul.list-group.list-group-flush
+      - @posts.each do |post|
+        li.list-group-item
+          - if post.department
+            span.badge.badge-info.mb-2= "#{post.department.name}の掲示板"
+          - elsif post.work
+            span.badge.badge-success.mb-2= "#{post.work.label}の掲示板"
+          - else
+            span.badge.badge-primary.mb-2 全体の掲示板
+          h6.mb-1= link_to post.user.name, post.user, class: "text-secondary"
+          h5= link_to highlight(post.title, @keyword.split(/[[:space:]]+/)), post, class: "text-primary"
+          p.small.text-secondary.mb-1= highlight(truncate(post.content, length: 80), @keyword.split(/[[:space:]]+/))
+          p= post.created_at.strftime("%Y/%m/%d")
+
+    .mt-4
+      = paginate @posts
+      = page_entries_info @posts
+
+  .mt-3
+    = link_to "掲示板トップへ", top_posts_path, class: "nav-link"

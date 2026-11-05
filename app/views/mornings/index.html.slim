@@ -4,13 +4,28 @@
   .d-flex.justify-content-end
     = link_to "新規投稿", new_morning_path, class: "btn btn-primary mr-3"
     = link_to "印刷用ページ", print_mornings_path, class: "btn btn-secondary mr-3 d-none d-md-inline"
+  /--search--
+  = form_with url: mornings_path, method: :get, local: true, class: "my-3" do |f|
+    .input-group
+      = f.search_field :keyword, value: @keyword, class: "form-control", placeholder: "朝ミーティングを検索（タイトル・本文）"
+      .input-group-append
+        = f.button type: "submit", class: "btn btn-outline-primary", name: nil do
+          i.fas.fa-search
+  - if @keyword.present?
+    .d-flex.justify-content-between.align-items-center
+      p.text-secondary.mb-0= "「#{@keyword}」の検索結果：#{@mornings.total_count}件"
+      = link_to "検索をクリア", mornings_path, class: "small"
   /--posts--
   div
     ul.list-group.list-group-flush
       - @mornings.each do |morning|
         li.list-group-item
           h6.mb-3= link_to morning.user.name, morning.user, class: "text-secondary"
-          h5= link_to simple_format(morning.title), morning
+          - if @keyword.present?
+            h5= link_to highlight(morning.title, @keyword.split(/[[:space:]]+/)), morning
+            p.small.text-secondary.mb-1= highlight(truncate(morning.content, length: 80), @keyword.split(/[[:space:]]+/))
+          - else
+            h5= link_to simple_format(morning.title), morning
     .mt-4
       = paginate @mornings
       = page_entries_info @mornings

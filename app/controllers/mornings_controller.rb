@@ -4,7 +4,8 @@ class MorningsController < ApplicationController
 
 
   def index
-    @mornings = Morning.all.order(created_at: "DESC").page(params[:page]).per(10)
+    @keyword = params[:keyword].to_s.strip
+    @mornings = Morning.search(@keyword).includes(:user).order(created_at: "DESC").page(params[:page]).per(10)
   end
 
   def print

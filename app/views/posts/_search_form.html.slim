@@ -1,0 +1,6 @@
+= form_with url: local_assigns.fetch(:url, search_posts_path), method: :get, local: true, class: "my-3" do |f|
+  .input-group
+    = f.search_field :keyword, value: params[:keyword], class: "form-control", placeholder: local_assigns.fetch(:placeholder, "掲示板を検索（タイトル・本文）")
+    .input-group-append
+      = f.button type: "submit", class: "btn btn-outline-primary", name: nil do
+        i.fas.fa-search

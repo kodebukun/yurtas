@@ -103,4 +103,129 @@ RSpec.describe "Posts", type: :request do
       end
     end
   end
+
+  describe "検索" do
+    let(:department) { create(:department, name: "MRI") }
+    let(:my_work) { create(:work, name: "医療安全") }
+    let(:other_work) { create(:work, name: "放射線管理") }
+
+    let!(:general_post) { create(:post, user: user, title: "全体 点検のお知らせ", meeting: true) }
+    let!(:department_public) { create(:post, user: user, title: "部署 点検（全体にも表示）", department: department, meeting: true) }
+    let!(:department_private) { create(:post, user: user, title: "部署 点検", department: department, meeting: false) }
+    let!(:my_work_private) { create(:post, user: user, title: "所属係り 点検", work: my_work, meeting: false) }
+    let!(:other_work_private) { create(:post, user: user, title: "他の係り 点検", work: other_work, meeting: false) }
+    let!(:unmatched_post) { create(:post, user: user, title: "忘年会", meeting: true) }
+
+    def link_to_post(p)
+      %(href="#{post_path(p)}")
+    end
+
+    before { user.works << my_work }
+
+    describe "GET /posts/search（掲示板トップからの検索）" do
+      context "未ログインのとき" do
+        it "rootにリダイレクトされる" do
+          get search_posts_url, params: { keyword: "点検" }
+          expect(response).to redirect_to(root_url)
+        end
+      end
+
+      context "ログイン済みのとき" do
+        before { login(user) }
+
+        it "全体・部署・係りの掲示板を横断して検索する" do
+          get search_posts_url, params: { keyword: "点検" }
+          expect(response).to have_http_status(:ok)
+          expect(response.body).to include("検索結果：4件")
+          [general_post, department_public, department_private, my_work_private].each do |p|
+            expect(response.body).to include(link_to_post(p))
+          end
+          expect(response.body).not_to include(link_to_post(unmatched_post))
+        end
+
+        it "所属していない係りの非公開投稿は表示しない" do
+          get search_posts_url, params: { keyword: "点検" }
+          expect(response.body).not_to include(link_to_post(other_work_private))
+        end
+
+        it "どの掲示板の投稿かバッジで表示する" do
+          get search_posts_url, params: { keyword: "点検" }
+          expect(response.body).to include('<span class="badge badge-primary mb-2">全体の掲示板')
+          expect(response.body).to include('<span class="badge badge-info mb-2">MRIの掲示板')
+          expect(response.body).to include('<span class="badge badge-success mb-2">医療安全の掲示板')
+        end
+
+        it "一致した語をハイライトする" do
+          get search_posts_url, params: { keyword: "点検" }
+          expect(response.body).to include("<mark>点検</mark>")
+        end
+
+        it "キーワードが空のときは結果を表示しない" do
+          get search_posts_url, params: { keyword: "" }
+          expect(response).to have_http_status(:ok)
+          expect(response.body).not_to include("検索結果")
+          expect(response.body).not_to include(link_to_post(general_post))
+        end
+
+        it "キーワードをエスケープして表示する" do
+          get search_posts_url, params: { keyword: "<script>alert(1)</script>" }
+          expect(response).to have_http_status(:ok)
+          expect(response.body).not_to include("<script>alert(1)</script>")
+        end
+
+        it "10件ごとにページ分割する" do
+          create_list(:post, 10, user: user, title: "点検 追加分", meeting: true)
+          get search_posts_url, params: { keyword: "点検", page: 2 }
+          expect(response).to have_http_status(:ok)
+          expect(response.body).to include("検索結果：14件")
+          expect(response.body.scan('class="list-group-item"').size).to eq(4)
+        end
+      end
+    end
+
+    describe "GET /posts/top" do
+      it "掲示板トップに横断検索のフォームがある" do
+        login(user)
+        get top_posts_url
+        expect(response.body).to include(%(action="#{search_posts_path}"))
+      end
+    end
+
+    describe "GET /posts?keyword=（全体の掲示板内の検索）" do
+      before { login(user) }
+
+      it "全体の掲示板に表示される投稿だけを検索する" do
+        get posts_url, params: { keyword: "点検" }
+        expect(response).to have_http_status(:ok)
+        expect(response.body).to include("検索結果：2件")
+        expect(response.body).to include(link_to_post(general_post))
+        expect(response.body).to include(link_to_post(department_public))
+      end
+
+      it "全体の掲示板に表示しない部署・係りの投稿は含めない" do
+        get posts_url, params: { keyword: "点検" }
+        [department_private, my_work_private, other_work_private].each do |p|
+          expect(response.body).not_to include(link_to_post(p))
+        end
+      end
+
+      it "検索をクリアするリンクを表示する" do
+        get posts_url, params: { keyword: "点検" }
+        expect(response.body).to include("検索をクリア")
+      end
+
+      it "キーワードがないときは全体の掲示板の投稿をすべて表示する" do
+        get posts_url
+        expect(response.body).not_to include("検索結果")
+        [general_post, department_public, unmatched_post].each do |p|
+          expect(response.body).to include(link_to_post(p))
+        end
+      end
+
+      it "検索フォームの送信先は全体の掲示板" do
+        get posts_url
+        expect(response.body).to include(%(action="#{posts_path}"))
+      end
+    end
+  end
 end

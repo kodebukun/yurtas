@@ -9,6 +9,8 @@ class Morning < ApplicationRecord
 
   belongs_to :user
 
+  include Searchable
+
   def create_notification_like!(current_user)
     # すでに「いいね」されているか検索
     temp = Notification.where(["visitor_id = ? and visited_id = ? and morning_id = ? and action = ? ", current_user.id, self.user_id, self.id, "like"])

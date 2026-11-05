@@ -4,6 +4,12 @@
 
   .d-flex.justify-content-end
     = link_to "新規投稿", new_post_path, class: "btn btn-primary mr-3"
+  /--search--
+  = render "search_form", url: posts_path, placeholder: "全体の掲示板を検索（タイトル・本文）"
+  - if @keyword.present?
+    .d-flex.justify-content-between.align-items-center
+      p.text-secondary.mb-0= "「#{@keyword}」の検索結果：#{@posts.total_count}件"
+      = link_to "検索をクリア", posts_path, class: "small"
   /--posts--
   div
     ul.list-group.list-group-flush
@@ -12,7 +18,11 @@
           - if post.unreads.find_by(user_id: @current_user.id)
             span.badge.badge-danger.mb-2 New
           h6.mb-1= link_to post.user.name, post.user, class: "text-secondary"
-          h5= link_to simple_format(post.title), post, class: "text-primary"
+          - if @keyword.present?
+            h5= link_to highlight(post.title, @keyword.split(/[[:space:]]+/)), post, class: "text-primary"
+            p.small.text-secondary.mb-1= highlight(truncate(post.content, length: 80), @keyword.split(/[[:space:]]+/))
+          - else
+            h5= link_to simple_format(post.title), post, class: "text-primary"
           p= post.created_at.strftime("%Y/%m/%d")
 
     .mt-4

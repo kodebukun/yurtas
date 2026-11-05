@@ -14,6 +14,13 @@ class Post < ApplicationRecord
   belongs_to :work, optional: true
   belongs_to :department, optional: true
 
+  include Searchable
+
+  #閲覧可能な投稿のみ取得（係りの非公開投稿は所属メンバーのみ）
+  def self.visible_to(user)
+    where(work_id: nil).or(where(meeting: true)).or(where(work_id: user.works.ids))
+  end
+
 
   def create_notification_like!(current_user)
     # すでに「いいね」されているか検索
