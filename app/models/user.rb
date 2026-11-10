@@ -39,6 +39,9 @@ class User < ApplicationRecord
 
   scope :staff, -> { where(id: UserPosition.where(position_id: STAFF_POSITION_IDS).select(:user_id)) }
 
+  # フォームで空欄のまま保存すると '' が入るため nil にそろえる
+  before_validation { self.email = email.presence; self.phone_no = phone_no.presence }
+
   after_create :add_to_ranking, if: -> { call }
   after_update :sync_ranking, if: :saved_change_to_call?
 
